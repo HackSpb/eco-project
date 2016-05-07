@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>GreenAge</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" media="screen" />
+<link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic-ext,cyrillic,latin-ext' rel='stylesheet' type='text/css'> <!-- Прикручиваем шрифты roboto из гугла (font-family: 'Roboto', sans-serif;) -->
+<link rel='stylesheet' href='fullcalendar/fullcalendar.css' />
+<script src='lib/jquery.min.js'></script>
+<script src='lib/moment.min.js'></script>
+<script src='fullcalendar/fullcalendar.js'></script>
+<link rel="stylesheet" href="css/jquery-ui.css"> <!-- своя тема -->
+<script src='fullcalendar/lang-all.js'></script> <!--языки -->
+<link rel='stylesheet' href='fullcalendar/calend.css' /> <!-- Стили -->
+<!-- Прикручиваем (инициальзируем) календарь, как только страничка загрузилась -->
+<script> 
+	$(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+        header: {
+					left: 'prev,next today',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+		lang: 'ru', // put your options and callbacks here
+		height: 650, <!--Высота блока календаря, ширина автоматически-->
+		theme: true,  // запускаем нашу специально созданную тему
+		timezone: ('Europe/Moskow'), <!--Часовой пояс-->
+			
+    });
+
+});
+</script>
+</head>
+ 
+ <body>
+ <!-- Header -->
+    <div class="container-fluid">
+        <h1 class="title"><a href="#">GreenAge</a></h1>
+        <div class="navigation">
+            <!--<div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>-->
+
+            <div class="navbar-collapse">
+                <ul class="nav">
+                    <li><a href="#">Карты</a></li>
+                    <li><a href="/">Анонсы</a></li>
+                    <li><a href="/cal">Календарь</a></li>
+                </ul>
+            </div>
+        </div>
+    </div> <!--/ Header-->
+	<div class='test'> <p>Шрифты ROBOTO - самые шрифтастые шрифты в мире!</p></div>
+	<div id='calendar'></div> <!--Блок календарика-->
+  </body>
+  body {
+	font-family: 'roboto', sans-serif;
+}
+</style>
+</html>
