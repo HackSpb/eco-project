@@ -250,7 +250,7 @@ function init () {
 
 
     $.ajax({
-        url: "map/data_for_map.json"
+        url: "map_files/data_for_map.json"
     }).done(function (data) {
         objectManager.add(data);
     });

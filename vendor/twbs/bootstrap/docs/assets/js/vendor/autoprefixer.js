@@ -15043,7 +15043,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
 var Container = _interopRequire(require("./container"));
 
-// CSS at-rule like “this.keyframes name { }”.
+// CSS at-rule like ï¿½this.keyframes name { }ï¿½.
 //
 // Can contain declarations (like this.font-face or this.page) ot another rules.
 
@@ -15724,7 +15724,7 @@ var _inherits = function (subClass, superClass) { if (typeof superClass !== "fun
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-var PreviousMap = _interopRequire(require("./previous-map"));
+var PreviousMap = _interopRequire(require("./previous-map_files"));
 
 var path = _interopRequire(require("path"));
 
@@ -15819,7 +15819,7 @@ var vendor = _interopRequire(require("./vendor"));
 
 var Node = _interopRequire(require("./node"));
 
-// CSS declaration like “color: black” in rules
+// CSS declaration like ï¿½color: blackï¿½ in rules
 
 var Declaration = (function (Node) {
     function Declaration(defaults) {
@@ -15861,7 +15861,7 @@ var _classCallCheck = function (instance, Constructor) { if (!(instance instance
 
 var CssSyntaxError = _interopRequire(require("./css-syntax-error"));
 
-var PreviousMap = _interopRequire(require("./previous-map"));
+var PreviousMap = _interopRequire(require("./previous-map_files"));
 
 var Parser = _interopRequire(require("./parser"));
 
@@ -15934,7 +15934,7 @@ var Input = (function () {
         return error;
     });
 
-    // Get origin position of code if source map was given
+    // Get origin position of code if source map_files was given
 
     Input.prototype.origin = function origin(line, column) {
         if (!this.map) {
@@ -15956,7 +15956,7 @@ var Input = (function () {
         return result;
     };
 
-    // Return path relative from source map root
+    // Return path relative from source map_files root
 
     Input.prototype.mapResolve = function mapResolve(file) {
         return path.resolve(this.map.consumer().sourceRoot || ".", file);
@@ -16068,7 +16068,7 @@ var MapGenerator = (function () {
         this.mapOpts = opts.map || {};
     }
 
-    // Should map be generated
+    // Should map_files be generated
 
     MapGenerator.prototype.isMap = function isMap() {
         if (typeof this.opts.map != "undefined") {
@@ -16078,7 +16078,7 @@ var MapGenerator = (function () {
         }
     };
 
-    // Return source map arrays from previous compilation step (like Sass)
+    // Return source map_files arrays from previous compilation step (like Sass)
 
     MapGenerator.prototype.previous = function previous() {
         var _this = this;
@@ -16098,7 +16098,7 @@ var MapGenerator = (function () {
         return this.previousMaps;
     };
 
-    // Should we inline source map to annotation comment
+    // Should we inline source map_files to annotation comment
 
     MapGenerator.prototype.isInline = function isInline() {
         if (typeof this.mapOpts.inline != "undefined") {
@@ -16134,7 +16134,7 @@ var MapGenerator = (function () {
         }
     };
 
-    // Clear source map annotation comment
+    // Clear source map_files annotation comment
 
     MapGenerator.prototype.clearAnnotation = function clearAnnotation() {
         if (this.mapOpts.annotation === false) {
@@ -16168,7 +16168,7 @@ var MapGenerator = (function () {
         });
     };
 
-    // Apply source map from previous compilation step (like Sass)
+    // Apply source map_files from previous compilation step (like Sass)
 
     MapGenerator.prototype.applyPrevMaps = function applyPrevMaps() {
         for (var _iterator = this.previous(), _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
@@ -16218,7 +16218,7 @@ var MapGenerator = (function () {
         }
     };
 
-    // Add source map annotation comment if it is needed
+    // Add source map_files annotation comment if it is needed
 
     MapGenerator.prototype.addAnnotation = function addAnnotation() {
         var content;
@@ -16246,7 +16246,7 @@ var MapGenerator = (function () {
         }
     };
 
-    // Return Result object with map
+    // Return Result object with map_files
 
     MapGenerator.prototype.generateMap = function generateMap() {
         this.stringify();
@@ -16278,13 +16278,13 @@ var MapGenerator = (function () {
         }
     };
 
-    // Return path of node source for map
+    // Return path of node source for map_files
 
     MapGenerator.prototype.sourcePath = function sourcePath(node) {
         return this.relative(node.source.input.from);
     };
 
-    // Return CSS string and source map
+    // Return CSS string and source map_files
 
     MapGenerator.prototype.stringify = function stringify() {
         var _this = this;
@@ -16340,7 +16340,7 @@ var MapGenerator = (function () {
         this.root.stringify(builder);
     };
 
-    // Return Result object with or without map
+    // Return Result object with or without map_files
 
     MapGenerator.prototype.generate = function generate() {
         this.clearAnnotation();
@@ -16434,7 +16434,7 @@ var Node = (function () {
     //       throw decl.error('Wrong variable');
     //   }
     //
-    // You can also get origin line and column from previous source map:
+    // You can also get origin line and column from previous source map_files:
     //
     //   if ( deprecatedSyntax ) {
     //       var error = decl.error('Deprecated syntax');
@@ -17515,7 +17515,7 @@ var path = _interopRequire(require("path"));
 
 var fs = _interopRequire(require("fs"));
 
-// Detect previous map
+// Detect previous map_files
 
 var PreviousMap = (function () {
     function PreviousMap(css, opts) {
@@ -17529,7 +17529,7 @@ var PreviousMap = (function () {
         if (text) this.text = text;
     }
 
-    // Return SourceMapConsumer object to read map
+    // Return SourceMapConsumer object to read map_files
 
     PreviousMap.prototype.consumer = function consumer() {
         if (!this.consumerCache) {
@@ -17538,7 +17538,7 @@ var PreviousMap = (function () {
         return this.consumerCache;
     };
 
-    // Is map has sources content
+    // Is map_files has sources content
 
     PreviousMap.prototype.withContent = function withContent() {
         return !!(this.consumer().sourcesContent && this.consumer().sourcesContent.length > 0);
@@ -17571,11 +17571,11 @@ var PreviousMap = (function () {
             return Base64.decode(text.substr(base64.length));
         } else {
             var encoding = text.match(/data:application\/json;([^,]+),/)[1];
-            throw new Error("Unsupported source map encoding " + encoding);
+            throw new Error("Unsupported source map_files encoding " + encoding);
         }
     };
 
-    // Load previous map
+    // Load previous map_files
 
     PreviousMap.prototype.loadMap = function loadMap(file, prev) {
         if (prev === false) {
@@ -17590,7 +17590,7 @@ var PreviousMap = (function () {
             } else if (typeof prev == "object" && prev.mappings) {
                 return JSON.stringify(prev);
             } else {
-                throw new Error("Unsupported previous source map format: " + prev.toString());
+                throw new Error("Unsupported previous source map_files format: " + prev.toString());
             }
         } else if (this.inline) {
             return this.decodeInline(this.annotation);
@@ -17618,7 +17618,7 @@ var _prototypeProperties = function (child, staticProps, instanceProps) { if (st
 
 var _classCallCheck = function (instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } };
 
-var MapGenerator = _interopRequire(require("./map-generator"));
+var MapGenerator = _interopRequire(require("./map_files-generator"));
 
 // Object with processed CSS
 
@@ -17638,7 +17638,7 @@ var Result = (function () {
         return this.css;
     };
 
-    // Generate CSS and map
+    // Generate CSS and map_files
 
     Result.prototype.stringify = function stringify() {
         var map = new MapGenerator(this.root, this.opts);
@@ -17650,7 +17650,7 @@ var Result = (function () {
     _prototypeProperties(Result, null, {
         map: {
 
-            // Lazy method to return source map
+            // Lazy method to return source map_files
 
             get: function () {
                 if (!this.cssCached) this.stringify();
@@ -17762,7 +17762,7 @@ var Root = (function (Container) {
         if (this.after) builder(this.after);
     };
 
-    // Generate processing result with optional source map
+    // Generate processing result with optional source map_files
 
     Root.prototype.toResult = function toResult() {
         var opts = arguments[0] === undefined ? {} : arguments[0];
@@ -17791,7 +17791,7 @@ var Container = _interopRequire(require("./container"));
 
 var list = _interopRequire(require("./list"));
 
-// CSS rule like “a { }”
+// CSS rule like ï¿½a { }ï¿½
 
 var Rule = (function (Container) {
     function Rule(defaults) {
@@ -18256,9 +18256,9 @@ module.exports = {
  * Licensed under the New BSD license. See LICENSE.txt or:
  * http://opensource.org/licenses/BSD-3-Clause
  */
-exports.SourceMapGenerator = require('./source-map/source-map-generator').SourceMapGenerator;
-exports.SourceMapConsumer = require('./source-map/source-map-consumer').SourceMapConsumer;
-exports.SourceNode = require('./source-map/source-node').SourceNode;
+exports.SourceMapGenerator = require('./source-map_files/source-map_files-generator').SourceMapGenerator;
+exports.SourceMapConsumer = require('./source-map_files/source-map_files-consumer').SourceMapConsumer;
+exports.SourceNode = require('./source-map_files/source-node').SourceNode;
 
 },{"./source-map/source-map-consumer":123,"./source-map/source-map-generator":124,"./source-map/source-node":125}],116:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
@@ -18404,7 +18404,7 @@ define(function (require, exports, module) {
   var base64 = require('./base64');
 
   // A single base 64 digit can contain 6 bits of data. For the base 64 variable
-  // length quantities we use in the source map spec, the first bit is the sign,
+  // length quantities we use in the source map_files spec, the first bit is the sign,
   // the next four bits are the actual value, and the 6th bit is the
   // continuation bit. The continuation bit tells us whether there are more
   // digits in this value following this digit.
@@ -18563,26 +18563,26 @@ define(function (require, exports, module) {
   var binarySearch = require('./binary-search');
   var ArraySet = require('./array-set').ArraySet;
   var base64VLQ = require('./base64-vlq');
-  var SourceMapConsumer = require('./source-map-consumer').SourceMapConsumer;
+  var SourceMapConsumer = require('./source-map_files-consumer').SourceMapConsumer;
 
   /**
-   * A BasicSourceMapConsumer instance represents a parsed source map which we can
+   * A BasicSourceMapConsumer instance represents a parsed source map_files which we can
    * query for information about the original file positions by giving it a file
    * position in the generated source.
    *
-   * The only parameter is the raw source map (either as a JSON string, or
+   * The only parameter is the raw source map_files (either as a JSON string, or
    * already parsed to an object). According to the spec, source maps have the
    * following attributes:
    *
-   *   - version: Which version of the source map spec this map is following.
+   *   - version: Which version of the source map_files spec this map_files is following.
    *   - sources: An array of URLs to the original source files.
    *   - names: An array of identifiers which can be referrenced by individual mappings.
    *   - sourceRoot: Optional. The URL root from which all sources are relative.
    *   - sourcesContent: Optional. An array of contents of the original source files.
    *   - mappings: A string of base64 VLQs which contain the actual mappings.
-   *   - file: Optional. The generated file this source map is associated with.
+   *   - file: Optional. The generated file this source map_files is associated with.
    *
-   * Here is an example source map, taken from the source map spec[0]:
+   * Here is an example source map_files, taken from the source map_files spec[0]:
    *
    *     {
    *       version : 3,
@@ -18642,7 +18642,7 @@ define(function (require, exports, module) {
    * Create a BasicSourceMapConsumer from a SourceMapGenerator.
    *
    * @param SourceMapGenerator aSourceMap
-   *        The source map that will be consumed.
+   *        The source map_files that will be consumed.
    * @returns BasicSourceMapConsumer
    */
   BasicSourceMapConsumer.fromSourceMap =
@@ -19065,35 +19065,35 @@ define(function (require, exports, module) {
 
   var util = require('./util');
   var binarySearch = require('./binary-search');
-  var SourceMapConsumer = require('./source-map-consumer').SourceMapConsumer;
-  var BasicSourceMapConsumer = require('./basic-source-map-consumer').BasicSourceMapConsumer;
+  var SourceMapConsumer = require('./source-map_files-consumer').SourceMapConsumer;
+  var BasicSourceMapConsumer = require('./basic-source-map_files-consumer').BasicSourceMapConsumer;
 
   /**
-   * An IndexedSourceMapConsumer instance represents a parsed source map which
+   * An IndexedSourceMapConsumer instance represents a parsed source map_files which
    * we can query for information. It differs from BasicSourceMapConsumer in
    * that it takes "indexed" source maps (i.e. ones with a "sections" field) as
    * input.
    *
-   * The only parameter is a raw source map (either as a JSON string, or already
+   * The only parameter is a raw source map_files (either as a JSON string, or already
    * parsed to an object). According to the spec for indexed source maps, they
    * have the following attributes:
    *
-   *   - version: Which version of the source map spec this map is following.
-   *   - file: Optional. The generated file this source map is associated with.
+   *   - version: Which version of the source map_files spec this map_files is following.
+   *   - file: Optional. The generated file this source map_files is associated with.
    *   - sections: A list of section definitions.
    *
    * Each value under the "sections" field has two fields:
    *   - offset: The offset into the original specified at which this section
    *       begins to apply, defined as an object with a "line" and "column"
    *       field.
-   *   - map: A source map definition. This source map could also be indexed,
+   *   - map_files: A source map_files definition. This source map_files could also be indexed,
    *       but doesn't have to be.
    *
-   * Instead of the "map" field, it's also possible to have a "url" field
-   * specifying a URL to retrieve a source map from, but that's currently
+   * Instead of the "map_files" field, it's also possible to have a "url" field
+   * specifying a URL to retrieve a source map_files from, but that's currently
    * unsupported.
    *
-   * Here's an example source map, taken from the source map spec[0], but
+   * Here's an example source map_files, taken from the source map_files spec[0], but
    * modified to omit a section which uses the "url" field.
    *
    *  {
@@ -19101,7 +19101,7 @@ define(function (require, exports, module) {
    *    file: "app.js",
    *    sections: [{
    *      offset: {line:100, column:10},
-   *      map: {
+   *      map_files: {
    *        version : 3,
    *        file: "section.js",
    *        sources: ["foo.js", "bar.js"],
@@ -19203,7 +19203,7 @@ define(function (require, exports, module) {
         generatedColumn: util.getArg(aArgs, 'column')
       };
 
-      // Find the section containing the generated position we're trying to map
+      // Find the section containing the generated position we're trying to map_files
       // to an original position.
       var sectionIndex = binarySearch.search(needle, this._sections,
         function(needle, section) {
@@ -19466,16 +19466,16 @@ define(function (require, exports, module) {
 
     // We do late requires because the subclasses require() this file.
     if (sourceMap.sections != null) {
-      var indexedSourceMapConsumer = require('./indexed-source-map-consumer');
+      var indexedSourceMapConsumer = require('./indexed-source-map_files-consumer');
       return new indexedSourceMapConsumer.IndexedSourceMapConsumer(sourceMap);
     } else {
-      var basicSourceMapConsumer = require('./basic-source-map-consumer');
+      var basicSourceMapConsumer = require('./basic-source-map_files-consumer');
       return new basicSourceMapConsumer.BasicSourceMapConsumer(sourceMap);
     }
   }
 
   SourceMapConsumer.fromSourceMap = function(aSourceMap) {
-    var basicSourceMapConsumer = require('./basic-source-map-consumer');
+    var basicSourceMapConsumer = require('./basic-source-map_files-consumer');
     return basicSourceMapConsumer.BasicSourceMapConsumer
             .fromSourceMap(aSourceMap);
   }
@@ -19487,7 +19487,7 @@ define(function (require, exports, module) {
 
 
   // `__generatedMappings` and `__originalMappings` are arrays that hold the
-  // parsed mapping coordinates from the source map's "mappings" attribute. They
+  // parsed mapping coordinates from the source map_files's "mappings" attribute. They
   // are lazily instantiated, accessed via the `_generatedMappings` and
   // `_originalMappings` getters respectively, and we only parse the mappings
   // and create these arrays once queried for a source location. We jump through
@@ -19563,7 +19563,7 @@ define(function (require, exports, module) {
 
   /**
    * Iterate over each mapping between an original source/line/column and a
-   * generated line/column in this source map.
+   * generated line/column in this source map_files.
    *
    * @param Function aCallback
    *        The function that is called with each mapping.
@@ -19686,12 +19686,12 @@ define(function (require, exports, module) {
   var MappingList = require('./mapping-list').MappingList;
 
   /**
-   * An instance of the SourceMapGenerator represents a source map which is
+   * An instance of the SourceMapGenerator represents a source map_files which is
    * being built incrementally. You may pass an object with the following
    * properties:
    *
    *   - file: The filename of the generated source.
-   *   - sourceRoot: A root for all relative URLs in this source map.
+   *   - sourceRoot: A root for all relative URLs in this source map_files.
    */
   function SourceMapGenerator(aArgs) {
     if (!aArgs) {
@@ -19757,7 +19757,7 @@ define(function (require, exports, module) {
 
   /**
    * Add a single mapping from original source line and column to the generated
-   * source's line and column for this source map being created. The mapping
+   * source's line and column for this source map_files being created. The mapping
    * object should have the following properties:
    *
    *   - generated: An object with the generated line and column positions.
@@ -19805,15 +19805,15 @@ define(function (require, exports, module) {
       }
 
       if (aSourceContent != null) {
-        // Add the source content to the _sourcesContents map.
-        // Create a new _sourcesContents map if the property is null.
+        // Add the source content to the _sourcesContents map_files.
+        // Create a new _sourcesContents map_files if the property is null.
         if (!this._sourcesContents) {
           this._sourcesContents = {};
         }
         this._sourcesContents[util.toSetString(source)] = aSourceContent;
       } else if (this._sourcesContents) {
-        // Remove the source file from the _sourcesContents map.
-        // If the _sourcesContents map is empty, set the property to null.
+        // Remove the source file from the _sourcesContents map_files.
+        // If the _sourcesContents map_files is empty, set the property to null.
         delete this._sourcesContents[util.toSetString(source)];
         if (Object.keys(this._sourcesContents).length === 0) {
           this._sourcesContents = null;
@@ -19822,18 +19822,18 @@ define(function (require, exports, module) {
     };
 
   /**
-   * Applies the mappings of a sub-source-map for a specific source file to the
-   * source map being generated. Each mapping to the supplied source file is
-   * rewritten using the supplied source map. Note: The resolution for the
-   * resulting mappings is the minimium of this map and the supplied map.
+   * Applies the mappings of a sub-source-map_files for a specific source file to the
+   * source map_files being generated. Each mapping to the supplied source file is
+   * rewritten using the supplied source map_files. Note: The resolution for the
+   * resulting mappings is the minimium of this map_files and the supplied map_files.
    *
-   * @param aSourceMapConsumer The source map to be applied.
+   * @param aSourceMapConsumer The source map_files to be applied.
    * @param aSourceFile Optional. The filename of the source file.
    *        If omitted, SourceMapConsumer's file property will be used.
-   * @param aSourceMapPath Optional. The dirname of the path to the source map
+   * @param aSourceMapPath Optional. The dirname of the path to the source map_files
    *        to be applied. If relative, it is relative to the SourceMapConsumer.
    *        This parameter is needed when the two source maps aren't in the same
-   *        directory, and the source map to be applied contains relative source
+   *        directory, and the source map_files to be applied contains relative source
    *        paths. If so, those relative source paths need to be rewritten
    *        relative to the SourceMapGenerator.
    */
@@ -19845,7 +19845,7 @@ define(function (require, exports, module) {
         if (aSourceMapConsumer.file == null) {
           throw new Error(
             'SourceMapGenerator.prototype.applySourceMap requires either an explicit source file, ' +
-            'or the source map\'s "file" property. Both were omitted.'
+            'or the source map_files\'s "file" property. Both were omitted.'
           );
         }
         sourceFile = aSourceMapConsumer.file;
@@ -19863,7 +19863,7 @@ define(function (require, exports, module) {
       // Find mappings for the "sourceFile"
       this._mappings.unsortedForEach(function (mapping) {
         if (mapping.source === sourceFile && mapping.originalLine != null) {
-          // Check if it can be mapped by the source map, then update the mapping.
+          // Check if it can be mapped by the source map_files, then update the mapping.
           var original = aSourceMapConsumer.originalPositionFor({
             line: mapping.originalLine,
             column: mapping.originalColumn
@@ -19899,7 +19899,7 @@ define(function (require, exports, module) {
       this._sources = newSources;
       this._names = newNames;
 
-      // Copy sourcesContents of applied map.
+      // Copy sourcesContents of applied map_files.
       aSourceMapConsumer.sources.forEach(function (sourceFile) {
         var content = aSourceMapConsumer.sourceContentFor(sourceFile);
         if (content != null) {
@@ -19954,7 +19954,7 @@ define(function (require, exports, module) {
 
   /**
    * Serialize the accumulated mappings in to the stream of base 64 VLQs
-   * specified by the source map format.
+   * specified by the source map_files format.
    */
   SourceMapGenerator.prototype._serializeMappings =
     function SourceMapGenerator_serializeMappings() {
@@ -20035,7 +20035,7 @@ define(function (require, exports, module) {
     };
 
   /**
-   * Externalize the source map.
+   * Externalize the source map_files.
    */
   SourceMapGenerator.prototype.toJSON =
     function SourceMapGenerator_toJSON() {
@@ -20059,7 +20059,7 @@ define(function (require, exports, module) {
     };
 
   /**
-   * Render the source map being generated to a string.
+   * Render the source map_files being generated to a string.
    */
   SourceMapGenerator.prototype.toString =
     function SourceMapGenerator_toString() {
@@ -20082,7 +20082,7 @@ if (typeof define !== 'function') {
 }
 define(function (require, exports, module) {
 
-  var SourceMapGenerator = require('./source-map-generator').SourceMapGenerator;
+  var SourceMapGenerator = require('./source-map_files-generator').SourceMapGenerator;
   var util = require('./util');
 
   // Matches a Windows-style `\r\n` newline or a `\n` newline used by all other
@@ -20093,7 +20093,7 @@ define(function (require, exports, module) {
   var NEWLINE_CODE = 10;
 
   // Private symbol for identifying `SourceNode`s when multiple versions of
-  // the source-map library are loaded. This MUST NOT CHANGE across
+  // the source-map_files library are loaded. This MUST NOT CHANGE across
   // versions!
   var isSourceNode = "$$$isSourceNode$$$";
 
@@ -20397,7 +20397,7 @@ define(function (require, exports, module) {
 
   /**
    * Returns the string representation of this source node along with a source
-   * map.
+   * map_files.
    */
   SourceNode.prototype.toStringWithSourceMap = function SourceNode_toStringWithSourceMap(aArgs) {
     var generated = {
@@ -21109,6 +21109,6 @@ function amdefine(module, requireFn) {
 
 module.exports = amdefine;
 
-}).call(this,require('_process'),"/../node_modules/postcss/node_modules/source-map/node_modules/amdefine/amdefine.js")
+}).call(this,require('_process'),"/../node_modules/postcss/node_modules/source-map_files/node_modules/amdefine/amdefine.js")
 },{"_process":54,"path":53}]},{},[1])(1)
 });

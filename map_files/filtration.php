@@ -5,7 +5,7 @@
  * Date: 03.05.2016
  * Time: 12:30
  * Desc: Скрипт, который вызывается ajax, методом POST в файле geoScript, при изменении состояния checkbox
- * в файле map.php
+ * в файле map_files.php
  */
 
 
@@ -224,4 +224,4 @@ $array = ["type" => "FeatureCollection", "features" => $arrayForJSON];
 $json = json_encode($array);
 
 
-//file_put_contents('../map/data_for_map.json', $json);
+//file_put_contents('../map_files/data_for_map.json', $json);

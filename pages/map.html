@@ -16,6 +16,13 @@
     <script src="../lib/jquery.min.js"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
     <script src="../js/mapScripts/geoScript2.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" media="screen" />
+
     <style>
         .accept {
             margin-left: 20px;
@@ -23,11 +30,32 @@
     </style>
 </head>
 <body>
+<div class="container-fluid">
+    <h1 class="title"><a href="#">GreenAge</a></h1>
+    <div class="navigation">
+        <!--<div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>-->
+
+        <div class="navbar-collapse">
+            <ul class="nav">
+                <li><a href="/map">Карты</a></li>
+                <li><a href="/">Анонсы</a></li>
+                <li><a href="/cal">Календарь</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div class="map-container">
     <div id="map" style="width: 600px; height: 400px;"></div>
     <div>
         Фильтр по точкам <br>
-        <form action="../map/filtration.php" method="post">
+        <form action="../map_files/filtration.php" method="post">
             <input name="check" type="checkbox" id="check" onchange="checStateOfkCheckBox();" checked><label for="check">Прием
                 вторсырья </label><br>
             <div class="accept">

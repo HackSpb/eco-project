@@ -1892,7 +1892,7 @@ QUnit.dump = (function() {
 					}
 					return " " + args.join( ", " ) + " ";
 				},
-				// object calls it internally, the key part of an item in a map
+				// object calls it internally, the key part of an item in a map_files
 				key: quote,
 				// function calls it internally, it's the content of the function
 				functionCode: "[code]",

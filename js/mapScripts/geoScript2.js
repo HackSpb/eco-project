@@ -86,11 +86,11 @@ function init () {
     function checkState () {
         myMap.geoObjects.removeAll();
         $.ajax({
-            url: "map/filtration.php"
+            url: "map_files/filtration.php"
         });
 
         $.ajax({
-            url: "map/data_for_map.json"
+            url: "map_files/data_for_map.json"
         }).done(function (data) {
             objectManager.add(data);
         });
@@ -114,7 +114,7 @@ function init () {
 
 
     $.ajax({
-        url: "map/data_for_map.json"
+        url: "map_files/data_for_map.json"
     }).done(function (data) {
         objectManager.add(data);
     });

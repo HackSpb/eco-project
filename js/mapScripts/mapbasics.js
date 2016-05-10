@@ -11,7 +11,7 @@ ymaps.ready(init);
 
 function init () {
     // Создание экземпляра карты и его привязка к контейнеру с
-    // заданным id ("map").
+    // заданным id ("map_files").
     myMap = new ymaps.Map('map', {
         // При инициализации карты обязательно нужно указать
         // её центр и коэффициент масштабирования.
@@ -62,7 +62,7 @@ function init () {
     myMap.geoObjects.add(objectManager);
 
     $.ajax({
-        url: "../map/data_for_map.json"
+        url: "../map_files/data_for_map.json"
     }).done(function(data) {
         objectManager.add(data);
     });
