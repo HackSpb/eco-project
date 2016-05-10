@@ -31,11 +31,12 @@ $app->get('/event_create', function() use ($app) {
 })->bind('add_event');
 
 $app->get('/cal', function() use ($app) {
-    
-    echo 2+3;
 	return $app['twig']->render('cal.html');
 })->bind('cal');
 
+$app->get('/map', function() use ($app) {
+    return $app['twig']->render('map.html');
+})->bind('map');
 //$app->get('/contact', function() use ($app) {
 //	return $app['twig']->render('pages/contact.twig');
 //})->bind('contact');
