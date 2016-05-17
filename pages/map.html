@@ -21,7 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css" media="screen" />
+    <link rel="stylesheet" href="../css/style.css" media="screen" />
 
     <style>
         .accept {
@@ -56,7 +56,7 @@
     <div>
         Фильтр по точкам <br>
         <form action="../map_files/filtration.php" method="post">
-            <input name="check" type="checkbox" id="check" onchange="checStateOfkCheckBox();" checked><label for="check">Прием
+            <input name="check" type="checkbox" id="check" checked><label for="check">Прием
                 вторсырья </label><br>
             <div class="accept">
                 <input name="acception[]" value="dangerousGarbage" type="checkbox" id="dangerousGarbage" checked="true"><label
@@ -92,6 +92,7 @@
             <br>
             <input type="submit" value="Отладка скрипта">
         </form>
+        <div class="result"></div>
     </div>
 </div>
 <script>

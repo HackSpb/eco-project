@@ -84,13 +84,33 @@ function init () {
     myMap.geoObjects.add(objectManager);
 
     function checkState () {
+        var check = "",
+            acception = [],
+            points = [];
+
+        if (document.getElementById("check").checked) {
+            check = "on";
+            for (var i = 0; i < document.getElementsByName('acception[]').length; i++) {
+                acception.push(document.getElementsByName('acception[]')[i].id);
+            }
+        }
+        for (var j = 0; j < document.getElementsByName('points[]').length; j++) {
+            points.push(document.getElementsByName('points[]')[j].id);
+        }
+
         myMap.geoObjects.removeAll();
-        $.ajax({
-            url: "map_files/filtration.php"
+        $.post('../map_files/filtration.php',
+            {
+                check: check,
+                acception: acception,
+                points: points
+            },
+            function (data) {
+            $('.result').html(data);
         });
 
         $.ajax({
-            url: "map_files/data_for_map.json"
+            url: "map_files/data.json"
         }).done(function (data) {
             objectManager.add(data);
         });
