@@ -9,6 +9,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 	'twig.path' => __DIR__.'/pages',
 ));
 
+
 $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($app) {
         return sprintf('%s/%s', trim($app['request']->getBasePath()), ltrim($asset, '/'));
@@ -21,6 +22,10 @@ $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->before(function ($request) use ($app) {
     $app['twig']->addGlobal('active', $request->get("_route"));
 });
+
+//$app->before(function ($request) use ($app) {
+//    $app['twig']->addGlobal('active', $request->post("_route"));
+//});
 
 $app->get('/', function() use ($app) {
 	return $app['twig']->render('index.html');
@@ -37,6 +42,11 @@ $app->get('/cal', function() use ($app) {
 $app->get('/map', function() use ($app) {
     return $app['twig']->render('map.html');
 })->bind('map');
+
+$app->get('/admin/addPoint', function() use ($app) {
+    return $app['twig']->render('admin/addPointToMap.php');
+})->bind('addPoint123');
+
 //$app->get('/contact', function() use ($app) {
 //	return $app['twig']->render('pages/contact.twig');
 //})->bind('contact');

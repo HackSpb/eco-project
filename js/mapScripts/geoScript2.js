@@ -1,68 +1,5 @@
-/*
- 1.1.	Опасные отходы - islands#blackIcon
- 1.2.	Бумага - islands#yellowIcon
- 1.3.	Стекло - islands#greenIcon
- 1.4.	Пластик - islands#orangeIcon
- 1.5.	Металл - islands#redIcon
- 1.6.	Одежда - islands#violetIcon
- 1.7.	Иное - islands#blueIcon
-
- 1.8.	Опасные отходы – металл     - islands#blueCircleDotIcon
-
- 1.9.	Опасные отходы – иное   - islands#redCircleDotIcon
-
- 1.10.	Опасные отходы – иное – металл  - islands#darkOrangeCircleDotIcon
-
- 1.11.	Бумага – металл     - islands#nightCircleDotIcon
-
- 1.12.	Иное - металл – пластик – стекло – бумага   - islands#darkBlueCircleDotIcon
-
- 1.13.	Металл – пластик – стекло – бумага  - islands#pinkCircleDotIcon
-
- 1.14.	Пластик – бумага    - islands#grayCircleDotIcon
-
- 1.15.	Пластик – Стекло – бумага   - islands#brownCircleDotIcon
-
- 1.16.	Одежда – металл – стекло – бумага   - islands#darkGreenCircleDotIcon
-
- 1.17.	Металл – пластик – бумага   - islands#violetCircleDotIcon
-
- 1.18.	Стекло – бумага     - islands#blackCircleDotIcon
-
- 1.19.	Опасные отходы – пластик – стекло – бумага  - islands#yellowCircleDotIcon
-
- 1.20.	Опасные отходы – металл – бумага    - islands#greenCircleDotIcon
-
- 1.21.	Металл – стекло – бумага    - islands#orangeCircleDotIcon
-
- 1.22.	Одежда – металл – пластик – стекло – бумага     - islands#lightBlueCircleDotIcon
-
- 1.23.	Иное – металл – пластик – бумага    - islands#oliveCircleDotIcon
-
- 1.24.	Бумага – стекло- пластик – металл   - islands#blueDotIcon
-
- 1.25.	Металл – пластик – стекло   - islands#redDotIcon
-
- 1.26.	Металл – стекло     - islands#darkOrangeDotIcon
-
- 1.27.	Иное – металл – пластик – стекло    - islands#nightDotIcon
-
- 1.28.	Бумага – стекло – пластик – металл – одежда – одежда – иное – опасные отходы    - islands#darkBlueDotIcon
-
- 1.29.	Иное – металл   - islands#pinkDotIcon
-
- 1.30.	Иное – одежда   - islands#grayDotIcon
-
- 2.	Предстоящие мероприятия     - islands#brownDotIcon
- 3.	Пункты велопроката  - islands#darkGreenDotIcon
- 4.	Эко-кафе    - islands#violetDotIcon
- 5.	Приюты для животных     - islands#blackDotIcon
- 6.	Магазины с веганскими товарами  - islands#yellowDotIcon
- 7.	Магазины с экотоварами  - islands#greenDotIcon
-
- */
-
 ymaps.ready(init);
+
 
 function init () {
     var myMap = new ymaps.Map('map', {
@@ -78,41 +15,80 @@ function init () {
             gridSize: 32
         });
 
+    $.getJSON('../js/mapScripts/icons.json', function (data) {
+        for (var i = 0; i < data.length; i++) {
+            var iconLayout = data[i]['iconLayout'];
+            var iconImageHref = data[i]['iconImageHref'];
+
+            ymaps.option.presetStorage.add(iconLayout, {
+                iconLayout: "default#image",
+                iconImageHref: iconImageHref,
+                iconImageSize: [40, 40],
+                iconImageOffset: [-12, -12]
+            })
+        }
+    });
+
     // Чтобы задать опции одиночным объектам и кластерам,
     // обратимся к дочерним коллекциям ObjectManager.
     objectManager.clusters.options.set('preset', 'islands#violetClusterIcons');
     myMap.geoObjects.add(objectManager);
 
     function checkState () {
-        var check = "",
-            acception = [],
-            points = [];
+        var filterArr = [];
 
-        if (document.getElementById("check").checked) {
-            check = "on";
-            for (var i = 0; i < document.getElementsByName('acception[]').length; i++) {
-                acception.push(document.getElementsByName('acception[]')[i].id);
+        var acceptArr = [],
+            pointsArr = [];
+
+        for (var i = 0; i < document.getElementsByName('acception[]').length; i++) {
+            if (document.getElementsByName('acception[]')[i].checked) {
+                acceptArr.push(document.getElementsByName('acception[]')[i].value);
             }
         }
-        for (var j = 0; j < document.getElementsByName('points[]').length; j++) {
-            points.push(document.getElementsByName('points[]')[j].id);
+
+        for (i = 0; i < document.getElementsByName('points[]').length; i++) {
+            if (document.getElementsByName('points[]')[i].checked) {
+                pointsArr.push(document.getElementsByName('points[]')[i].value);
+            }
         }
 
-        myMap.geoObjects.removeAll();
-        $.post('../map_files/filtration.php',
-            {
-                check: check,
-                acception: acception,
-                points: points
-            },
-            function (data) {
-            $('.result').html(data);
-        });
+        $.getJSON('../js/mapScripts/preset.json', function (data) {
+            if (document.getElementById('check').checked) {
+                $.each(data[1], function(key, value) {
+                    var keys = key.split(" ");
+                    for (i = 0; i < acceptArr.length; i++) {
+                        for (var j = 0; j < keys.length; j++) {
+                            if (acceptArr[i] == keys[j] && filterArr.indexOf(value) == -1) {
+                                filterArr.push(value);
+                            }
+                        }
+                    }
+                })
+            }
+            $.each(data[0], function(key,value){
+                var keys = key.split(" ");
+                for (i = 0; i < pointsArr.length; i++) {
+                    for (var j = 0; j < keys.length; j++) {
+                        if (pointsArr[i] == keys[j] && (filterArr.indexOf(keys[j]) == -1)) {
+                            filterArr.push(value);
+                        }
+                    }
+                }
+            });
 
-        $.ajax({
-            url: "map_files/data.json"
-        }).done(function (data) {
-            objectManager.add(data);
+            var filterString = "";
+            var count = 0;
+            for (i = 0; i < filterArr.length; i++) {
+                count = i;
+                if (count < (filterArr.length - 1)) {
+                    filterString = filterString + 'options.preset == "' + filterArr[i] + '" || ';
+                }
+                if (count == (filterArr.length - 1)) {
+                    filterString = filterString + 'options.preset == "' + filterArr[i] + '"';
+                }
+            }
+
+            objectManager.setFilter(filterString);
         });
     }
 
@@ -134,7 +110,7 @@ function init () {
 
 
     $.ajax({
-        url: "map_files/data_for_map.json"
+        url: "../../map_files/data.json"
     }).done(function (data) {
         objectManager.add(data);
     });

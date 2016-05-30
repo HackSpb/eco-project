@@ -10,7 +10,7 @@
  * Подключаемся к БД и получаем данные с нужных таблиц
  */
 
-include '../map_files/connect_DB.php';
+include '../../map_files/connect_DB.php';
 $balContAcceptType = $db->prepare('SELECT * FROM `balooncontent_accept_type`');  //Содержит в себе все варианты
 $balContAcceptType->execute();                                                   //типов пунктов приема вторсырья
 
@@ -27,7 +27,7 @@ $presetsType->execute();
 $baloon_type_id = 0; // Переменная будет хранить id типа балуна
 
 foreach ($balType as $balTypeConf) {
-    if ($_POST['list'] == $balTypeConf['type']) {
+    if ($_POST['list'] == $balTypeConf['type_rus']) {
         $baloon_type_id = $balTypeConf['id'];
     }
 }
@@ -128,5 +128,82 @@ $addNewPointToGeoobjects = $db->prepare('INSERT INTO `geoobjects` (coordinates_x
 baloonContent_id) VALUES ("'.$coords[0].'", "'.$coords[1].'", '.$baloon_type_id.', '.$idOfNewPointInBaloonContent.')');
 $addNewPointToGeoobjects->execute();
 
-header("Location: addPointToMap.php");
+/**
+ * Выводим объекты в файл data.json
+ */
+
+$arrForJSON = [];   //массив, который будет преобразовываться в json-файл
+$getDataFromGeoObj = $db->query('SELECT * FROM `geoobjects`');
+foreach ($getDataFromGeoObj as $item) {
+    if ($item['baloon_type_id'] == 1) { //Проверяем, является ли точка пунктом приема вторсырья
+        $getDataFromTables = $db->prepare('SELECT b.name, b.time, b.adres, b.info, c.presets
+                                                FROM `balooncontent` as b INNER JOIN `presets` as c
+                                                                          INNER JOIN `balooncontent_accept` as d
+                                                WHERE b.id = ? AND b.baloonContent_accept_id = d.id
+                                                                            AND d.preset_id = c.id');
+        $getDataFromTables->execute(array($item['baloonContent_id']));
+        $data = $getDataFromTables->fetchAll();
+
+        $balloonContent = "<b>".$data[0]['name']."</b><br>
+                    <div><b>Время работы: </b>".$data[0]['time']."</div>
+                    <div><b>Адрес/телефон: </b>".$data[0]['adres']."</div>
+                    <div><b>Дополнительно: </b>".$data[0]['info']."</div>";
+        $coordinates = [$item['coordinates_x'], $item['coordinates_y']];
+
+        $arrForPushToJSON = [
+            "type" => "Feature",
+            "id" => $item['id'],
+            "geometry" => [
+                "type" => "Point",
+                "coordinates" => $coordinates
+            ],
+            "options" => [
+                "preset" => $data[0]['presets']
+            ],
+            "properties" => ["balloonContent" => $balloonContent],
+            "hintContent" => $data[0]['name']
+        ];
+
+        array_push($arrForJSON, $arrForPushToJSON);
+    }
+    else {  //Точки, которые не являются
+        $getDataFromTables = $db->prepare('SELECT b.name, b.time, b.adres, b.info, c.preset
+                                            FROM `balooncontent` as b INNER JOIN `baloon_type` as c
+                                            WHERE b.id = ? AND c.id = ?');
+        $getDataFromTables->execute(array($item['baloonContent_id'], $item['baloon_type_id']));
+        $data = $getDataFromTables->fetchAll();
+
+        print_r($data[0]);
+
+        $balloonContent = "<b>".$data[0]['name']."</b><br>
+                    <div><b>Время работы: </b>".$data[0]['time']."</div>
+                    <div><b>Адрес/телефон: </b>".$data[0]['adres']."</div>
+                    <div><b>Дополнительно: </b>".$data[0]['info']."</div>";
+        $coordinates = [$item['coordinates_x'], $item['coordinates_y']];
+
+        $arrForPushToJSON = [
+            "type" => "Feature",
+            "id" => $item['id'],
+            "geometry" => [
+                "type" => "Point",
+                "coordinates" => $coordinates
+            ],
+            "options" => [
+                "preset" => $data[0]['preset']
+            ],
+            "properties" => ["balloonContent" => $balloonContent],
+            "hintContent" => $data[0]['name']
+        ];
+
+        print_r($arrForPushToJSON);
+    }
+}
+
+$array = ["type" => "FeatureCollection", "features" => $arrForJSON];
+$json = json_encode($array);
+
+file_put_contents('../../map_files/data.json', $json);
+
+
+//header("Location: addPointToMap.php");
 ?>

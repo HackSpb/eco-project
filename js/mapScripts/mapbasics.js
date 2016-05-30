@@ -62,7 +62,7 @@ function init () {
     myMap.geoObjects.add(objectManager);
 
     $.ajax({
-        url: "../map_files/data_for_map.json"
+        url: "../../map_files/data.json"
     }).done(function(data) {
         objectManager.add(data);
     });

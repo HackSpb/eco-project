@@ -45,9 +45,10 @@
             cursor: default;
         }
     </style>
+    <script language="JavaScript" src="../../lib/jquery.min.js"></script>
     <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-    <script src="../js/mapScripts/mapbasics.js" type="text/javascript"></script>
-    <script language="JavaScript" src="../lib/jquery.min.js"></script>
+    <script src="../../js/mapScripts/mapbasics.js" type="text/javascript"></script>
+    <script src="../../map_files/data.json"></script>
 </head>
 <body>
 <div id="map"></div>
@@ -81,6 +82,9 @@
                                                            rows="10"></textarea></label><br>
                 <input type="submit" value="Отправить на сервер">
         </div>
+    </form>
+    <form action="refreshMap.php" method="get">
+        <input type="submit" value="Обновить карту">
     </form>
 </div>
 </body>
