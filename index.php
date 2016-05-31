@@ -6,7 +6,7 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-	'twig.path' => __DIR__.'/pages',
+	'twig.path' => __DIR__.'/views',
 ));
 
 $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
@@ -23,26 +23,20 @@ $app->before(function ($request) use ($app) {
 });
 
 $app->get('/', function() use ($app) {
-	return $app['twig']->render('index.html');
+	return $app['twig']->render('layout.twig');
 })->bind('home');
 
-$app->get('/event_create', function() use ($app) {
-	return $app['twig']->render('event_create.html');
-})->bind('add_event');
+$app->get('/about', function() use ($app) {
+	return $app['twig']->render('pages/about.twig');
+})->bind('about');
 
-$app->get('/cal', function() use ($app) {
-    
-    echo 2+3;
-	return $app['twig']->render('cal.html');
-})->bind('cal');
-
-//$app->get('/contact', function() use ($app) {
-//	return $app['twig']->render('pages/contact.twig');
-//})->bind('contact');
+$app->get('/contact', function() use ($app) {
+	return $app['twig']->render('pages/contact.twig');
+})->bind('contact');
 
 /* This is a hidden page for those who clicked the Send It button on the demo contact page */
-//$app->get('/road-to-nowhere', function() use ($app) {
-//	return $app['twig']->render('pages/road.twig');
-//})->bind('road');
+$app->get('/road-to-nowhere', function() use ($app) {
+	return $app['twig']->render('pages/road.twig');
+})->bind('road');
 
 $app->run();
