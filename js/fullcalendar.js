@@ -4240,7 +4240,7 @@ Grid.mixin({
 		var mouseFollower; // A clone of the original element that will move with the mouse
 		var dropLocation; // zoned event date properties
 
-		// Tracks mouse movement over the *view's* coordinate map. Allows dragging and dropping between subcomponents
+		// Tracks mouse movement over the *view's* coordinate map_files. Allows dragging and dropping between subcomponents
 		// of the view.
 		var dragListener = this.segDragListener = new HitDragListener(view, {
 			scroll: view.opt('dragScroll'),
@@ -4545,7 +4545,7 @@ Grid.mixin({
 		var isDragging;
 		var resizeLocation; // zoned event date properties. falsy if invalid resize
 
-		// Tracks mouse movement over the *grid's* coordinate map
+		// Tracks mouse movement over the *grid's* coordinate map_files
 		var dragListener = this.segResizeListener = new HitDragListener(this, {
 			scroll: view.opt('dragScroll'),
 			subjectEl: el,

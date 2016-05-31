@@ -12,6 +12,7 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 	'twig.path' => __DIR__.'/pages',
 ));
 
+
 $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($app) {
         return sprintf('%s/%s', trim($app['request']->getBasePath()), ltrim($asset, '/'));
@@ -29,6 +30,11 @@ $app->before(function ($request) use ($app) {
     $db = new PDO($dsn, $user_db, $password_db);
     $db->query("SET NAMES UTF8");
 
+//$app->before(function ($request) use ($app) {
+//    $app['twig']->addGlobal('active', $request->post("_route"));
+//});
+
+
 $app->get('/', function() use ($app) {
     global $db;
     $sql ="SELECT * FROM `event` Where 1 Order by begin_date";
@@ -43,6 +49,7 @@ $app->get('/', function() use ($app) {
 $app->get('/event_create', function() use ($app) {
 	return $app['twig']->render('event_create.html');
 })->bind('add_event');
+
 
 $app->get('/calendar', function() use ($app) {
    
@@ -94,6 +101,20 @@ $app->match('/reg', function() use ($app) {
         
 	return $app['twig']->render('reg.html');
 })->bind('reg');
+
+$app->get('/cal', function() use ($app) {
+	return $app['twig']->render('cal.html');
+})->bind('cal');
+
+$app->get('/map', function() use ($app) {
+    return $app['twig']->render('map.html');
+})->bind('map');
+
+$app->get('/admin/addPoint', function() use ($app) {
+    return $app['twig']->render('admin/addPointToMap.php');
+})->bind('addPoint123');
+
+
 //$app->get('/contact', function() use ($app) {
 //	return $app['twig']->render('pages/contact.twig');
 //})->bind('contact');

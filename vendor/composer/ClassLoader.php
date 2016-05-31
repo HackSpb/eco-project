@@ -86,7 +86,7 @@ class ClassLoader
     }
 
     /**
-     * @param array $classMap Class to filename map
+     * @param array $classMap Class to filename map_files
      */
     public function addClassMap(array $classMap)
     {
@@ -252,7 +252,7 @@ class ClassLoader
 
     /**
      * Turns off searching the prefix and fallback directories for classes
-     * that have not been registered with the class map.
+     * that have not been registered with the class map_files.
      *
      * @param bool $classMapAuthoritative
      */
@@ -262,7 +262,7 @@ class ClassLoader
     }
 
     /**
-     * Should class lookup fail if not found in the current class map?
+     * Should class lookup fail if not found in the current class map_files?
      *
      * @return bool
      */
@@ -318,7 +318,7 @@ class ClassLoader
             $class = substr($class, 1);
         }
 
-        // class map lookup
+        // class map_files lookup
         if (isset($this->classMap[$class])) {
             return $this->classMap[$class];
         }

@@ -333,7 +333,7 @@ abstract class Kernel implements KernelInterface, TerminableInterface
      */
     public function setClassCache(array $classes)
     {
-        file_put_contents($this->getCacheDir().'/classes.map', sprintf('<?php return %s;', var_export($classes, true)));
+        file_put_contents($this->getCacheDir().'/classes.map_files', sprintf('<?php return %s;', var_export($classes, true)));
     }
 
     /**
@@ -370,8 +370,8 @@ abstract class Kernel implements KernelInterface, TerminableInterface
 
     protected function doLoadClassCache($name, $extension)
     {
-        if (!$this->booted && is_file($this->getCacheDir().'/classes.map')) {
-            ClassCollectionLoader::load(include($this->getCacheDir().'/classes.map'), $this->getCacheDir(), $name, $this->debug, false, $extension);
+        if (!$this->booted && is_file($this->getCacheDir().'/classes.map_files')) {
+            ClassCollectionLoader::load(include($this->getCacheDir().'/classes.map_files'), $this->getCacheDir(), $name, $this->debug, false, $extension);
         }
     }
 
