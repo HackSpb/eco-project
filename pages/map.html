@@ -8,7 +8,8 @@
  <!--*/-->
 <!--?>-->
 <!doctype html>
-<html lang="en">
+{% include 'header.html' %}
+<!--<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Карта</title>
@@ -40,7 +41,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-        </div>-->
+        </div>
 
         <div class="navbar-collapse">
             <ul class="nav">
@@ -51,6 +52,7 @@
         </div>
     </div>
 </div>
+-->
 <div class="map-container">
     <div id="map" style="width: 600px; height: 400px;"></div>
     <div>
@@ -103,5 +105,4 @@
             $('.accept').hide("fast");
     }
 </script>
-</body>
-</html>
+{% include 'footer.html' %}
