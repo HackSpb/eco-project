@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!-- Header -->
+{% include 'header.html' %}
+    <!-- Main content -->
+
+        <!--<div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="project-feed-filter">
+                        <li><a href="#" class="current" data-filter="*">#все</a></li>
+                        <li><a href="#" data-filter=".animal">#животные</a></li>
+                        <li><a href="#" data-filter=".environ">#среда</a></li>
+                        <li><a href="#" data-filter=".man">#человек</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>-->
+
+        <div class="container">
+            <div class="row">
+                <!-- Левый блок  -->
+                <div class="col-md-9">
+                    <div class="row">
+                        {% for event in events %}
+                        <div class="col-xs-12 col-sm-4 col-md-4">
+                            <div class="post type-2">
+                                {% if (event.image) %} <img src="images/{{event.image}}" alt="" /> {% else %} <img src="images/eco_post2.jpg" alt="" />{% endif %}
+                                <div class="post-data">
+                                     <a href="#"><h2>{{event.title}}</h2></a>
+                                    <p>{{event.description}}</p>
+                                    <p style="margin-bottom:0px;"><span class="glyphicon glyphicon-calendar"></span>{{event.begin_date}}</p>
+                                     <p style="margin-bottom:0px;"><span class="glyphicon glyphicon-map-marker"></span><a href="#">{{event.address}}</a></p>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- / Левый блок -->
+
+
+                <!-- Правый блок с прошедшими событиями -->
+                <div class="col-md-3 hidden-xs hidden-sm">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="last-posts">
+                                <li>12.12.2016 Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh</li>
+                                <li>12.12.2016 Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh</li>
+                                <li>12.12.2016 Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh</li>
+                                <li>12.12.2016 Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh</li>
+                                <li>12.12.2016 Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh</li>
+                                <li>12.12.2016 Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- / Правый блок с прошедшими событиями -->
+            </div>
+
+            <!-- Cредний блок 3 поста -->
+<!--            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="post type-1">
+                        <img src="images/eco_post1.jpg" alt="" />
+                        <div class="post-data">
+                            <h2>Lorem ipsum dolor sit amet </h2>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="post type-2">
+                        <img src="images/eco_post1.jpg" alt="" />
+                        <div class="post-data">
+                            <h2>Lorem ipsum dolor sit amet </h2>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="post">
+                        <img src="images/eco_post2.jpg" alt="" />
+                        <div class="big-post-data">
+                            <h2>Lorem ipsum dolor sit amet</h2>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!-- / Cредний блок 3 поста -->
+
+            <!-- Нижний блок 4 поста -->
+<!--            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="post type-2">
+                        <img src="images/eco_post1.jpg" alt="" />
+                        <div class="post-data">
+                            <h2>Lorem ipsum dolor sit amet </h2>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="post type-3">
+                        <img src="images/eco_post1.jpg" alt="" />
+                        <div class="post-data">
+                            <h2>Lorem ipsum dolor sit amet </h2>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="post type-1">
+                        <img src="images/eco_post1.jpg" alt="" />
+                        <div class="post-data">
+                            <h2>Lorem ipsum dolor sit amet </h2>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="post type-2">
+                        <img src="images/eco_post1.jpg" alt="" />
+                        <div class="post-data">
+                            <h2>Lorem ipsum dolor sit amet </h2>
+                            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+            <!-- / Нижний блока 4 поста -->
+        </div>
+    <!-- / Main content -->
+
+<!-- / Footer -->
+{% include 'footer.html' %}
