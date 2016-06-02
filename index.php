@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/vendor/autoload.php';
 
-$dsn="mysql:dbname=green_age;host=127.0.0.1"; $user_db="root"; $password_db="";
+$dsn="mysql:dbname=eco-sputnik;host=127.0.0.1"; $user_db="root"; $password_db="";
 
 
 $app = new Silex\Application();
