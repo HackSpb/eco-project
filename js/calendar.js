@@ -6,4 +6,4 @@ $(document).ready(function() {
         dayClick: function() {
         alert('a day has been clicked!');
     }
-});
+});}

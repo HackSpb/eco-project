@@ -23,16 +23,20 @@ function init () {
             ymaps.option.presetStorage.add(iconLayout, {
                 iconLayout: "default#image",
                 iconImageHref: iconImageHref,
-                iconImageSize: [40, 40],
+                iconImageSize: [48, 64],
                 iconImageOffset: [-12, -12]
             })
         }
     });
 
+    console.log(ymaps.option.presetStorage);
     // Чтобы задать опции одиночным объектам и кластерам,
     // обратимся к дочерним коллекциям ObjectManager.
+    objectManager.removeAll();
     objectManager.clusters.options.set('preset', 'islands#violetClusterIcons');
     myMap.geoObjects.add(objectManager);
+
+
 
     function checkState () {
         var filterArr = [];

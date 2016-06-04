@@ -7,10 +7,10 @@
  */
 
  $host = "localhost";
- $db_name = "a0030107_eco";
+ $db_name = "green_age";
  $charset = "UTF8";
- $user = "a0030107_eco";
- $pass = "eco123";
+ $user = "root";
+ $pass = "";
 
         $db = new PDO("mysql:host=$host;dbname=$db_name", $user, $pass);
         $db ->exec('SET NAMES UTF8');

@@ -136,6 +136,6 @@ class MapRefresher
         $array = ["type" => "FeatureCollection", "features" => $arrForJson];
         $json = json_encode($array);
 
-        file_put_contents('..\..\map_files\data.json', $json);
+        file_put_contents('../../map_files/data.json', $json);
     }
 }

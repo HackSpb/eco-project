@@ -14,13 +14,15 @@ use MapLib\MapRefresher;
 use MapLib\PresetRefresher;
 use MapLib\IconRefresher;
 
-$mapRefresher = new MapRefresher();
-$mapRefresher->refresh();
-
 $presetRefresher = new PresetRefresher();
 $presetRefresher->refresh('../../js/mapScripts/preset.json');
 
 $iconsRefresh = new IconRefresher();
 $iconsRefresh->refresh('../../js/mapScripts/icons.json');
+
+$mapRefresher = new MapRefresher();
+$mapRefresher->refresh();
+
+
 
 header('Location: addPointToMap.php');
