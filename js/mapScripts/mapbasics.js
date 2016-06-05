@@ -30,8 +30,6 @@ function init () {
             var coords = e.get('coords');
             coordX = coords[0].toPrecision(6);
             coordY = coords[1].toPrecision(6);
-            console.log("x" + coordX);
-            console.log("y" + coordY);
             document.getElementById('coords').value = coordX + " " + coordY;
             myMap.balloon.open(coords, {
                 contentBody: '<p>Координаты: ' + [

@@ -1,22 +1,40 @@
 ymaps.ready(init);
 
 
+
 function init () {
+
+    /**
+     * Инициализируем карту
+     */
+
     var myMap = new ymaps.Map('map', {
             center: [59.9158,30.2394],
             zoom: 9
         }, {
             searchControlProvider: 'yandex#search'
         }),
+
+        /**
+         * Инициализируем хранилище объектов objectManager
+         */
+
         objectManager = new ymaps.ObjectManager({
             // Чтобы метки начали кластеризоваться, выставляем опцию.
             clusterize: true,
             // ObjectManager принимает те же опции, что и кластеризатор.
             gridSize: 32
         });
+
+    /**
+     * Очищаем хранилище объектов предыдущей сессии
+     */
+
     objectManager.removeAll();
 
-
+    /**
+     * Добавляем новые иконки в хранилище опций presetStorage
+     */
 
     $.getJSON('js/mapScripts/icon.json', function (data) {
         for (var i = 0; i < 9; i++) {
@@ -47,15 +65,17 @@ function init () {
             })
         }
     });
-
-    console.log(ymaps.option.presetStorage);
-    // Чтобы задать опции одиночным объектам и кластерам,
-    // обратимся к дочерним коллекциям ObjectManager.
+    /**
+    * Чтобы задать опции одиночным объектам и кластерам,
+    * обратимся к дочерним коллекциям ObjectManager.
+    */
 
     objectManager.clusters.options.set('preset', 'islands#violetClusterIcons');
     myMap.geoObjects.add(objectManager);
 
-
+    /**
+     * Функция проверки состояния флажков
+     */
 
     function checkState () {
         var filterArr = [];

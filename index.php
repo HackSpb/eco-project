@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__.'/vendor/autoload.php';
+include_once 'lib/php/map_lib/EventGeoObjToDB.php';
 
 $dsn="mysql:dbname=green_age;host=127.0.0.1"; $user_db="root"; $password_db="";
 
@@ -47,7 +48,14 @@ $app->get('//', function() use ($app) {
 })->bind('index');
 
 // создание события
-$app->get('/event_create', function() use ($app) {
+$app->match('/event_create', function() use ($app) {
+    
+    $eventToDB = new \MapLib\EventGeoObjToDB($_POST['name'], $_POST['time'], $_POST['location'], $_POST['description'],
+        [$_POST['coord_x'], $_POST['coord_y']]);
+    $eventToDB->addEventToMap();
+    
+    $geoobjectID = $eventToDB->getId();
+    
 	return $app['twig']->render('event_create.html');
 })->bind('add_event');
 
