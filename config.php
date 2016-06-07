@@ -6,9 +6,11 @@
  * Time: 22:01
  */
 
-$dsn="mysql:dbname=a0030107_eco;host=localhost";
-$user_db="a0030107_eco";
-$password_db="eco123";
+$dbName = "";
+$host= "";
+$dsn="mysql:dbname=$dbName;host=$host";
+$user_db="";
+$password_db="";
 try {
     $db = new PDO($dsn, $user_db, $password_db);
     $db->exec("SET NAMES UTF8");
