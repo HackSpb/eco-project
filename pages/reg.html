@@ -1,143 +1,30 @@
-﻿<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>GreenAge</title>
-    <link href='https://fonts.googleapis.com/css?family=Roboto&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css" media="screen" />
-</head>
-<body>
-    <!-- Header -->
-    <div class="container-fluid">
-        <h1 class="title"><a href="#">GreenAge</a></h1>
-        <div class="navigation">
-            <!--<div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>-->
+﻿<!-- Header -->
+{% include 'header.html' %}
 
-            <div class="navbar-collapse">
-                <ul class="nav">
-                    <li><a href="">Карты</a></li>
-                    <li><a href="/">Анонсы</a></li>
-                    <li><a href="/cal">Календарь</a></li>
-                </ul>
-            </div>
-        </div>
-    </div> <!--/ Header-->
-
-    <!-- Main content -->
-    <!-- начало контента -->
+<!-- начало контента -->
 <div class="fmain">
-<!-- заголовки вкладок -->
-<script type="text/javascript">
-
-$j(document).ready(function() {
-	$j("#to_date_rus").datepicker({
-		dateFormat: 'dd.mm.yy',
-		changeMonth: true,
-		changeYear: true,
-		showButtonPanel: true,
-		altField: '#to_date',
-		altFormat: 'yy-mm-dd',
-		onChangeMonthYear: function(y, m, i) {
-			$j(this).datepicker('setDate', new Date(y, m-1, i.selectedDay));
-
-			// эмуяция изменения
-			$j(this).change();
-		}
-	});
-	$j("#from_date_rus").datepicker({
-		dateFormat: 'dd.mm.yy',
-		changeMonth: true,
-		changeYear: true,
-		showButtonPanel: true,
-		altField: '#from_date',
-		altFormat: 'yy-mm-dd',
-		onChangeMonthYear: function(y, m, i) {
-			$j(this).datepicker('setDate', new Date(y, m-1, i.selectedDay));
-
-			// эмуяция изменения
-			$j(this).change();
-		}
-	});
-});
-</script>
 <!-- тело вкладок -->
 <form action="reg" method="post" name="main" enctype="multipart/form-data">
 
-  <div class="container">
-	<div>
-		<div> Имя <span class="star">*</span></div>
-		<div><input type="text" class="inp" size="100" name="name" value=""></div>
-	</div>
-	<div>
-		<div> e-mail </div>
-		<div><input type="text" class="inp" size="100" name="email" value=""></div>
-	</div>
-	
-	<div>
-		<div> пароль </div>
-		<div>
-			<input type="text" name="password" id="to_date_rus" value="" class="inp" style="width:100px">
-			
-		</div>
-	</div>
-         <div>
-		<div> Повторите пароль </div>
-		<div>
-			<input type="text" name="password_repeat" id="to_date_rus" value="" class="inp" style="width:100px">
-			
-		</div>
-	</div>
+        <div> Имя <span>*</span></div>
+		<div><input type="text" size="100" size="100" name="name" value=""></div>
 
-</div>
-<!-- завершающая часть -->
-<div>
-	<div></div>
-	<div>
-	<div class="fbut" align="center" style="width:500px;">
-		<input type="submit" value="сохранить" class="butsub">
-		<input type="button" value="отмена" class="butback" onclick="history.go(-1);">
+        <div> e-mail </div>
+        <div><input type="text" size="100" name="email" value=""></div>
+
+        <div> Пароль </div>
+        <div> <input type="password" name="password" value=""></div>
+
+        <div> Повторите пароль </div>
+	<div><input type="password" name="password_repeat"value=""></div>
+
+	<div  align="center" style="width:500px;">
+		<input type="submit" value="сохранить">
+		<input type="button" value="отмена" onclick="history.go(-1);">
 	</div>
-	</div>
-</div>
 </form>
+</div>
+<!-- / Main content -->
 
-    <!-- / Main content -->
-
-    <!-- Footer -->
-    <div class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-row">
-                    <div class="col-xs-12 col-sm-4 col-md-3">
-                        <h3>GreenAge</h3>
-                        <p>© 206 GreenAge</p>
-                    </div>
-                    <div class="col-xs-12 col-sm-4 col-md-6"><p> Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p></div>
-                    <div class="col-xs-12 col-sm-4 col-md-3"><p> Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p></div>
-                 </div>
-            </div>
-        </div>
-    </div>
-    <!-- / Footer -->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-1.9.1.min.js"><\/script>')</script>
-    <script src="js/jquery-migrate-1.1.1.min.js"></script>
-    <script src="js/jquery.mobilemenu.js"></script>
-    <script src="js/jquery.superfish-1.5.0.js"></script>
-    <script src="js/jquery.elastislide.js"></script>
-    <script src="js/jquery.isotope.min.js"></script>
-    <script src="js/custom.js"></script>
-</body>
-</html>
+<!-- / Footer -->
+{% include 'footer.html' %}
