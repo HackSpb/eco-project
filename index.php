@@ -5,7 +5,9 @@ include_once 'lib/php/map_lib/DataBaseConnection.php';
 include_once 'lib/php/map_lib/EventGeoObjToDB.php';
 include_once 'lib/php/map_lib/BalloonTempComposer.php';
 
-$dsn="mysql:dbname=green_age;host=127.0.0.1"; $user_db="root"; $password_db="";
+include 'config.php';
+
+//$dsn="mysql:dbname=green_age;host=127.0.0.1"; $user_db="root"; $password_db="";
 
 
 $app = new Silex\Application();

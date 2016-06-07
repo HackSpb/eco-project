@@ -16,10 +16,10 @@ use \PDO;
 class DataBase
 {
     private $host = "localhost";
-    private $db_name = "green_age";
+    private $db_name = "a0030107_eco";
     private $charset = "UTF8";
-    private $user = "root";
-    private $pass = "";
+    private $user = "a0030107_eco";
+    private $pass = "eco123";
 
     private $db;
 
