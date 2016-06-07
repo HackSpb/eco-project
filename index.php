@@ -31,9 +31,11 @@ $app->before(function ($request) use ($app) {
     $app['twig']->addGlobal('active', $request->get("_route"));
 });
 
-global $dsn, $user_db, $password_db;
-$db = new PDO($dsn, $user_db, $password_db);
-$db->query("SET NAMES UTF8");
+global $db;
+
+//global $dsn, $user_db, $password_db;
+//$db = new PDO($dsn, $user_db, $password_db);
+//$db->query("SET NAMES UTF8");
 
 //$app->before(function ($request) use ($app) {
 //    $app['twig']->addGlobal('active', $request->post("_route"));
