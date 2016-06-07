@@ -28,8 +28,12 @@ class DataBase
      */
     public function __construct()
     {
-        $this->db = $db = new PDO("mysql:host=$this->host;dbname=$this->db_name", $this->user, $this->pass);
-        $db ->exec("SET NAMES $this->charset");
+        try {
+            $this->db = $db = new PDO("mysql:host=$this->host;dbname=$this->db_name", $this->user, $this->pass);
+            $db->exec("SET NAMES $this->charset");
+        } catch (\PDOException $e) {
+            print_r('ошибка подключении к базе данных');
+        }
     }
 
     /**
