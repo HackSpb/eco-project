@@ -11,7 +11,7 @@ $user_db="a0030107_eco";
 $password_db="eco123";
 try {
     $db = new PDO($dsn, $user_db, $password_db);
-    $db->exec("SET NAMES $this->charset");
+    $db->exec("SET NAMES UTF8");
 } catch (\PDOException $e) {
     print_r('ошибка подключении к базе данных');
 }
