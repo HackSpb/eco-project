@@ -45,6 +45,7 @@ global $db;
 $app->get('//', function() use ($app) {
     global $db;
 
+    print_r($db);
     $sql ="SELECT * FROM `event` Where 1 Order by begin_date";
     foreach ($db->query($sql) as $row) {
         $events[]= $row;
