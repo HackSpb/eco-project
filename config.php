@@ -6,14 +6,15 @@
  * Time: 22:01
  */
 
-$dbName = "";
-$host= "";
+$dbName = "green_age";
+$host= "localhost";
 $dsn="mysql:dbname=$dbName;host=$host";
-$user_db="";
+$user_db="root";
 $password_db="";
 try {
     $db = new PDO($dsn, $user_db, $password_db);
-    $db->exec("SET NAMES UTF8");
+    $db->query('SET NAMES \'utf8\'');
+
 } catch (\PDOException $e) {
     print_r('ошибка подключении к базе данных');
 }
