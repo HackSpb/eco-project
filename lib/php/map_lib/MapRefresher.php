@@ -47,7 +47,7 @@ class MapRefresher
         $geoDataArr = $dataFromGeoTables->fetchAll();
         $geoData = $geoDataArr[0];
 
-        $path = "../../map_files/templates/balloon_temp.html";
+        $path = $this->tempPath;
         $var = new BalloonTempComposer($path, $geoData['name'], $geoData['time'], $geoData['adres'], $geoData['info']);
         $balloonContent = $var->getBalloonContent();
 
@@ -58,24 +58,63 @@ class MapRefresher
     }
 
     private function getNotRePoints(PDO $db, $balContID, $balTypeID) {
-        $dataFromGeoTables = $db->prepare('SELECT a.name, a.time, a.adres, a.info, b.preset
+        if ($balTypeID != 2) {
+            $dataFromGeoTables = $db->prepare('SELECT a.name, a.time, a.adres, a.info, b.preset
                                                     FROM `balooncontent` as a INNER JOIN `baloon_type` as b
                                                     WHERE a.id = :balContID AND b.id = :balTypeID');
-        $dataFromGeoTables->execute(array('balContID' => $balContID, 'balTypeID' => $balTypeID));
-        $geoDataArr = $dataFromGeoTables->fetchAll();
-        $geoData = $geoDataArr[0];
+            $dataFromGeoTables->execute(array('balContID' => $balContID, 'balTypeID' => $balTypeID));
+            $geoDataArr = $dataFromGeoTables->fetchAll();
+            $geoData = $geoDataArr[0];
 
 
+            $path = "../../map_files/templates/balloon_temp.html";
+            $var = new BalloonTempComposer($path, $geoData['name'], $geoData['time'], $geoData['adres'], $geoData['info']);
+            $balloonContent = $var->getBalloonContent();
 
-        $path = "../../map_files/templates/balloon_temp.html";
-        $var = new BalloonTempComposer($path, $geoData['name'], $geoData['time'], $geoData['adres'], $geoData['info']);
-        $balloonContent = $var->getBalloonContent();
 
+            $returningArray = ['balloonContent' => $balloonContent, "hintContent" => $geoData['name'],
+                "preset" => $geoData['preset']];
 
-        $returningArray = ['balloonContent' => $balloonContent, "hintContent" => $geoData['name'],
-            "preset" => $geoData['preset']];
+            return $returningArray;
+        }
+        else {
+            $returningArray = [];
+            $dataFromEventTables = $db->prepare('SELECT a.name, a.time, a.adres, a.info, b.preset, c.end_date
+                                                    FROM `balooncontent` as a INNER JOIN `baloon_type` as b 
+                                                                              INNER JOIN `event` as c
+                                                    WHERE a.id = :balContID AND b.id = :balTypeID
+                                                                            AND a.id = c.geoobject_id');
+            $dataFromEventTables->execute(array('balContID' => $balContID, 'balTypeID' => $balTypeID));
 
-        return $returningArray;
+            $geoDataArr = $dataFromEventTables->fetchAll();
+            $geoData = $geoDataArr[0];
+
+            if ($this->checkExpiredDate($geoData['end_date'])) {
+
+                $path = $this->tempPath;
+                $var = new BalloonTempComposer($path, $geoData['name'], $geoData['time'], $geoData['adres'], $geoData['info']);
+                $balloonContent = $var->getBalloonContent();
+
+                $returningArray = ['balloonContent' => $balloonContent, "hintContent" => $geoData['name'],
+                    "preset" => $geoData['preset']];
+
+                return $returningArray;
+            }
+            else {
+                return $returningArray;
+            }
+        }
+    }
+
+    private function checkExpiredDate($endDate) {
+        $dateNow = date('Y-m-d H-i-s');
+        $dateNowObj = new \DateTime($dateNow);
+        $endDateObj = new \DateTime($endDate);
+
+        if ($dateNowObj > $endDateObj)
+            return true;
+        else
+            return false;
     }
 
     /**
@@ -125,6 +164,9 @@ class MapRefresher
             }
             else {
                 $notRePoints = $this->getNotRePoints($db, $geoData['baloonContent_id'], $geoData['baloon_type_id']);
+                if (empty($notRePoints)) {
+                    continue;
+                }
                 $coords = $this->createCoordsArr($geoData['coordinates_x'], $geoData['coordinates_y']);
 
                 $arrForPush = $this->createArrForPush($notRePoints, $geoData['id'], $coords);

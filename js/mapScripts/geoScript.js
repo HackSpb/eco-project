@@ -1,3 +1,8 @@
+$(document).ready(function () {
+    console.log('1');
+    $.post('../../map_files/checkExpiredEvents.php');
+});
+
 ymaps.ready(init);
 
 
@@ -54,8 +59,6 @@ function init () {
         for (i = 9; i < data.length; i++) {
             iconLayout = data[i]['iconLayout'];
             iconImageHref = data[i]['iconImageHref'];
-
-            console.log(data.length);
 
             ymaps.option.presetStorage.add(iconLayout, {
                 iconLayout: "default#image",
