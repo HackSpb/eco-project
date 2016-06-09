@@ -10,7 +10,7 @@
  * Подключаемся к БД и получаем данные с нужных таблиц
  */
 
-include '../../map_files/connect_DB.php';
+include '../../config.php';
 $balContAcceptType = $db->prepare('SELECT * FROM `balooncontent_accept_type`');  //Содержит в себе все варианты
 $balContAcceptType->execute();                                                   //типов пунктов приема вторсырья
 
