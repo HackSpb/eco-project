@@ -205,5 +205,5 @@ $json = json_encode($array);
 file_put_contents('../../map_files/data.json', $json);
 
 
-//header("Location: addPointToMap.php");
+header("Location: addPointToMap.php");
 ?>
