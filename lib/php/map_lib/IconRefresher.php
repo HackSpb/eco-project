@@ -24,8 +24,9 @@ class IconRefresher
     }
 
     public function refresh($path) {
-        $var = new DataBase();
-        $db = $var->getDb();
+        include "../../../config.php";
+        global $db;
+        
         $arrForJSON = [];
 
         $getDataFromIcons = $db->query('SELECT * FROM `icons`');

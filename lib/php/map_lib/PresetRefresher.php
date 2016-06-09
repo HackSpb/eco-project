@@ -17,8 +17,8 @@ class PresetRefresher
      * @param $path, путь к json файлу, который необходимо обновить
      */
     public function refresh($path) {
-        $var = new DataBase();
-        $db = $var->getDb();
+        include '../../../config.php';
+        global $db;
 
         $points = [];
         $stmt = $db->query('SELECT type_eng, preset FROM `baloon_type`');

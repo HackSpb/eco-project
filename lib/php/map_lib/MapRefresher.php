@@ -149,9 +149,10 @@ class MapRefresher
      * Метод обновляет карту, добавляя данные из БД
      */
     public function refresh() {
+        include "../../../config.php";
+        global $db;
+        
         $arrForJson = [];
-        $var = new DataBase();
-        $db = $var->getDb();
 
         $getDataFromGeoObj = $db->query('SELECT * FROM `geoobjects`');
         foreach ($getDataFromGeoObj as $geoData) {
