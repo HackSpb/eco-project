@@ -24,6 +24,33 @@ function init () {
         clusterize: false
     });
 
+    $.getJSON('js/mapScripts/icon.json', function (data) {
+        for (var i = 0; i < 9; i++) {
+            var iconLayout = data[i]['iconLayout'];
+            var iconImageHref = data[i]['iconImageHref'];
+
+
+
+            ymaps.option.presetStorage.add(iconLayout, {
+                iconLayout: "default#image",
+                iconImageHref: iconImageHref,
+                iconImageSize: [34, 44],
+                iconImageOffset: [-12, -12]
+            })
+        }
+
+        for (i = 9; i < data.length; i++) {
+            iconLayout = data[i]['iconLayout'];
+            iconImageHref = data[i]['iconImageHref'];
+
+            ymaps.option.presetStorage.add(iconLayout, {
+                iconLayout: "default#image",
+                iconImageHref: iconImageHref,
+                iconImageSize: [64, 46],
+                iconImageOffset: [-12, -12]
+            })
+        }
+    });
 
     myMap.events.add('click', function (e) {
         if (!myMap.balloon.isOpen()) {
