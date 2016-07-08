@@ -47,7 +47,7 @@ $app->get('//', function() use ($app) {
 
     $sql ="SELECT * FROM `event` Where 1 Order by begin_date";
     foreach ($db->query($sql) as $row) {
-        $events[]= $row;
+        $events[] = $row;
     }
     $app['twig']->addGlobal('events', $events);
 //    print_r($events);
@@ -105,11 +105,7 @@ $app->match('/reg', function() use ($app) {
             } else echo 'Некорректные данные';
 
         } else  echo "не равны пароли";
-    } else {
-
-        echo "незаполнены нужные поля ";
-    }
-
+    } 
 
 	return $app['twig']->render('reg.html');
 })->bind('reg');
@@ -127,7 +123,44 @@ $app->get('/admin/addPoint', function() use ($app) {
     return $app['twig']->render('admin/addPointToMap.php');
 })->bind('addPoint123');
 
+// $app->get('/auth', function() use ($app) {
+//     return $app['twig']->render('authorization.html');
+// })->bind('auth');
 
+$app->match('/auth', function() use ($app) {
+
+     if ( isset($_POST["email"] ) && isset($_POST["password"]) ) {
+        $email = ( preg_match("|^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$|", $_POST["email"]) ) ? $_POST["email"] : false;
+
+            if ( $email ) {
+                global $db;
+
+                // узнаем пользователь с таким  уже существует
+               $result = $db->query("
+                    SELECT
+                        `u_password`
+                    FROM
+                        `users`
+                    WHERE 
+                            `u_email` = '".$email."'
+                    LIMIT 1");
+
+                $hash_password = $result->fetch();
+
+                if ( $hash_password[0] ) {
+                    $password = trim($_POST["password"]);
+                    if ( password_verify($password, $hash_password[0]) ) {
+                        echo 'Авторизация';
+                    } else{
+                        echo "Ошибка";
+                    }
+
+                } else echo 'Вы ввели неправильный логин/пароль';
+            } else echo 'Некорректные данные';
+
+    } 
+    return $app['twig']->render('about.html');
+})->bind('about');
 //$app->get('/contact', function() use ($app) {
 //	return $app['twig']->render('pages/contact.twig');
 //})->bind('contact');

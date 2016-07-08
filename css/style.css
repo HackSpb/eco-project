@@ -6,11 +6,12 @@ body {
 	-webkit-text-size-adjust: 100%;
 }
 .title {
-	text-align: center;
+	text-align: left;
 	margin-top: 20px;
 	margin-bottom: -10px;
 	font-size: 60px;
 	font-weight: bold;
+     margin-left: 30px
 }
 .title a {
 	color: #4caf50;
@@ -89,7 +90,7 @@ https://github.com/HackSpb/eco-project.git
 }
 .type-2{
 	background: #d5e4c8;
-}
+  }
 .type-3{
 	background: #e8eaf6;
 }
@@ -320,3 +321,123 @@ https://github.com/HackSpb/eco-project.git
 		.project-details .spacer {
 			height: 30px;
 		}
+
+/*  Forms lera */
+.box1 { 
+    background: #d5e4c8; 
+    width: 350px; 
+    padding:10px; 
+      margin: auto; 
+    border: 15px solid #fff;
+               }
+.form-row {
+	margin-bottom: 8px;
+	overflow: hidden;          
+}
+.form-row input {
+	float: right;
+	height: 19px;
+	line-height: 19px;
+	margin: 0px;
+	padding: 0px 5px;
+		border: 1px solid #ABADB3;
+}
+
+.reg-form {
+	width: 416px;
+	margin: 0 auto;
+}
+.form-row textarea {
+	height: 90px;
+    line-height: 16px;
+    font-size: 12px;
+ 
+    width: 100%;
+    border: 1px solid #ABADB3;
+}
+
+.form-row input[type=submit] {
+	padding:5px;
+	height:25px;
+	width:100%;
+	line-height: 10px;
+	background: #4caf50;
+	color:white;
+}
+
+.butsub{
+    padding:5px;
+	height:25px;
+	width:143px;
+    float:left;
+       	line-height: 10px;
+	background: #4caf50;
+    text-transform: uppercase;
+    color:white;
+        }
+.btom12{
+ display: inline-block;
+}
+.butback
+{
+    padding:5px;
+	height:25px;
+	width:143px;
+    float:right;
+	line-height: 10px;
+    background:#848484;
+    text-transform: uppercase;
+    color:white;
+        }
+.h1
+{
+    text-align: center;
+     margin-top:-10px;
+}
+
+.autorizb
+{
+    padding:5px;
+	height:35px;
+	width:auto;
+    float:right;
+       	line-height: 10px;
+	background: #4caf50;
+    text-transform: uppercase;
+    color:white;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-right: 20px
+        }
+.autorizb2
+{
+    padding:5px;
+	height:35px;
+	width:auto;
+    float:right;
+       	line-height: 10px;
+	background: #f89b35;
+    text-transform: uppercase;
+    color:white;
+    font-size: 18px;
+      margin-top: 30px;
+     margin-right: 10px
+        }
+.reg
+{
+    padding:5px;
+	height:25px;
+	width:100%;
+  	line-height: 10px;
+    background:#f89b35;
+    text-transform: uppercase;
+    color:white;
+        }
+.a
+{
+   text-decoration: none;
+}
+.vr
+{
+   text-align: right
+}
