@@ -33,6 +33,7 @@ $app->before(function ($request) use ($app) {
 
 global $db;
 
+
 //global $dsn, $user_db, $password_db;
 //$db = new PDO($dsn, $user_db, $password_db);
 //$db->query("SET NAMES UTF8");
@@ -41,27 +42,53 @@ global $db;
 //    $app['twig']->addGlobal('active', $request->post("_route"));
 //});
 
+// Инициируем сессию
+session_start();
+if( isset($_SESSION['user']) ){
+     $app['twig']->addGlobal('user', $_SESSION['user']);
+}
+
 // вывод главное страницы - все анонсы
 $app->get('//', function() use ($app) {
     global $db;
 
-    $sql ="SELECT * FROM `event` Where 1 Order by begin_date";
+    $sql ="SELECT * FROM `event` Where `archive` = 'Y' Order by begin_date";
     foreach ($db->query($sql) as $row) {
         $events[] = $row;
     }
     $app['twig']->addGlobal('events', $events);
-//    print_r($events);
 	return $app['twig']->render('index.html');
 })->bind('index');
 
 // создание события
 $app->match('/event_create', function() use ($app) {
-    if (!empty($_POST['title']) && !empty($_POST['begin_date']) && !empty($_POST['location']) && !empty($_POST['description'])
-        && !empty($_POST['coord_x']) && !empty($_POST['coord_y'])) {
-        $eventToDB = new \MapLib\EventGeoObjToDB($_POST['title'], $_POST['time'], $_POST['location'], $_POST['description'],
-            [$_POST['coord_x'], $_POST['coord_y']]);
-        $eventToDB->addEventToMap();
-        $geoobjectID = $eventToDB->getId();
+
+    if (isset($_POST['submit'])) {
+
+        // массив ошибок
+        $err = array();
+
+        if (!empty($_POST['title']) && !empty($_POST['begin_date']) && !empty($_POST['location']) && !empty($_POST['description'])
+            && !empty($_POST['coord_x']) && !empty($_POST['coord_y'])) {
+            $eventToDB = new \MapLib\EventGeoObjToDB($_POST['title'], $_POST['begin_date'], $_POST['location'], $_POST['description'],
+                [$_POST['coord_x'], $_POST['coord_y']]);
+            $eventToDB->addEventToMap();
+            $geoobjectID = $eventToDB->getId();
+        } else {
+            $err[] = 'Необходимо заполнить все поля!';
+        }
+
+        // Если нет ошибок, то возвращаемся на главную страницу
+        if(count($err) == 0) {
+
+            header("Location: /GreenAge"); exit();
+        // иначе выводим ошибки
+        } else {
+            print $msg_error = "<b>При добавлении события произошли следующие ошибки:</b><br>";
+            foreach($err AS $error) {
+                print $error."<br>";
+            }
+        }
     }
     
 	return $app['twig']->render('event_create.html');
@@ -164,15 +191,15 @@ $app->match('/auth', function() use ($app) {
                 // Вытаскиваем из БД запись, у которой логин равняеться введенному
                 $result = $db->query("
                     SELECT
-                        `u_password`
+                        *
                     FROM
                         `users`
                     WHERE 
                             `u_email` = '".$email."'
                     LIMIT 1");
 
-                $date = $result->fetch();
-                $hash_password = $date[0];
+                $user = $result->fetch();
+                $hash_password = $user[3];
 
                 $password = trim($_POST["password"]);
 
@@ -187,18 +214,26 @@ $app->match('/auth', function() use ($app) {
             $err[] = 'Необходимо заполнить все поля!';
         }
 
-        // Если нет ошибок, то возвращаемся на главную страницу
-        if(count($err) == 0) {
-
-            header("Location: /GreenAge"); exit();
-        // иначе выводим ошибки
-        } else {
-            print $msg_error = "<b>При авторизации произошли следующие ошибки:</b><br>";
-            foreach($err AS $error) {
-                print $error."<br>";
-            }
-        }
     }
+
+    if (isset($err)) {
+
+        // если пройдена авторизация
+        if( count($err) == 0) {
+            session_start();
+            $_SESSION['user'] = $user;
+            $app['twig']->addGlobal('user', $_SESSION['user']);
+            // Если нет ошибок, то возвращаемся на главную страницу
+            header("Location: /GreenAge"); exit();
+        
+         }
+    } else {
+        $err = false;
+        $_POST['email'] = false;
+    }
+
+    $app['twig']->addGlobal('err', $err);
+    $app['twig']->addGlobal('POST', $_POST['email']);
 
     return $app['twig']->render('authorization.html');
 })->bind('auth');

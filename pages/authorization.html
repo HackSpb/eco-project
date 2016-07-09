@@ -1,13 +1,24 @@
 <!-- Header -->
+<!-- <script type="text/javascript">
+   
+</script> -->
 {% include 'header.html' %}
 <!-- / Main content -->
 <form action="auth" method="post" enctype="multipart/form-data">
     <div class="container">   
         <div class="box1"> 
-            <div class='h1'><h1>Авторизация</h1></div>                                       
+            <div class='h1'><h1>Авторизация</h1></div>
+            {% if err is not empty %}
+            <div class="form-row error">
+                <b>При авторизации произошли следующие ошибки:</b><br>;
+                {% for error in err %}
+                    {{ error }},
+                {% endfor %}
+            </div>
+            {% endif %}
             <div class='form-row'>
     			<label>Email</label>
-        		<input type='text' id='' name='email'>
+        		<input type='text' id='' name='email' value="{{ POST }}">
       		</div>
             <div class='form-row'>
         		<label>Пароль</label>
