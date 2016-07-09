@@ -63,36 +63,75 @@ $app->get('//', function() use ($app) {
 // создание события
 $app->match('/event_create', function() use ($app) {
 
-    if (isset($_POST['submit'])) {
+   if (isset($_POST['submit'])) {
 
         // массив ошибок
         $err = array();
 
-        if (!empty($_POST['title']) && !empty($_POST['begin_date']) && !empty($_POST['location']) && !empty($_POST['description'])
-            && !empty($_POST['coord_x']) && !empty($_POST['coord_y'])) {
+        if (!empty($_POST['title']) && !empty($_POST['begin_date']) && !empty($_POST['location']) && !empty($_POST['description']) && !empty($_POST['coord_x']) && !empty($_POST['coord_y'])) {
+
             $eventToDB = new \MapLib\EventGeoObjToDB($_POST['title'], $_POST['begin_date'], $_POST['location'], $_POST['description'],
                 [$_POST['coord_x'], $_POST['coord_y']]);
             $eventToDB->addEventToMap();
             $geoobjectID = $eventToDB->getId();
-        } else {
-            $err[] = 'Необходимо заполнить все поля!';
-        }
+        } 
+        // else {
+        //     $err[] = 'Необходимо заполнить все поля!';
+        // }
+            $title = $_POST['title'];
+            $description = $_POST['description'];
+            $begin_date = $_POST['begin_date'];
+            $end_date = $_POST['end_date'];
+            $address = $_POST['location'];
+            $tag = $_POST['tag'];
+            $image = NULL;
+            $user_id = 1;
 
         // Если нет ошибок, то возвращаемся на главную страницу
         if(count($err) == 0) {
 
+            $sql ="
+                INSERT INTO 
+                    `EVENT`
+                SET
+                    `title`         = '".$title."',
+                    `description`   = '".$description."',
+                    `create_date`   = NOW(),
+                    `begin_date`    = '".$begin_date."',
+                    `end_date`      = '".$end_date."',
+                    `address`       = '".$address."',
+                    `tag_id`        = '".$tag."',
+                    `image`         = '".$image."',
+                    `user_id`       = '".$user_id."'
+               ";
+               
+            global $db;
+
+            $db->query($sql);
+
             header("Location: /GreenAge"); exit();
-        // иначе выводим ошибки
-        } else {
-            print $msg_error = "<b>При добавлении события произошли следующие ошибки:</b><br>";
-            foreach($err AS $error) {
-                print $error."<br>";
-            }
         }
+    } else {
+        $err = false;
+        $_POST = [
+            "title" => false,
+            "description" => false,
+            "begin_date" => false,
+            "end_date" => false,
+            "tag" => false,
+            "image" => false,
+            "location" => false,
+            "coord_x" => false,
+            "coord_y" => false,
+            "url" => false,
+        ];
     }
-    
+
+    $app['twig']->addGlobal('POST', $_POST);
+    $app['twig']->addGlobal('err', $err);
+
 	return $app['twig']->render('event_create.html');
-})->bind('add_event');
+})->bind('event_create');
 
 // страница с гугл календарем
 $app->get('/calendar', function() use ($app) {
@@ -102,6 +141,8 @@ $app->get('/calendar', function() use ($app) {
 // Страница регистрации нового пользователя
 $app->match('/reg', function() use ($app) {
 
+    // include_once '/includes/reg_save.php';
+    // reg_save();
     if(isset($_POST['submit'])) {
 
         // массив ошибок
@@ -147,18 +188,18 @@ $app->match('/reg', function() use ($app) {
 
             $sql ="INSERT INTO USERS (`u_password`, `u_email`, `role_id`, `u_create_date`, `u_active_date`)
                 VALUES ('".$password."', '".$email."', 1, NOW(), NOW() ); ";
-            $db->query($sql) ;
+            $db->query($sql);
 
             header("Location: /GreenAge"); exit();
-        // иначе выводим ошибки
-        } else {
-            print $msg_error = "<b>При регистрации произошли следующие ошибки:</b><br>";
-            foreach($err AS $error) {
-                print $error."<br>";
-            }
         }
+
+    } else {
+        $err = false;
+        $_POST['email'] = false;
     }
 
+    $app['twig']->addGlobal('POST', $_POST['email']);
+    $app['twig']->addGlobal('err', $err);
 	return $app['twig']->render('reg.html');
 })->bind('reg');
 
@@ -172,6 +213,9 @@ $app->get('/admin/addPoint', function() use ($app) {
 
 // Страница авторизации
 $app->match('/auth', function() use ($app) {
+
+    // include_once '/includes/authorization.php';
+    // authorization_check();
 
     if(isset($_POST['submit'])) {
 

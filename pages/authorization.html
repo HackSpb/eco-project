@@ -10,7 +10,7 @@
             <div class='h1'><h1>Авторизация</h1></div>
             {% if err is not empty %}
             <div class="form-row error">
-                <b>При авторизации произошли следующие ошибки:</b><br>;
+                <b>При авторизации произошли следующие ошибки:</b><br>
                 {% for error in err %}
                     {{ error }},
                 {% endfor %}

@@ -5,9 +5,17 @@
     <div class="container">   
         <div class="box1"> 
             <div class='h1'><h1>Регистрация</h1></div>
+            {% if err is not empty %}
+                <div class="form-row error">
+                    <b>При регистрации произошли следующие ошибки:</b><br>
+                    {% for error in err %}
+                        {{ error }}<br>
+                    {% endfor %}
+                </div>
+            {% endif %}
             <div class='form-row'>
     			<label>Email<span class="star">*</span></label>
-        		<input type='text' id='' name='email'>
+        		<input type='text' name='email' value="{{ POST }}">
   		    </div>
             <div class='form-row'>
         	   <label>Пароль<span class="star">*</span></label>

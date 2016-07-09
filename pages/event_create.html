@@ -5,34 +5,44 @@
     <div class="container">   
         <div class="box1">
             <div class='h1'><h1>Добавление новостей</h1></div>
+            {% if err is not empty %}
+            <div class="form-row error">
+                <b>При добавлении новости произошли следующие ошибки:</b><br>
+                {% for error in err %}
+                    {{ error }},
+                {% endfor %}
+            </div>
+            {% endif %}
             <div class='form-row'>
         		<label>Название<span class="star">*</span></label>
-        		<input type='text'name='title'>
+        		<input type='text' name='title' value="{{ POST.title }}">
     		</div>
     		<div class='form-row'>
                 <label>Дата начала</label>
-                <input type="text" name="begin_date" class="inp">
+                <input type="text" name="begin_date" class="inp" value="{{ POST.begin_date }}">
             </div>
         	<div class='form-row'>
         		<label>Дата окончания</label>
-        		<input type="text" name="end_date" class="inp">
+        		<input type="text" name="end_date" class="inp" value="{{ POST.end_date }}">
         	</div>
             <div class='form-row'>
                 <label >Тег</label>
-                <input type="text" name="teg" class="inp">
+                <input type="text" name="tag" class="inp" value="{{ POST.tag }}">
             </div>
             <div class='form-row'>
                 <label >Ссылка на мероприятие</label>
-                <input type="text" name="url" class="inp">
+                <input type="text" name="url" class="inp" value="{{ POST.url }}">
             </div>
             <div style="width: 300px; height: 300px" id="map"></div><br>
             <div class='form-row'>
             	<label>Адрес</label>
-            	<input type='text' id='location' name='location'>
+            	<input type='text' id='location' name='location' value="{{ POST.location }}">
+                <input type='hidden' id='coord_x' name='coord_x' value="{{ POST.coord_x}}">
+                <input type='hidden' id='coord_y' name='coord_y' value="{{ POST.coord_y}}">
             </div>
-        	<div class='form-row'>
-        		<label>Описание<span class="star">*</span></label>
-        		<textarea name='description'></textarea>
+            <div class='form-row'>
+                <label>Описание<span class="star">*</span></label>
+        		<textarea name='description' value="{{ POST.description }}"></textarea>
         	</div>
             <div class="btom12"><input type="submit" name="submit" value="сохранить" class="butsub"></div>
             <div class="btom12"><input type="button" value="отмена" class="butback" onclick="history.go(-1);"></div>
