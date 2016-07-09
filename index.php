@@ -56,15 +56,13 @@ $app->get('//', function() use ($app) {
 
 // создание события
 $app->match('/event_create', function() use ($app) {
-    if (!empty($_POST['name']) && !empty($_POST['time']) && !empty($_POST['location']) && !empty($_POST['description'])
+    if (!empty($_POST['title']) && !empty($_POST['begin_date']) && !empty($_POST['location']) && !empty($_POST['description'])
         && !empty($_POST['coord_x']) && !empty($_POST['coord_y'])) {
-        $eventToDB = new \MapLib\EventGeoObjToDB($_POST['name'], $_POST['time'], $_POST['location'], $_POST['description'],
+        $eventToDB = new \MapLib\EventGeoObjToDB($_POST['title'], $_POST['time'], $_POST['location'], $_POST['description'],
             [$_POST['coord_x'], $_POST['coord_y']]);
         $eventToDB->addEventToMap();
         $geoobjectID = $eventToDB->getId();
     }
-    
-
     
 	return $app['twig']->render('event_create.html');
 })->bind('add_event');
@@ -74,46 +72,68 @@ $app->get('/calendar', function() use ($app) {
 	return $app['twig']->render('google-calendar.html');
 })->bind('calendar');
 
-// страница с регистрацией пользователя
+// Страница регистрации нового пользователя
 $app->match('/reg', function() use ($app) {
 
-    if ( isset($_POST["name"]) && isset($_POST["email"] ) && isset($_POST["password"]) && isset($_POST["password_repeat"])) {
-        $name = ( !preg_match("|[\\<>'\"-/]+|", $_POST["name"]) ) ? $_POST["name"] : false;
-        $email = ( preg_match("|^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$|", $_POST["email"]) ) ? $_POST["email"] : false;
-        // проверка что пароли равны
-        if ( $_POST["password"] == $_POST["password_repeat"]  ) {
+    if(isset($_POST['submit'])) {
+
+        // массив ошибок
+        $err = array();
+
+        if ( isset($_POST["email"] ) && isset($_POST["password"]) && isset($_POST["password_repeat"]) 
+            && !empty($_POST["email"] ) && !empty($_POST["password"]) && !empty($_POST["password_repeat"])) {
+
+            // проверям email
+            if ( !preg_match("|^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$|", $_POST["email"]) ) {
+
+                $err[] = 'Неверно введён email';
+            }
+
+            // проверка что пароли равны
+            if ( $_POST["password"] != $_POST["password_repeat"]  ) {
+
+                $err[] = 'Пароли не равны';
+            }
+
             $password = password_hash(trim($_POST["password_repeat"]), PASSWORD_DEFAULT);
-            if ( $name && $email && $password ) {
+            $email = $_POST["email"];
+
+            // проверяем, не сущестует ли пользователя с таким именем
+            if ( $email && $password ) {
                 global $db;
 
                 // узнаем пользователь с таким  уже существует
-                $u_id = $db->query("
-                    SELECT
-                        `u_id`
-                    FROM
-                        `users`
-                    WHERE 
-                        `u_email` = '".$email."'
-                    LIMIT 1");
-                list( $user_id) = $u_id->fetchColumn();
-                if ( !$user_id ) {
-                    $sql ="INSERT INTO USERS (`u_name`, `u_password`, `u_email`, `role_id`, `u_create_date`, `u_active_date`)
-                         VALUES ('".$name."', '".$password."', '".$email."', 1, NOW(), NOW()); ";
-                    $db->query($sql) ;
-                    echo 'регистрация прошла успешно';
-                } else echo 'Пользователь с таким email уже существует';
-            } else echo 'Некорректные данные';
+                $query = $db->query("SELECT * FROM `users` WHERE `u_email` = '".$email."'");
 
-        } else  echo "не равны пароли";
-    } 
+                if($query->rowCount() > 0) {
+                    $err[] = 'Пользователь с таким email уже существует в базе данных';
+                } 
+
+            } 
+
+        } else {
+            $err[] = 'Необходимо заполнить все поля!';
+        }
+
+        // Если нет ошибок, то добавляем в БД нового пользователя
+        if(count($err) == 0) {
+
+            $sql ="INSERT INTO USERS (`u_password`, `u_email`, `role_id`, `u_create_date`, `u_active_date`)
+                VALUES ('".$password."', '".$email."', 1, NOW(), NOW() ); ";
+            $db->query($sql) ;
+
+            header("Location: /GreenAge"); exit();
+        // иначе выводим ошибки
+        } else {
+            print $msg_error = "<b>При регистрации произошли следующие ошибки:</b><br>";
+            foreach($err AS $error) {
+                print $error."<br>";
+            }
+        }
+    }
 
 	return $app['twig']->render('reg.html');
 })->bind('reg');
-
-// старый календарь
-//$app->get('/cal', function() use ($app) {
-//	return $app['twig']->render('cal.html');
-//})->bind('cal');
 
 $app->get('/map', function() use ($app) {
     return $app['twig']->render('map.html');
@@ -123,20 +143,26 @@ $app->get('/admin/addPoint', function() use ($app) {
     return $app['twig']->render('admin/addPointToMap.php');
 })->bind('addPoint123');
 
-// $app->get('/auth', function() use ($app) {
-//     return $app['twig']->render('authorization.html');
-// })->bind('auth');
-
+// Страница авторизации
 $app->match('/auth', function() use ($app) {
 
-     if ( isset($_POST["email"] ) && isset($_POST["password"]) ) {
-        $email = ( preg_match("|^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$|", $_POST["email"]) ) ? $_POST["email"] : false;
+    if(isset($_POST['submit'])) {
 
-            if ( $email ) {
+        // массив ошибок
+        $err = array();
+
+        if ( isset($_POST["email"] ) && isset($_POST["password"]) && !empty($_POST["email"] ) && !empty($_POST["password"])) {
+
+            if ( !preg_match("|^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$|", $_POST["email"]) ) {
+                
+                $err[] = "Вы ввели неправильный email"; 
+            } else {
+
+                $email = $_POST["email"];   
                 global $db;
 
-                // узнаем пользователь с таким  уже существует
-               $result = $db->query("
+                // Вытаскиваем из БД запись, у которой логин равняеться введенному
+                $result = $db->query("
                     SELECT
                         `u_password`
                     FROM
@@ -145,22 +171,37 @@ $app->match('/auth', function() use ($app) {
                             `u_email` = '".$email."'
                     LIMIT 1");
 
-                $hash_password = $result->fetch();
+                $date = $result->fetch();
+                $hash_password = $date[0];
 
-                if ( $hash_password[0] ) {
-                    $password = trim($_POST["password"]);
-                    if ( password_verify($password, $hash_password[0]) ) {
-                        echo 'Авторизация';
-                    } else{
-                        echo "Ошибка";
-                    }
+                $password = trim($_POST["password"]);
 
-                } else echo 'Вы ввели неправильный логин/пароль';
-            } else echo 'Некорректные данные';
+                if ( !password_verify($password, $hash_password) ) {
 
-    } 
-    return $app['twig']->render('about.html');
-})->bind('about');
+                    $err[] = "Вы ввели неправильный пароль"; 
+                }
+
+            }
+
+        } else {
+            $err[] = 'Необходимо заполнить все поля!';
+        }
+
+        // Если нет ошибок, то возвращаемся на главную страницу
+        if(count($err) == 0) {
+
+            header("Location: /GreenAge"); exit();
+        // иначе выводим ошибки
+        } else {
+            print $msg_error = "<b>При авторизации произошли следующие ошибки:</b><br>";
+            foreach($err AS $error) {
+                print $error."<br>";
+            }
+        }
+    }
+
+    return $app['twig']->render('authorization.html');
+})->bind('auth');
 //$app->get('/contact', function() use ($app) {
 //	return $app['twig']->render('pages/contact.twig');
 //})->bind('contact');

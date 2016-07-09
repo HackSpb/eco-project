@@ -1,32 +1,26 @@
 <!-- Header -->
 {% include 'header.html' %}
-         <!-- / Main content -->
-    <form action="/reg" method="post" enctype="multipart/form-data">
-        <div class="container">   
-                         <div class="box1"> 
-                              <div class='h1'>
-                              <h1>Регистрация</h1> 
-                             </div>
-<div class='form-row'>
-			<label>Email<span class="star">*</span></label>
-    		<input type='text' id='' name='email'>
-  		</div>
-<div class='form-row'>
-    		<label>Пароль<span class="star">*</span></label>
-    	   <input type="password" name="password" value="">
-		</div>
-<div class='form-row'>
-    		<label>Повторите пароль<span class="star">*</span></label>
-    	   <input type="password" name="password" value="">
-		</div>
-<div class="btom12">
-                    <input type="submit" value="сохранить" class="butsub">
-                                   </div>
-                             <div class="btom12">
-                              <input type="button" value="отмена" class="butback" onclick="history.go(-1);">
-                                   </div>
-		            </div>
-            	</div>
-            </form>
+<!-- / Main content -->
+<form action="reg" method="post" enctype="multipart/form-data">
+    <div class="container">   
+        <div class="box1"> 
+            <div class='h1'><h1>Регистрация</h1></div>
+            <div class='form-row'>
+    			<label>Email<span class="star">*</span></label>
+        		<input type='text' id='' name='email'>
+  		    </div>
+            <div class='form-row'>
+        	   <label>Пароль<span class="star">*</span></label>
+        	   <input type="password" name="password" value="">
+            </div>
+            <div class='form-row'>
+        		<label>Повторите пароль<span class="star">*</span></label>
+                <input type="password" name="password_repeat" value="">
+            </div>
+            <div class="btom12"><input name="submit" type="submit" value="сохранить" class="butsub"></div>
+            <div class="btom12"><input type="button" value="отмена" class="butback" onclick="history.go(-1);"></div>
+        </div>
+    </div>
+</form>
 <!-- Footer -->
 {% include 'footer.html' %}
