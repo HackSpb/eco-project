@@ -6,7 +6,7 @@
  * Time: 22:01
  */
 
-$dbName = "green_age";
+$dbName = "eco";
 $host= "localhost";
 $dsn="mysql:dbname=$dbName;host=$host";
 $user_db="root";

@@ -21,6 +21,8 @@ class EventGeoObjToDB
     private $info;
     private $coords = [];
     private $id;    //Переменная содержит в себе id нового геообъекта
+    private $JSONPath = "";
+    private $tempPath = "";
 
     /**
      * EventGeoObjToDB constructor.
@@ -29,14 +31,18 @@ class EventGeoObjToDB
      * @param $adres
      * @param $info
      * @param array $coords , где по индексу [0] - координата х, а по индексу [1] - координата y.
+     * @param $JSONPath
+     * @param $tempPath
      */
-    public function __construct($name, $time, $adres, $info, array $coords)
+    public function __construct($name, $time, $adres, $info, array $coords, $JSONPath, $tempPath)
     {
         $this->name = $name;
         $this->time = $time;
         $this->adres = $adres;
         $this->info = $info;
         $this->coords = $coords;
+        $this->JSONPath = $JSONPath;
+        $this->tempPath = $tempPath;
     }
 
     private function addToDB()
@@ -62,10 +68,10 @@ class EventGeoObjToDB
 
     private function addToMapFromDB()
     {
-        $file = file_get_contents('data.json');
+        $file = file_get_contents($this->JSONPath);
         $json = json_decode($file, true);
 
-        $tempPath = '../../../map_files/templates/balloon_temp.html';
+        $tempPath = $this->tempPath;
         $obj = new BalloonTempComposer($tempPath, $this->name, $this->time, $this->adres, $this->info);
         $balloonContent = $obj->getBalloonContent();
 

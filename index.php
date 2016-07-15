@@ -68,10 +68,24 @@ $app->match('/event_create', function() use ($app) {
         // массив ошибок
         $err = array();
 
-        if (!empty($_POST['title']) && !empty($_POST['begin_date']) && !empty($_POST['location']) && !empty($_POST['description']) && !empty($_POST['coord_x']) && !empty($_POST['coord_y'])) {
+       $title = $_POST['title'];
+       $description = $_POST['description'];
+       $begin_date = $_POST['begin_date'];
+       $end_date = $_POST['end_date'];
+       $address = $_POST['location'];
+       $tag = $_POST['tag'];
+       $image = NULL;
+       $user_id = 1;
 
-            $eventToDB = new \MapLib\EventGeoObjToDB($_POST['title'], $_POST['begin_date'], $_POST['location'], $_POST['description'],
-                [$_POST['coord_x'], $_POST['coord_y']]);
+        if (!empty($_POST['title']) && !empty($_POST['begin_date']) && !empty($_POST['location']) && !empty($_POST['description']) && !empty($_POST['coord_x']) && !empty($_POST['coord_y'])) {
+            $tempPath = "map_files/templates/balloon_temp.html";
+            $JSONPath = "map_files/data_for_map.json";
+            $coord_x = $_POST['coord_x'];
+            $coord_y = $_POST['coord_y'];
+            $coords = [$coord_x, $coord_y];
+
+            $eventToDB = new \MapLib\EventGeoObjToDB($title, $begin_date, $address, $description, $coords,
+                $JSONPath, $tempPath);
             $eventToDB->addEventToMap();
             $geoobjectID = $eventToDB->getId();
         } 
@@ -109,7 +123,7 @@ $app->match('/event_create', function() use ($app) {
 
             $db->query($sql);
 
-            header("Location: /GreenAge"); exit();
+            header("Location: /"); exit();
         }
     } else {
         $err = false;
