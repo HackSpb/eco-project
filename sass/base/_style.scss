@@ -1,0 +1,116 @@
+/* 
+* ECO Project
+* Project Page - http://myeco.city
+* Author - Fiodorov Nikita
+* Site - https://new.vk.com/handlebar
+*/
+
+/* base.h */
+$footer-height:10px;
+
+
+/* 
+* used namespace normalize;
+* used namespace simplegrid;
+*/
+h2{
+  padding-top: 40px;
+  font-size: 40px;
+  font-family: "RobotoCondensed";
+  color: rgb(66, 70, 75);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-align: center;
+}
+h4{
+  font-size: 22px;
+  font-family: "RobotoCondensed";
+  color: rgb(66, 70, 75);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-align: center;
+}
+p {
+  font-size: 18px;
+  font-family: "RobotoCondensed";
+  color: rgb(96, 104, 114);
+  font-weight: bold;
+  line-height: 1.2;
+  text-align: center;
+  padding: 0px 20%;
+}
+a,a:hover { text-decoration: none;}
+ul,ol{list-style: none;}
+.clearfix:before,
+.clearfix:after {
+ content: " ";
+ display: table;
+}
+.clearfix:after {clear: both;overflow: auto;}
+.left {float: left;}
+.right {float:right;}
+.centr{
+  display: block;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+html,
+body {
+  height: 100%;//Растяжка на весь экран
+}
+.container {
+  margin: 0 auto;
+  padding: 20px;
+}
+.wrapper{
+  position: relative;//Растяжка на весь экран
+  min-height: 100%;//Растяжка на весь экран
+  background-color: #cccccc;
+  background: url(http://genegan.ru/ftt/47/ogni_nochnoy_gorod_razmytost_1920x1080.jpg) no-repeat fixed right top;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 50px;
+}
+.page-content{
+  padding-bottom: $footer-height;
+  padding-top: 0px;
+}
+figure{margin: 0;}
+.inner-wrapper{
+  padding: 0 11%;
+}
+.blur {
+  position: absolute;
+    z-index: 99; /* изображение размыто */
+    background-image: url(http://genegan.ru/ftt/47/ogni_nochnoy_gorod_razmytost_1920x1080.jpg);
+    background-size: cover;
+    backgroun-repeat: no-repeat;
+    -webkit-filter: blur(5px);
+    -moz-filter: blur(5px);
+    filter: blur(5px);
+}
+.list-row li{
+  float: right;
+}
+@media (max-width:1110px){
+  .nav ul.right{display: none;}
+}
+@media (max-width:780px){
+  .nav{display: none;}
+  .header{background: none;}
+  .header-logo{
+    float: none;
+    width: 90px;
+    margin: 0 auto;
+  }
+  .header-logo img{width: 100%;}
+}
+

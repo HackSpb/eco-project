@@ -1,0 +1,24 @@
+$grey-102: rgb(102, 102, 102);
+$black-13: rgb(13, 13, 13);
+$light-blue: rgb(0, 137, 207);
+$yellow: yellow;
+.footer{
+  background-color: $yellow;
+  opacity: 0.2;
+  /*footer вниз страницы*/
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  //height: $footer-height; не стоит
+  /*footer вниз страницы*/
+  p{
+    color: $black-13;
+    padding: 0 20% 10px 20%;
+    
+  }
+}
+p.copyright{
+  text-align: center;
+  opacity: 0.9;
+}
