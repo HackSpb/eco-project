@@ -19,14 +19,22 @@
     		</div>
     		<div class='form-row'>
                 <label>Дата начала</label>
-                <input type="text" name="begin_date" class="inp" value="{{ POST.begin_date }}">
+                <input type="date" name="begin_date" class="inp" value="{{ POST.begin_date }}">
+            </div>
+            <div class='form-row'>
+                <label>Время начала</label>
+                <input type="time" name="begin_time" class="inp" value="{{ POST.begin_time }}">
             </div>
         	<div class='form-row'>
         		<label>Дата окончания</label>
-        		<input type="text" name="end_date" class="inp" value="{{ POST.end_date }}">
+        		<input type="date" name="end_date" class="inp" value="{{ POST.end_date }}">
         	</div>
             <div class='form-row'>
-                <label >Тег</label>
+                <label>Время окончания</label>
+                <input type="time" name="end_time" class="inp" value="{{ POST.end_time }}">
+            </div>
+            <div class='form-row'>
+                <label >Тег<span class="star">*</span></label>
                 <input type="text" name="tag" class="inp" value="{{ POST.tag }}">
             </div>
             <div class='form-row'>

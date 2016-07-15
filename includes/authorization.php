@@ -1,21 +1,21 @@
 <?php
 
 function authorization_check(){
-	
+
+    global  $app, $db, $form_err;
+
+    // если нажали на кнопку
     if(isset($_POST['submit'])) {
 
-        // массив ошибок
-        $err = array();
 
         if ( isset($_POST["email"] ) && isset($_POST["password"]) && !empty($_POST["email"] ) && !empty($_POST["password"])) {
 
             if ( !preg_match("|^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$|", $_POST["email"]) ) {
                 
-                $err[] = "Вы ввели неправильный email"; 
+                $form_err[] = "Вы ввели неправильный email"; 
             } else {
 
                 $email = $_POST["email"];   
-                global $db;
 
                 // Вытаскиваем из БД запись, у которой логин равняеться введенному
                 $result = $db->query("
@@ -34,33 +34,31 @@ function authorization_check(){
 
                 if ( !password_verify($password, $hash_password) ) {
 
-                    $err[] = "Вы ввели неправильный пароль"; 
+                    $form_err[] = "Вы ввели неправильный пароль"; 
                 }
 
             }
 
         } else {
-            $err[] = 'Необходимо заполнить все поля!';
+            $form_err[] = 'Необходимо заполнить все поля!';
         }
 
-    }
-
-    if (isset($err)) {
-
         // если пройдена авторизация
-        if( count($err) == 0) {
+        if( count($form_err) == 0) {
             session_start();
             $_SESSION['user'] = $user;
             $app['twig']->addGlobal('user', $_SESSION['user']);
             // Если нет ошибок, то возвращаемся на главную страницу
-            header("Location: /GreenAge"); exit();
-        
-         }
+            header("Location: /"); exit();
+        }
+
+    // иначе первый раз зашли на страницу
     } else {
-        $err = false;
+
+        $form_err = false;
         $_POST['email'] = false;
     }
 
-    $app['twig']->addGlobal('err', $err);
+    $app['twig']->addGlobal('form_err', $form_err);
     $app['twig']->addGlobal('POST', $_POST['email']);
 }

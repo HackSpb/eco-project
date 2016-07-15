@@ -1,10 +1,10 @@
 <?php
 function reg_save () {
-    
-	 if(isset($_POST['submit'])) {
 
-        // массив ошибок
-        $form_err = array();
+    global  $app, $db, $form_err;
+
+    // если нажали на кнопку
+    if(isset($_POST['submit'])) {
 
         if ( isset($_POST["email"] ) && isset($_POST["password"]) && isset($_POST["password_repeat"]) 
             && !empty($_POST["email"] ) && !empty($_POST["password"]) && !empty($_POST["password_repeat"])) {
@@ -46,15 +46,21 @@ function reg_save () {
 
             $sql ="INSERT INTO USERS (`u_password`, `u_email`, `role_id`, `u_create_date`, `u_active_date`)
                 VALUES ('".$password."', '".$email."', 1, NOW(), NOW() ); ";
-            $db->query($sql) ;
+            $db->query($sql);
 
-            header("Location: /GreenAge"); exit();
-        // иначе выводим ошибки
-        } else {
-            print $msg_form_error = "<b>При регистрации произошли следующие ошибки:</b><br>";
-            foreach($form_err AS $form_error) {
-                print $form_error."<br>";
-            }
+            session_start();
+            $_SESSION['user'] = $user;
+            $app['twig']->addGlobal('user', $_SESSION['user']);
+
+            // переход на главную страницу
+            header("Location: /"); exit();
         }
+
+    } else {
+        $form_err = false;
+        $_POST['email'] = false;
     }
+
+    $app['twig']->addGlobal('POST', $_POST['email']);
+    $app['twig']->addGlobal('form_err', $form_err);
 }

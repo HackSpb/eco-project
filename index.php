@@ -31,7 +31,7 @@ $app->before(function ($request) use ($app) {
     $app['twig']->addGlobal('active', $request->get("_route"));
 });
 
-global $db;
+$form_err = array();//массив для ошибок обработок форм
 
 
 //global $dsn, $user_db, $password_db;
@@ -118,6 +118,8 @@ $app->match('/event_create', function() use ($app) {
             "description" => false,
             "begin_date" => false,
             "end_date" => false,
+            "begin_time" => false,
+            "end_time" => false,
             "tag" => false,
             "image" => false,
             "location" => false,
@@ -141,65 +143,9 @@ $app->get('/calendar', function() use ($app) {
 // Страница регистрации нового пользователя
 $app->match('/reg', function() use ($app) {
 
-    // include_once '/includes/reg_save.php';
-    // reg_save();
-    if(isset($_POST['submit'])) {
-
-        // массив ошибок
-        $err = array();
-
-        if ( isset($_POST["email"] ) && isset($_POST["password"]) && isset($_POST["password_repeat"]) 
-            && !empty($_POST["email"] ) && !empty($_POST["password"]) && !empty($_POST["password_repeat"])) {
-
-            // проверям email
-            if ( !preg_match("|^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$|", $_POST["email"]) ) {
-
-                $err[] = 'Неверно введён email';
-            }
-
-            // проверка что пароли равны
-            if ( $_POST["password"] != $_POST["password_repeat"]  ) {
-
-                $err[] = 'Пароли не равны';
-            }
-
-            $password = password_hash(trim($_POST["password_repeat"]), PASSWORD_DEFAULT);
-            $email = $_POST["email"];
-
-            // проверяем, не сущестует ли пользователя с таким именем
-            if ( $email && $password ) {
-                global $db;
-
-                // узнаем пользователь с таким  уже существует
-                $query = $db->query("SELECT * FROM `users` WHERE `u_email` = '".$email."'");
-
-                if($query->rowCount() > 0) {
-                    $err[] = 'Пользователь с таким email уже существует в базе данных';
-                } 
-
-            } 
-
-        } else {
-            $err[] = 'Необходимо заполнить все поля!';
-        }
-
-        // Если нет ошибок, то добавляем в БД нового пользователя
-        if(count($err) == 0) {
-
-            $sql ="INSERT INTO USERS (`u_password`, `u_email`, `role_id`, `u_create_date`, `u_active_date`)
-                VALUES ('".$password."', '".$email."', 1, NOW(), NOW() ); ";
-            $db->query($sql);
-
-            header("Location: /GreenAge"); exit();
-        }
-
-    } else {
-        $err = false;
-        $_POST['email'] = false;
-    }
-
-    $app['twig']->addGlobal('POST', $_POST['email']);
-    $app['twig']->addGlobal('err', $err);
+    include_once '/includes/reg.php';
+    reg_save();
+    
 	return $app['twig']->render('reg.html');
 })->bind('reg');
 
@@ -214,71 +160,9 @@ $app->get('/admin/addPoint', function() use ($app) {
 // Страница авторизации
 $app->match('/auth', function() use ($app) {
 
-    // include_once '/includes/authorization.php';
-    // authorization_check();
-
-    if(isset($_POST['submit'])) {
-
-        // массив ошибок
-        $err = array();
-
-        if ( isset($_POST["email"] ) && isset($_POST["password"]) && !empty($_POST["email"] ) && !empty($_POST["password"])) {
-
-            if ( !preg_match("|^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$|", $_POST["email"]) ) {
-                
-                $err[] = "Вы ввели неправильный email"; 
-            } else {
-
-                $email = $_POST["email"];   
-                global $db;
-
-                // Вытаскиваем из БД запись, у которой логин равняеться введенному
-                $result = $db->query("
-                    SELECT
-                        *
-                    FROM
-                        `users`
-                    WHERE 
-                            `u_email` = '".$email."'
-                    LIMIT 1");
-
-                $user = $result->fetch();
-                $hash_password = $user[3];
-
-                $password = trim($_POST["password"]);
-
-                if ( !password_verify($password, $hash_password) ) {
-
-                    $err[] = "Вы ввели неправильный пароль"; 
-                }
-
-            }
-
-        } else {
-            $err[] = 'Необходимо заполнить все поля!';
-        }
-
-    }
-
-    if (isset($err)) {
-
-        // если пройдена авторизация
-        if( count($err) == 0) {
-            session_start();
-            $_SESSION['user'] = $user;
-            $app['twig']->addGlobal('user', $_SESSION['user']);
-            // Если нет ошибок, то возвращаемся на главную страницу
-            header("Location: /GreenAge"); exit();
-        
-         }
-    } else {
-        $err = false;
-        $_POST['email'] = false;
-    }
-
-    $app['twig']->addGlobal('err', $err);
-    $app['twig']->addGlobal('POST', $_POST['email']);
-
+    include_once '/includes/authorization.php';
+    authorization_check();
+    
     return $app['twig']->render('authorization.html');
 })->bind('auth');
 //$app->get('/contact', function() use ($app) {
