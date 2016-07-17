@@ -14,7 +14,7 @@ $footer-height:10px;
 * used namespace simplegrid;
 */
 h1{
-  font-size: 19px;
+  font-size: 40px;
   font-family: "Roboto";
   color: rgb(0, 0, 0);
   line-height: 1.2;
@@ -22,32 +22,35 @@ h1{
   position: absolute;
 }
 h2{
-  padding-top: 40px;
-  font-size: 40px;
+  padding-top: 20px;
+  font-size: 30px;
   font-family: 'Roboto', sans-serif;
-  color: rgb(66, 70, 75);
+  color: rgb(0, 0, 0);
   font-weight: bold;
   text-transform: uppercase;
   line-height: 1.2;
-  text-align: center;
+}
+h3{
+  padding: 0 10px;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  line-height: 1.2;
 }
 h4{
   font-size: 22px;
   font-family: 'Roboto', sans-serif;
   color: rgb(66, 70, 75);
-  font-weight: bold;
-  text-transform: uppercase;
   line-height: 1.2;
   text-align: center;
 }
 p {
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
-  color: rgb(96, 104, 114);
-  font-weight: bold;
+  color: rgb(0, 0, 0);
   line-height: 1.2;
-  text-align: center;
-  padding: 0px 20%;
+  padding: 0px 20px;
 }
 a,a:hover { text-decoration: none;}
 ul,ol{list-style: none;}
@@ -73,6 +76,8 @@ ul,ol{list-style: none;}
 html,
 body {
   height: 100%;//Растяжка на весь экран
+  font-family: 'Roboto', sans-serif;
+  color: rgb(0, 0, 0);
 }
 .container {
   margin: 0 auto;

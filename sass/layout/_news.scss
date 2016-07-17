@@ -1,5 +1,5 @@
 .content{
-  height: 265px;
+  height: auto;
   padding: 0;
   margin: 0;
   background-color: rgba(204, 255, 144,0.271);
@@ -8,4 +8,24 @@
 .post-logo{
   width: 100%;
   height: auto;
+}
+p.residents{
+  color: rgb(74, 20, 140);
+  text-align: right;
+  padding: 5px 30px;
+  text-transform: uppercase;
+}
+.card-info{
+  margin: 0px;//для тени
+  box-shadow: 0 5px 15px -1px rgba(0, 0, 0, 0.2);
+  padding: 13px;
+  min-width: auto;
+  p,h3{
+    padding: 0;
+    margin: 0;
+  }
+  .timeinfo{}
+}
+.content{
+  min-width: auto;
 }

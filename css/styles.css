@@ -606,7 +606,7 @@ textarea {
 * used namespace simplegrid;
 */
 h1 {
-  font-size: 19px;
+  font-size: 40px;
   font-family: "Roboto";
   color: black;
   line-height: 1.2;
@@ -614,32 +614,35 @@ h1 {
   position: absolute; }
 
 h2 {
-  padding-top: 40px;
-  font-size: 40px;
+  padding-top: 20px;
+  font-size: 30px;
   font-family: 'Roboto', sans-serif;
-  color: #42464b;
+  color: black;
   font-weight: bold;
   text-transform: uppercase;
-  line-height: 1.2;
-  text-align: center; }
+  line-height: 1.2; }
+
+h3 {
+  padding: 0 10px;
+  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  color: black;
+  font-weight: bold;
+  line-height: 1.2; }
 
 h4 {
   font-size: 22px;
   font-family: 'Roboto', sans-serif;
   color: #42464b;
-  font-weight: bold;
-  text-transform: uppercase;
   line-height: 1.2;
   text-align: center; }
 
 p {
   font-size: 18px;
   font-family: 'Roboto', sans-serif;
-  color: #606872;
-  font-weight: bold;
+  color: black;
   line-height: 1.2;
-  text-align: center;
-  padding: 0px 20%; }
+  padding: 0px 20px; }
 
 a, a:hover {
   text-decoration: none; }
@@ -675,7 +678,9 @@ ul, ol {
 
 html,
 body {
-  height: 100%; }
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  color: black; }
 
 .container {
   margin: 0 auto;
@@ -765,7 +770,7 @@ p.copyright {
   text-align: left; }
 
 .content {
-  height: 265px;
+  height: auto;
   padding: 0;
   margin: 0;
   background-color: rgba(204, 255, 144, 0.271);
@@ -775,25 +780,41 @@ p.copyright {
   width: 100%;
   height: auto; }
 
+p.residents {
+  color: #4a148c;
+  text-align: right;
+  padding: 5px 30px;
+  text-transform: uppercase; }
+
+.card-info {
+  margin: 0px;
+  box-shadow: 0 5px 15px -1px rgba(0, 0, 0, 0.2);
+  padding: 13px;
+  min-width: auto; }
+  .card-info p, .card-info h3 {
+    padding: 0;
+    margin: 0; }
+
+.content {
+  min-width: auto; }
+
 .btn {
-  background-color: #cd4949;
+  background-color: #ffb74d;
   border: 0;
   cursor: pointer;
-  margin: 2px 15px;
-  font-size: 16px;
-  font-family: "RobotoCondensed";
-  color: white;
   font-weight: bold;
+  margin: 2px 15px;
+  font-size: 15px;
   text-transform: uppercase;
   line-height: 1.2;
   text-align: center; }
   .btn:hover {
     background-color: #9b4949; }
   .btn-normal {
-    width: 147px;
-    height: 50px; }
+    padding: 7px;
+    margin: 20px; }
   .btn-small {
-    width: 117.6px;
-    height: 40px; }
+    padding: 3.5px;
+    margin: 10px; }
 
 /*# sourceMappingURL=styles.css.map */

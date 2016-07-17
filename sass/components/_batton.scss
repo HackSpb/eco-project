@@ -1,14 +1,12 @@
-$btn-width:147px;
-$btn-height:50px;
+$padding-normal: 7px;
+$margin-normal: 20px;
 .btn{
-  background-color: rgb(205, 73, 73);
+  background-color: rgb(255, 183, 77);
   border: 0;
   cursor: pointer;
-  margin: 2px 15px;
-  font-size: 16px;
-  font-family: "RobotoCondensed";
-  color: rgb(255, 255, 255);
   font-weight: bold;
+  margin: 2px 15px;
+  font-size: 15px;
   text-transform: uppercase;
   line-height: 1.2;
   text-align: center;
@@ -16,11 +14,12 @@ $btn-height:50px;
     background-color: rgb(155, 73, 73);
   }
   &-normal{
-    width: $btn-width;
-    height: $btn-height;
+    padding: $padding-normal;
+    margin: $margin-normal;
   }
   &-small{
-    width: $btn-width*0.8;
-    height: $btn-height*0.8;
+    padding: $padding-normal/2;
+    margin: $margin-normal/2;
   }
 }
+
