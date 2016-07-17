@@ -2,46 +2,10 @@
   height: 265px;
   padding: 0;
   margin: 0;
-  background-color: antiquewhite;
-  opacity: 0.6;
-  box-shadow: 0 0 30px rgba(0,0,0,1); /* Параметры тени */
+  background-color: rgba(204, 255, 144,0.271);
+  box-shadow: 0px 9px 12.16px 3.84px rgba(0, 0, 0, 0.004);
 }
 .post-logo{
   width: 100%;
   height: auto;
 }
-/* здесь находится скорость перевертывания */
-.flipper {
-	transition: 0.2s;
-	transform-style: preserve-3d;
-
-	position: relative;
-}
-
-/* скройте обратную сторону во время переворота */
-.front, .back {
-	backface-visibility: hidden;
-
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
-/* лицевая сторона размещена над обратной */
-.front {
-	z-index: 2;
-}
-
-/* обратная, изначально скрытая сторона */
-.back {
-	transform: rotateY(180deg);
-}
-
-/* весь контейнер поддерживает перспективу */
-.flip-container {
-	perspective: 1000;
-}
-	/* переверните сторону при проведении мышью */
-	.flip-container:hover .flipper, .flip-container.hover .flipper {
-		transform: rotateY(180deg);
-	}

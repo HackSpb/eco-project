@@ -605,10 +605,18 @@ textarea {
 * used namespace normalize;
 * used namespace simplegrid;
 */
+h1 {
+  font-size: 19px;
+  font-family: "Roboto";
+  color: black;
+  line-height: 1.2;
+  text-align: center;
+  position: absolute; }
+
 h2 {
   padding-top: 40px;
   font-size: 40px;
-  font-family: "RobotoCondensed";
+  font-family: 'Roboto', sans-serif;
   color: #42464b;
   font-weight: bold;
   text-transform: uppercase;
@@ -617,7 +625,7 @@ h2 {
 
 h4 {
   font-size: 22px;
-  font-family: "RobotoCondensed";
+  font-family: 'Roboto', sans-serif;
   color: #42464b;
   font-weight: bold;
   text-transform: uppercase;
@@ -626,7 +634,7 @@ h4 {
 
 p {
   font-size: 18px;
-  font-family: "RobotoCondensed";
+  font-family: 'Roboto', sans-serif;
   color: #606872;
   font-weight: bold;
   line-height: 1.2;
@@ -677,7 +685,7 @@ body {
   position: relative;
   min-height: 100%;
   background-color: #cccccc;
-  background: url(http://genegan.ru/ftt/47/ogni_nochnoy_gorod_razmytost_1920x1080.jpg) no-repeat fixed right top;
+  background: url(/images/Background/background.png) no-repeat fixed right top;
   box-sizing: border-box;
   width: 100%;
   padding: 50px; }
@@ -692,66 +700,49 @@ figure {
 .inner-wrapper {
   padding: 0 11%; }
 
-.blur {
-  position: absolute;
-  z-index: 99;
-  /* ╨╕╨╖╨╛╨▒╤А╨░╨╢╨╡╨╜╨╕╨╡ ╤А╨░╨╖╨╝╤Л╤В╨╛ */
-  background-image: url(http://genegan.ru/ftt/47/ogni_nochnoy_gorod_razmytost_1920x1080.jpg);
-  background-size: cover;
-  backgroun-repeat: no-repeat;
-  -webkit-filter: blur(5px);
-  -moz-filter: blur(5px);
-  filter: blur(5px); }
-
 .list-row li {
   float: right; }
 
-@media (max-width: 1110px) {
-  .nav ul.right {
-    display: none; } }
-@media (max-width: 780px) {
-  .nav {
-    display: none; }
-
-  .header {
-    background: none; }
-
-  .header-logo {
-    float: none;
-    width: 90px;
-    margin: 0 auto; }
-
-  .header-logo img {
-    width: 100%; } }
 .header {
+  background-color: rgba(255, 255, 255, 0.349);
+  height: 60px;
   /*header ╨▓╨▓╨╡╤А╤Е ╤Б╤В╤А╨░╨╜╨╕╤Ж╤Л*/
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
-  /*header ╨▓╨▓╨╡╤А╤Е ╤Б╤В╤А╨░╨╜╨╕╤Ж╤Л*/
-  background-color: yellow;
-  opacity: 0.2; }
+  /*header ╨▓╨▓╨╡╤А╤Е ╤Б╤В╤А╨░╨╜╨╕╤Ж╤Л*/ }
 
 .nav {
+  /* ╨ж╨╡╨╜╤В╤А╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡*/
+  position: fixed;
+  left: 50%;
+  margin-left: -20%;
+  /* ╨ж╨╡╨╜╤В╤А╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡*/
+  background-color: rgba(255, 255, 255, 0.502);
   text-align: center; }
   .nav ul {
-    width: 50%; }
+    margin: 0 auto;
+    top: 60px;
+    height: 100%; }
   .nav li {
-    display: inline-block; }
+    width: 175px;
+    display: inline-block;
+    padding-top: 2px;
+    padding-bottom: 2px; }
     .nav li:hover a {
       color: #0089cf; }
+    .nav li:nth-child(2) {
+      background-color: #ffb74d; }
   .nav a {
-    font-size: 14px;
-    font-family: "DINNextLTPro";
-    color: #333333;
-    text-transform: uppercase;
-    line-height: 20px;
+    font-size: 19px;
+    font-family: "Roboto", sans-serif;
+    color: black;
+    line-height: 1.2;
     text-align: center; }
 
 .footer {
-  background-color: yellow;
-  opacity: 0.2;
+  background-color: rgba(255, 255, 255, 0.349);
   /*footer ╨▓╨╜╨╕╨╖ ╤Б╤В╤А╨░╨╜╨╕╤Ж╤Л*/
   position: absolute;
   left: 0;
@@ -766,47 +757,23 @@ p.copyright {
   text-align: center;
   opacity: 0.9; }
 
+.footer-contact {
+  font-size: 15px;
+  font-family: "Roboto";
+  color: #212121;
+  line-height: 1.2;
+  text-align: left; }
+
 .content {
   height: 265px;
   padding: 0;
   margin: 0;
-  background-color: antiquewhite;
-  opacity: 0.6;
-  box-shadow: 0 0 30px black;
-  /* ╨Я╨░╤А╨░╨╝╨╡╤В╤А╤Л ╤В╨╡╨╜╨╕ */ }
+  background-color: rgba(204, 255, 144, 0.271);
+  box-shadow: 0px 9px 12.16px 3.84px rgba(0, 0, 0, 0.004); }
 
 .post-logo {
   width: 100%;
   height: auto; }
-
-/* ╨╖╨┤╨╡╤Б╤М ╨╜╨░╤Е╨╛╨┤╨╕╤В╤Б╤П ╤Б╨║╨╛╤А╨╛╤Б╤В╤М ╨┐╨╡╤А╨╡╨▓╨╡╤А╤В╤Л╨▓╨░╨╜╨╕╤П */
-.flipper {
-  transition: 0.2s;
-  transform-style: preserve-3d;
-  position: relative; }
-
-/* ╤Б╨║╤А╨╛╨╣╤В╨╡ ╨╛╨▒╤А╨░╤В╨╜╤Г╤О ╤Б╤В╨╛╤А╨╛╨╜╤Г ╨▓╨╛ ╨▓╤А╨╡╨╝╤П ╨┐╨╡╤А╨╡╨▓╨╛╤А╨╛╤В╨░ */
-.front, .back {
-  backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0; }
-
-/* ╨╗╨╕╤Ж╨╡╨▓╨░╤П ╤Б╤В╨╛╤А╨╛╨╜╨░ ╤А╨░╨╖╨╝╨╡╤Й╨╡╨╜╨░ ╨╜╨░╨┤ ╨╛╨▒╤А╨░╤В╨╜╨╛╨╣ */
-.front {
-  z-index: 2; }
-
-/* ╨╛╨▒╤А╨░╤В╨╜╨░╤П, ╨╕╨╖╨╜╨░╤З╨░╨╗╤М╨╜╨╛ ╤Б╨║╤А╤Л╤В╨░╤П ╤Б╤В╨╛╤А╨╛╨╜╨░ */
-.back {
-  transform: rotateY(180deg); }
-
-/* ╨▓╨╡╤Б╤М ╨║╨╛╨╜╤В╨╡╨╣╨╜╨╡╤А ╨┐╨╛╨┤╨┤╨╡╤А╨╢╨╕╨▓╨░╨╡╤В ╨┐╨╡╤А╤Б╨┐╨╡╨║╤В╨╕╨▓╤Г */
-.flip-container {
-  perspective: 1000; }
-
-/* ╨┐╨╡╤А╨╡╨▓╨╡╤А╨╜╨╕╤В╨╡ ╤Б╤В╨╛╤А╨╛╨╜╤Г ╨┐╤А╨╕ ╨┐╤А╨╛╨▓╨╡╨┤╨╡╨╜╨╕╨╕ ╨╝╤Л╤И╤М╤О */
-.flip-container:hover .flipper, .flip-container.hover .flipper {
-  transform: rotateY(180deg); }
 
 .btn {
   background-color: #cd4949;

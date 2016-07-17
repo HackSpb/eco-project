@@ -1,31 +1,44 @@
 .header{
+  background-color: rgba(255, 255, 255,0.349);
+  height: 60px;
   /*header вверх страницы*/
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   width: 100%;
-  //height: $footer-height; не стоит
+  //height: $header-height; не стоит
   /*header вверх страницы*/
-  background-color: yellow;
-  opacity: 0.2;
 }
 .nav{
+  /* Центрирование*/
+  position: fixed;
+  left:50%; 
+  margin-left: -20%;
+  /* Центрирование*/
+  background-color: rgba(255, 255, 255,0.502);
   text-align: center;
   ul{
-    width:50%;
+    margin: 0 auto;
+    top: 60px;
+    height: 100%;
   }
   li{
+    width: 175px;
     display: inline-block;
+    padding-top: 2px;
+    padding-bottom: 2px;
     &:hover a{
       color: rgb(0, 137, 207);
     }
+    &:nth-child(2){
+      background-color: rgb(255, 183, 77);
+    }
   }
   a {
-  font-size: 14px;
-  font-family: "DINNextLTPro";
-  color: rgb(51, 51, 51);
-  text-transform: uppercase;
-  line-height: 20px;
-  text-align: center;
-  }
+    font-size: 19px;
+    font-family: "Roboto", sans-serif;
+    color: rgb(0, 0, 0);
+    line-height: 1.2;
+    text-align: center;
+  }  
 }

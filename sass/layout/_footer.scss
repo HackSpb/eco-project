@@ -1,10 +1,8 @@
 $grey-102: rgb(102, 102, 102);
 $black-13: rgb(13, 13, 13);
 $light-blue: rgb(0, 137, 207);
-$yellow: yellow;
 .footer{
-  background-color: $yellow;
-  opacity: 0.2;
+  background-color: rgba(255, 255, 255,0.349);
   /*footer вниз страницы*/
   position: absolute;
   left: 0;
@@ -21,4 +19,11 @@ $yellow: yellow;
 p.copyright{
   text-align: center;
   opacity: 0.9;
+}
+.footer-contact {
+  font-size: 15px;
+  font-family: "Roboto";
+  color: rgb(33, 33, 33);
+  line-height: 1.2;
+  text-align: left;
 }
