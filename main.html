@@ -6,10 +6,19 @@
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" href="images/logo.png">
   <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
 </head>
 <body class="">
 <div class="wrapper">
 <div class="inner-wrapper">
+
+<script type="text/javascript">   
+$(document).ready(function(){
+   $(".dropbtn").click(
+     function(){$(".dropdown-content").slideToggle(300)}
+   );
+});                           
+</script>
 
 <!--header start!-->
   <header class="header" name="home">
@@ -39,6 +48,37 @@
 
 <!--content start-->
 <main class="page-content">
+
+<!--filter start-->
+<ul class="dropdown">
+ <li class="dropbtn">Фильтр</li>
+ <div class="dropdown-content">
+  <li class="dropdown-elem">Среда
+    <ul class="">
+      <li><a href="">Мероприятия</a></li>
+      <li><a href="">Очистка прибрежных территорий</a></li>
+      <li><a href="">Очистка лесов</a></li>
+      <li><a href="">Городские субботники</a></li>
+    </ul>
+  </li>
+  <li class="dropdown-elem">Животные
+    <ul>
+      <li><a href="">Мероприятия</a></li>
+      <li><a href="">Пикеты, марши</a></li>
+      <li><a href="">Волонтерство в притоках</a></li>
+    </ul>
+  </li>
+  <li class="dropdown-elem">Горожане
+    <ul>
+      <li><a href="">Образовательное</a></li>
+      <li><a href="">Зеленый транспорт</a></li>
+      <li><a href="">Мероприятия</a></li>
+    </ul>
+  </li>
+  </div>
+</ul>
+<!--filter end!-->
+
 <!--Встраеваемый контент начало-->
 <div class="grid grid-pad">
   <div class="col-1-4">
@@ -109,6 +149,6 @@
 <!--footer end-->
 
 </div><!-- end="inner-wrapper" -->
-</div>
+</div>   
 </body>
 </html>

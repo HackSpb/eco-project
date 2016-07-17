@@ -17,13 +17,17 @@ $light-blue: rgb(0, 137, 207);
   }
 }
 p.copyright{
+  display: none;
   text-align: center;
   opacity: 0.9;
 }
 .footer-contact {
+  float: left;
   font-size: 15px;
-  font-family: "Roboto";
-  color: rgb(33, 33, 33);
   line-height: 1.2;
-  text-align: left;
+  padding: 10px;
+  margin-right: 20%;
+  a{
+    color: black;
+  }
 }

@@ -759,15 +759,18 @@ figure {
     padding: 0 20% 10px 20%; }
 
 p.copyright {
+  display: none;
   text-align: center;
   opacity: 0.9; }
 
 .footer-contact {
+  float: left;
   font-size: 15px;
-  font-family: "Roboto";
-  color: #212121;
   line-height: 1.2;
-  text-align: left; }
+  padding: 10px;
+  margin-right: 20%; }
+  .footer-contact a {
+    color: black; }
 
 .content {
   height: auto;
@@ -797,6 +800,43 @@ p.residents {
 
 .content {
   min-width: auto; }
+
+.dropbtn {
+  background-color: rgba(255, 255, 255, 0.349);
+  padding: 6px;
+  border: none;
+  cursor: pointer; }
+
+.dropdown {
+  position: relative;
+  display: inline-block; }
+  .dropdown:hover .dropdown-content {
+    display: block; }
+  .dropdown:hover .dropbtn {
+    background-color: white; }
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2); }
+    .dropdown-content .dropdown-elem {
+      color: black;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block; }
+      .dropdown-content .dropdown-elem:nth-child(1) {
+        background-color: #9fd2ab; }
+      .dropdown-content .dropdown-elem:nth-child(2) {
+        background-color: #f9d58e; }
+      .dropdown-content .dropdown-elem:nth-child(3) {
+        background-color: #c5cae9; }
+      .dropdown-content .dropdown-elem:hover {
+        background-color: #f1f1f1; }
+        .dropdown-content .dropdown-elem:hover ul {
+          display: block; }
+      .dropdown-content .dropdown-elem ul {
+        display: none; }
 
 .btn {
   background-color: #ffb74d;
