@@ -90,7 +90,7 @@ body {
   background: url(/images/Background/background.png) no-repeat fixed right top;
   box-sizing: border-box;
   width: 100%;
-  padding: 50px;
+  padding: 60px 0%;
 }
 .page-content{
   padding-bottom: $footer-height;
@@ -98,7 +98,7 @@ body {
 }
 figure{margin: 0;}
 .inner-wrapper{
-  padding: 0 11%;
+  padding: 0 0;
 }
 .list-row li{
   float: right;

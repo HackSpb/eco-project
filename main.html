@@ -22,26 +22,35 @@ $(document).ready(function(){
 
 <!--header start!-->
   <header class="header" name="home">
-   <div class="inner-wrapper">
-    <div class="clearfix">
-    <figure class="header-logo left">
-      <a href=""><img src="logo.png" alt=""></a>
+   <div class="grid grid-pad">
+    <div class="col-1-1">
+    <div class="content">
+    <figure class="header-logo left MyEcoSity">
+      <a href="">MyEcoSity</a>
+      <p>мой городской помошник</p>
       </figure>
     <ul class="right">
-        <li><a href="#search">Если в объекте присутствует шавуха</a></li>
-        <li><a href="#cart">То это пиздец</a></li>
+        <li>Стать жителем MyEcoSity</li>
+        <li>Уже прописаны у нас?</li>
       </ul>
+      <div class="right add">
+      <img class="add-logo right" src="images/sprites/%D0%9A%D0%9D%D0%9E%D0%9F%D0%9A%D0%90%20%D0%94%D0%9E%D0%91%D0%90%D0%92%D0%98%D0%A2%D0%AC.png" alt="">
+      </div>
     </div>
-    </div><!-- end="inner-wrapper" -->
+     </div>
+     </div>
   </header>
 <!--header end!-->
 
 <!--menu start-->
 <nav class="nav clearfix">
       <ul class="centr">
-        <li><a href="#Map">Карта</a></li>
-        <li><a href="#News">Новости</a></li>
-        <li><a href="#Calendar">Календарь</a></li>
+        <!-- Грязный хак против отступов -->
+        <li>
+        <a href="#Map">Карта</a></li><li>
+        <a href="#News">Новости</a></li><li>
+        <a href="#Calendar">Календарь</a></li>
+        <!-- Грязный хак против отступов -->
       </ul>
 </nav>
 <!--menu end!-->
@@ -50,6 +59,7 @@ $(document).ready(function(){
 <main class="page-content">
 
 <!--filter start-->
+<div class="grid grid-pad drop-flow">
 <ul class="dropdown">
  <li class="dropbtn">Фильтр</li>
  <div class="dropdown-content">
@@ -77,6 +87,7 @@ $(document).ready(function(){
   </li>
   </div>
 </ul>
+  </div>
 <!--filter end!-->
 
 <!--Встраеваемый контент начало-->
@@ -133,18 +144,25 @@ $(document).ready(function(){
 
 <!--footer start-->
   <footer class="footer" id="Contact">
-  <div class="inner-wrapper">
-  <a href="#home">Наверх</a>
+  <div class="grid grid-pad">
+  <div class="col-1-4">
+    <div class="content">
   <ul class="footer-contact">
     <li><a href="">Написать нам</a></li>
     <li><a href="">Наша миссия</a></li>
   </ul>
+  </div>
+  </div>
+  <div class="col-1-4">
+    <div class="content">
   <ul class="footer-contact">
     <li><a href="">Архив</a></li>
     <li><a href="">Карта сайта</a></li>
   </ul>
   <p class="copyright">Copyright © 2015 Fiodorov Nikita. All rights reserved.</p>
-  </div><!-- end="inner-wrapper" -->
+    </div>
+  </div>
+  </div>
   </footer>
 <!--footer end-->
 
