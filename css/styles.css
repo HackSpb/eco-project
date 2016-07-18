@@ -610,8 +610,7 @@ h1 {
   font-family: "Roboto";
   color: black;
   line-height: 1.2;
-  text-align: center;
-  position: absolute; }
+  text-align: center; }
 
 h2 {
   padding-top: 20px;
@@ -927,5 +926,45 @@ p.residents {
         transition: height 0.6s,opacity 0.2s ease-out 0s; }
         .dropdown-content .dropdown-elem ul li:first-child {
           padding-top: 15px; }
+
+@font-face {
+  font-family: Pompadur;
+  /* ╨Ш╨╝╤П ╤И╤А╨╕╤Д╤В╨░ */
+  src: url(images/sprites/13ss.tif);
+  /* ╨Я╤Г╤В╤М ╨║ ╤Д╨░╨╣╨╗╤Г ╤Б╨╛ ╤И╤А╨╕╤Д╤В╨╛╨╝ */ }
+.error {
+  color: blue;
+  background-color: rgba(70, 0, 0, 0.4);
+  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4); }
+
+.form-auth {
+  box-sizing: border-box;
+  width: 300px; }
+  .form-auth input {
+    box-sizing: border-box;
+    margin: 10px;
+    width: 100%;
+    border: none;
+    height: 25px;
+    background-position: 0 30%;
+    color: black;
+    padding-bottom: 5px;
+    box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4); }
+    .form-auth input[type="text"] {
+      background: url(/images/sprites/people.svg) no-repeat;
+      border-bottom: 2px solid #666666;
+      padding-left: 25px;
+      box-shadow: none; }
+    .form-auth input[type="password"] {
+      background: url(images/sprites/people.svg) no-repeat;
+      border-bottom: 2px solid #666666;
+      padding-left: 25px;
+      box-shadow: none; }
+    .form-auth input.in {
+      width: 50%;
+      display: inline-block; }
+    .form-auth input.beack {
+      display: inline-block;
+      width: 40%; }
 
 /*# sourceMappingURL=styles.css.map */
