@@ -1,20 +1,17 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: root
- * Date: 07.06.16
- * Time: 22:01
+ * default config
  */
 
-$dbName = "a0030107_eco";
-$host= "localhost";
-$dsn="mysql:dbname=$dbName;host=$host";
-$user_db="a0030107_eco";
-$password_db="eco123";
-try {
-    $db = new PDO($dsn, $user_db, $password_db);
-    $db->query('SET NAMES \'utf8\'');
 
-} catch (\PDOException $e) {
-    print_r('ошибка подключении к базе данных');
-}
+$dbName = "eco";
+$host = "localhost";
+$dsn = "mysql:dbname=$dbName;host=$host";
+$user_db = "root";
+$password_db = "";
+
+$root_dir = __DIR__; //
+$prefix = ''; // prefix for BD tables
+$site_url = 'http://'.$_SERVER['HTTP_HOST'] ;
+ini_set('display_errors', 'off');
+//error_reporting('E_ALL');
