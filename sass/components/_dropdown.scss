@@ -11,13 +11,21 @@
   &:hover {
     .dropdown-content {
       display: block;
+      opacity: 1;
+      visibility:visible;
+      -webkit-transition: opacity 1s,visibility 2s ease-out 0s;
+      -moz-transition: opacity 0.6s,visibility 2s ease-out 0s;
+      -o-transition: opacity 0.6s,visibility 2s ease-out 0s;
+      transition: opacity 0.6s,visibility 2s ease-out 0s;
     }
     .dropbtn {
       background-color: white;
     }
   }
   &-content {
-    display: none;
+    opacity: 0;
+    //display: none;
+    visibility: hidden;//для трансформ
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -33,9 +41,23 @@
       display: block;
       &:hover {
         background-color: #f1f1f1;
-        ul{display: block;}
+        ul{
+          visibility:visible;//для трансформ
+          opacity: 1;
+          height: 200px;
+        }
       }
-      ul{display: none;}
+      ul{
+        visibility: hidden;//для трансформ
+        display: block;
+        opacity: 0;
+        height: 0;
+        -webkit-transition: height 0.6s,opacity 0.2s ease-out 0s;
+          -moz-transition: height 0.6s,opacity 0.2s ease-out 0s;
+          -o-transition: height 0.6s,opacity 0.2s ease-out 0s;
+          transition: height 0.6s,opacity 0.2s ease-out 0s;
+        //display: none;
+      }
     }
   }
 }
