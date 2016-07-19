@@ -6,9 +6,15 @@ include_once 'lib/php/map_lib/EventGeoObjToDB.php';
 include_once 'lib/php/map_lib/BalloonTempComposer.php';
 
 include 'config.php';
+if(file_exists('local.config.php'))include 'local.config.php';
 
-//$dsn="mysql:dbname=green_age;host=127.0.0.1"; $user_db="root"; $password_db="";
+try {
+    $db = new PDO($dsn, $user_db, $password_db);
+    $db->query('SET NAMES \'utf8\'');
 
+} catch (\PDOException $e) {
+    print_r('connect to BD failed');
+}
 
 $app = new Silex\Application();
 $app['debug'] = true;
