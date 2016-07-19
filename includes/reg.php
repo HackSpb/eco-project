@@ -55,7 +55,7 @@ function reg_save () {
             // переход на главную страницу
             header("Location: /"); exit();
         }
-
+    // иначе первый раз зашли на страницу
     } else {
         $form_err = false;
         $_POST['email'] = false;

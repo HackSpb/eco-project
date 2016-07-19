@@ -5,11 +5,11 @@
     <div class="container">   
         <div class="box1">
             <div class='h1'><h1>Добавление новостей</h1></div>
-            {% if err is not empty %}
+            {% if form_err|length > 0 %}
             <div class="form-row error">
                 <b>При добавлении новости произошли следующие ошибки:</b><br>
-                {% for error in err %}
-                    {{ error }},
+                {% for error in form_err %}
+                    <br>{{ error }}
                 {% endfor %}
             </div>
             {% endif %}
@@ -52,6 +52,9 @@
                 <label>Описание<span class="star">*</span></label>
         		<textarea name='description' value="{{ POST.description }}"></textarea>
         	</div>
+            <div class='form-row'>
+                <input type="file" name="image" accept="image">
+            </div>
             <div class="btom12"><input type="submit" name="submit" value="сохранить" class="butsub"></div>
             <div class="btom12"><input type="button" value="отмена" class="butback" onclick="history.go(-1);"></div>
         </div>

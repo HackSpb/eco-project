@@ -6,11 +6,11 @@
  * Time: 22:01
  */
 
-$dbName = "a0030107_eco";
+$dbName = "green_age";
 $host= "localhost";
 $dsn="mysql:dbname=$dbName;host=$host";
-$user_db="a0030107_eco";
-$password_db="eco123";
+$user_db="root";
+$password_db="";
 try {
     $db = new PDO($dsn, $user_db, $password_db);
     $db->query('SET NAMES \'utf8\'');

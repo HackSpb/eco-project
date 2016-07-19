@@ -24,7 +24,7 @@
                         {% for event in events %}
                         <div class="col-xs-12 col-sm-4 col-md-4">
                             <div class="post type-2">
-                                {% if (event.image) %} <img src="images/{{event.image}}" alt="" /> {% else %} <img src="images/eco_post2.jpg" alt="" />{% endif %}
+                                {% if (event.image) %} <img src="images/event/{{event.image}}" alt="" /> {% else %} <img src="images/event/eco_post2.jpg" alt="" />{% endif %}
                                 <div class="post-data">
                                      <a href="#"><h2>{{event.title}}</h2></a>
                                     <p>{{event.description}}</p>

@@ -63,89 +63,9 @@ $app->get('//', function() use ($app) {
 // создание события
 $app->match('/event_create', function() use ($app) {
 
-   if (isset($_POST['submit'])) {
-
-        // массив ошибок
-        $err = array();
-
-       $title = $_POST['title'];
-       $description = $_POST['description'];
-       $begin_date = $_POST['begin_date'];
-       $end_date = $_POST['end_date'];
-       $address = $_POST['location'];
-       $tag = $_POST['tag'];
-       $image = NULL;
-       $user_id = 1;
-
-        if (!empty($_POST['title']) && !empty($_POST['begin_date']) && !empty($_POST['location']) && !empty($_POST['description']) && !empty($_POST['coord_x']) && !empty($_POST['coord_y'])) {
-            $tempPath = "map_files/templates/balloon_temp.html";
-            $JSONPath = "map_files/data_for_map.json";
-            $coord_x = $_POST['coord_x'];
-            $coord_y = $_POST['coord_y'];
-            $coords = [$coord_x, $coord_y];
-
-            $eventToDB = new \MapLib\EventGeoObjToDB($title, $begin_date, $address, $description, $coords,
-                $JSONPath, $tempPath);
-            $eventToDB->addEventToMap();
-            $geoobjectID = $eventToDB->getId();
-        } 
-        // else {
-        //     $err[] = 'Необходимо заполнить все поля!';
-        // }
-            $title = $_POST['title'];
-            $description = $_POST['description'];
-            $begin_date = $_POST['begin_date'];
-            $end_date = $_POST['end_date'];
-            $address = $_POST['location'];
-            $tag = $_POST['tag'];
-            $image = NULL;
-            $user_id = 1;
-
-        // Если нет ошибок, то возвращаемся на главную страницу
-        if(count($err) == 0) {
-
-            $sql ="
-                INSERT INTO 
-                    `EVENT`
-                SET
-                    `title`         = '".$title."',
-                    `description`   = '".$description."',
-                    `create_date`   = NOW(),
-                    `begin_date`    = '".$begin_date."',
-                    `end_date`      = '".$end_date."',
-                    `address`       = '".$address."',
-                    `tag_id`        = '".$tag."',
-                    `image`         = '".$image."',
-                    `user_id`       = '".$user_id."'
-               ";
-               
-            global $db;
-
-            $db->query($sql);
-
-            header("Location: /"); exit();
-        }
-    } else {
-        $err = false;
-        $_POST = [
-            "title" => false,
-            "description" => false,
-            "begin_date" => false,
-            "end_date" => false,
-            "begin_time" => false,
-            "end_time" => false,
-            "tag" => false,
-            "image" => false,
-            "location" => false,
-            "coord_x" => false,
-            "coord_y" => false,
-            "url" => false,
-        ];
-    }
-
-    $app['twig']->addGlobal('POST', $_POST);
-    $app['twig']->addGlobal('err', $err);
-
+    include_once '/includes/event.php';
+    event_create();
+  
 	return $app['twig']->render('event_create.html');
 })->bind('event_create');
 
