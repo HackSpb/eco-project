@@ -28,7 +28,9 @@ function event_create(){
 	    	// экранирование необязательных входных данных
 			$begin_date = ( isset($_POST['begin_date']) && !empty($_POST['begin_date']) ) ? $_POST['begin_date'] : "NULL";
 			$end_date = ( isset($_POST['end_date']) && !empty($_POST['end_date']) ) ? $_POST['end_date'] : "NULL";
-			$address = ( isset($_POST['address']) && !empty($_POST['address']) ) ? $_POST['address'] : "NULL";
+			$begin_time = ( isset($_POST['begin_time']) && !empty($_POST['begin_time']) ) ? $_POST['begin_time'] : "NULL";
+			$end_time = ( isset($_POST['end_time']) && !empty($_POST['end_time']) ) ? $_POST['end_time'] : "NULL";
+			$address = ( isset($_POST['location']) && !empty($_POST['location']) ) ? $_POST['location'] : "NULL";
 			$user_id = 1;
 
 			// сохранение координаты (х, у) на карте
@@ -44,7 +46,6 @@ function event_create(){
 	            $eventToDB->addEventToMap();
 	            $geoobjectID = $eventToDB->getId();
 	        } 
-
 	        // если была загружена картинка
 	        if ($_FILES['image']['error'] == 0) {
 
@@ -64,7 +65,7 @@ function event_create(){
 				    $form_err[] = "Ошибка загрузки файла";
 				}
 	        } else {
-	        	$image = "NULL";
+	        	$image = NULL;
 	        }
 
 	        // Если нет ошибок, то сохраняем новость в БД
@@ -72,19 +73,20 @@ function event_create(){
 
 	            $sql ="
 	                INSERT INTO 
-	                    `event`
+	                    `events`
 	                SET
-	                    `title`         = '".$title."',
-	                    `description`   = '".$description."',
-	                    `create_date`   = NOW(),
-	                    `begin_date`    = '".$begin_date."',
-	                    `end_date`      = '".$end_date."',
-	                    `address`       = '".$address."',
-	                    `tag_id`        = '".$tag."',
-	                    `image`         = '".$image."',
-	                    `user_id`       = '".$user_id."'
+	                    `ev_title`         	= '".$title."',
+	                    `ev_description`   	= '".$description."',
+	                    `ev_create_date`   	= NOW(),
+	                    `ev_begin_date`    	= '".$begin_date."',
+	                    `ev_begin_time`    	= '".$begin_time."',
+	                    `ev_end_date`      	= '".$end_date."',
+	                    `ev_end_time`      	= '".$end_time."',
+	                    `ev_address`       	= '".$address."',
+	                    `tag_id`        	= '".$tag."',
+	                    `ev_image`         	= '".$image."',
+	                    `u_id`				= '".$user_id."'
 	               ";
-	               
 	            global $db;
 	            $db->query($sql);
 

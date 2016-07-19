@@ -58,7 +58,7 @@ if( isset($_SESSION['user']) ){
 $app->get('//', function() use ($app) {
     global $db;
 
-    $sql ="SELECT * FROM `event` Where `archive` = 'Y' Order by begin_date";
+    $sql ="SELECT * FROM `events` Where `ev_archive` = 'Y' Order by ev_begin_date";
     foreach ($db->query($sql) as $row) {
         $events[] = $row;
     }
