@@ -1,0 +1,25 @@
+$padding-normal: 7px;
+$margin-normal: 20px;
+.btn{
+  background-color: rgb(255, 183, 77);
+  border: 0;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 2px 15px;
+  font-size: 15px;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-align: center;
+  &:hover{
+    background-color: rgb(155, 73, 73);
+  }
+  &-normal{
+    padding: $padding-normal;
+    margin: $margin-normal;
+  }
+  &-small{
+    padding: $padding-normal/2;
+    margin: $margin-normal/2;
+  }
+}
+
