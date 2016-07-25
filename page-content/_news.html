@@ -1,0 +1,56 @@
+<!--filter start-->
+<div class="grid grid-pad drop-flow">
+<ul class="dropdown">
+ <li class="dropbtn">Фильтр</li>
+ <div class="dropdown-content">
+  <li class="dropdown-elem">Среда
+    <ul class="">
+      <li><a href="">Мероприятия</a></li>
+      <li><a href="">Очистка прибрежных территорий</a></li>
+      <li><a href="">Очистка лесов</a></li>
+      <li><a href="">Городские субботники</a></li>
+    </ul>
+  </li>
+  <li class="dropdown-elem">Животные
+    <ul>
+      <li></li>
+      <li><a href="">Мероприятия</a></li>
+      <li><a href="">Пикеты, марши</a></li>
+      <li><a href="">Волонтерство в притоках</a></li>
+    </ul>
+  </li>
+  <li class="dropdown-elem">Горожане
+    <ul>
+      <li><a href="">Образовательное</a></li>
+      <li><a href="">Зеленый транспорт</a></li>
+      <li><a href="">Мероприятия</a></li>
+    </ul>
+  </li>
+  </div>
+</ul>
+  </div>
+<!--filter end!-->
+
+<!--Встраеваемый контент начало-->
+<div class="grid grid-pad">
+  {% for event in events %}
+        <div class="col-1-4">
+            <div class="content">
+                {% if (event.ev_image is empty ) %} 
+                        <img class="post-logo" src="images/event/eco_post2.jpg" alt="" />
+                {% else %} 
+                        <img class="post-logo" src="images/event/{{event.ev_image}}" alt="" /> 
+                {% endif %}
+                <figcaption class="card-info">
+                  <p class="residents">ЖИТЕЛИ</p>
+                     <a href="#"><h3>{{event.ev_title}}</h3></a>
+                    <p class="timeinfo">{{event.ev_description}}</p>
+                    <p class="timeinfo"><span class="glyphicon glyphicon-calendar"></span>{{event.ev_begin_date}}</p>
+                     <p style="margin-bottom:0px;"><span class="glyphicon glyphicon-map-marker"></span><a href="#">{{event.ev_address}}</a></p>
+                </figcaption>
+                <button class="btn btn-small">Присоединяйся</button>
+            </div>
+        </div>
+  {% endfor %}
+</div>
+<!--Встраеваемый контент конец-->

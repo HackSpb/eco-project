@@ -1,0 +1,40 @@
+<!-- Header -->
+<!-- <script type="text/javascript">
+   
+</script> -->
+{% include 'header.html' %}
+<!-- / Main content -->
+<form action="auth" method="post" enctype="multipart/form-data">
+    <div class="container">   
+        <div class="box1"> 
+            <div class='h1'><h1>Авторизация</h1></div>
+            {% if form_err|length > 0 %}
+            <div class="form-row error">
+                <b>При авторизации произошли следующие ошибки:</b><br>
+                {% for error in form_err %}
+                    {{ error }},
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class='form-row'>
+    			<label>Email</label>
+        		<input type='text' id='' placeholder="Email" name='email' value="{{ POST }}">
+      		</div>
+            <div class='form-row'>
+        		<label>Пароль</label>
+        	   <input type="password" placeholder="Пароль" name="password" value="">
+        	</div>
+            <div class="btom12">
+                <input type="submit" name="submit" value="Войти" class="butsub">
+            </div>
+            <div class="btom12">
+                <input type="button" value="Отмена" class="butback" onclick="history.go(-1);">
+            </div>
+            <div>
+                <div><a href="reg" target="_blank"><input type="button" value="Зарегистироваться" class="reg"></a></div>
+            </div>
+        </div>
+	</div>
+</form>
+<!-- Footer -->
+{% include 'footer.html' %}

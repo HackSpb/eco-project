@@ -1,0 +1,37 @@
+$grey-102: rgb(102, 102, 102);
+$black-13: rgb(13, 13, 13);
+$light-blue: rgb(0, 137, 207);
+.footer{
+  background-color: rgba(255, 255, 255,0.349);
+  /*footer вниз страницы*/
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  //height: $footer-height; не стоит
+  /*footer вниз страницы*/
+  p{
+    color: $black-13;
+    padding: 0 20% 10px 20%;
+    
+  }
+}
+p.copyright{
+  display: none;
+  text-align: center;
+  opacity: 0.9;
+}
+.footer-contact {
+  float: left;
+  font-size: 15px;
+  line-height: 1.2;
+  padding: 10px;
+  margin-right: 20%;
+  a{
+    color: black;
+  }
+}
+.footer .grid{
+  padding-bottom: 0;
+  padding-top: 0;
+}

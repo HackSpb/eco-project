@@ -1,0 +1,443 @@
+body {
+	font-family: 'Roboto', sans-serif;
+	font-size: 12px;
+	color: #848484;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-size-adjust: 100%;
+}
+.title {
+	text-align: left;
+	margin-top: 20px;
+	margin-bottom: -10px;
+	font-size: 60px;
+	font-weight: bold;
+     margin-left: 30px
+}
+.title a {
+	color: #4caf50;
+}
+.title a:hover {
+	text-decoration: none;
+}
+.title a:visited {
+	text-decoration: none;
+}
+.navigation {
+	text-align: center;
+	border-top: 3px solid #E5E5E5;
+}
+.nav > li {
+	display: inline-block;
+}
+.nav > li + li {
+	margin-left: 20px;
+}
+.nav>li>a {
+	padding: 20px 15px;
+	color: #000;
+	text-transform: uppercase;
+}
+.nav>li>a:hover {
+	background-color: initial;
+	color: #f89b35;
+}
+.nav>li>a:hover {
+	background-color: initial;
+	color: #f89b35;
+}
+.post {
+	margin-bottom: 20px;
+}
+
+.post img {
+	width: 100%;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
+}
+.post-data {
+	padding: 0 20px 20px 20px;
+}
+.big-post-data {
+	background-color: rgba(89, 89, 89, 0.4);
+	position: absolute;
+	bottom: 50px;
+	color: #fff;
+	margin-right: 15px;
+}
+.post h2 {
+	font-size: 16px;
+	color: #000000;
+}
+.post h2:hover {
+	color:#f89b35;
+	text-decoration:inherit;
+}
+
+https://github.com/HackSpb/eco-project.git
+
+.big-post-data h2 {
+	font-size: 28px;
+	padding-left: 15px;
+}
+.big-post-data p {
+	font-size: 18px;
+	padding-left: 15px;
+	line-height: normal;
+}
+.type-1{
+	background: #fff9c4;
+}
+.type-2{
+	background: #d5e4c8;
+  }
+.type-3{
+	background: #e8eaf6;
+}
+
+
+.last-posts {
+	border: 2px solid #E5E5E5;
+	padding: 10px;
+}
+.last-posts li {
+	list-style-type: none;
+	border-bottom: 2px solid #E5E5E5;
+	padding: 5px;
+}
+.last-posts li:last-child {
+	border: none;
+}
+.footer {
+	background-image: linear-gradient(#1F2124,#1F2124);
+}
+.footer-row {
+	padding: 20px;
+}
+
+
+	/*  Project Feed Filter  */
+
+	.project-feed-filter {
+		display: inline-block;
+		font-size: 12px;
+		float: left;
+		margin: 0;
+		padding: 18px 0 0 0;
+	}
+	.project-feed-filter li {
+		display: block;
+		float: left;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		margin: 0 0 0 4px;
+	}
+	.project-feed-filter a {
+		display: block;
+		margin: 0;
+		color: white;
+		padding: 3px 8px;
+		background: #d5e4c8;
+		text-decoration: none;
+		-webkit-transition: all 0.1s ease-out;
+		-moz-transition: all 0.1s ease-out;
+		transition: all 0.1s ease-out;
+	}
+	.project-feed-filter a:hover {
+		background: #79c7c1;
+		color: #fff;
+	}
+	.project-feed-filter .current,
+	.project-feed-filter .current:hover {
+		background: #f89b35;
+		color: #fff;
+	}
+
+
+	/*  Project Feed  */
+
+	.project-feed {
+		margin-bottom: -40px;
+	}
+
+	.project-feed > div {
+		position: relative;
+		float: left;
+		margin: 0 0 40px 0;
+	}
+	.project-feed div img,
+	.related-projects div img {
+		display: block;
+		width: 100%;
+	}
+
+
+	/* Project Feed 4 cols */
+
+	.project-feed__four-cols {
+
+	}
+		.project-feed__four-cols .project-item {
+			margin-bottom: 20px;
+		}
+		.project-feed__four-cols .project-desc h3 {
+			font-size: 12px;
+			margin-bottom: .2em;
+		}
+		.green {
+			background-color:  #d5e4c8;
+		}
+		.yell {
+			background-color:  #f9d58e;
+		}
+
+	/*  Project Item Overlay */
+
+	.project-item {
+		overflow: hidden;
+	}
+	.project-item .thumbnail {
+		position: relative;
+		overflow: hidden;
+	}
+	.project-item .overlay,
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		background: url(../images/overlay-bg.png);
+		background: rgba(40,40,40, .8);
+		opacity: 0;
+		-webkit-transition: all 0.2s ease-out;
+		-moz-transition: all 0.2s ease-out;
+		transition: all 0.2s ease-out;
+	}
+	.project-img:hover .overlay {
+		opacity: 1;
+	}
+	.project-item .mask {
+		position: absolute;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+		width: 100%;
+		height: 100%;
+		opacity: 0;
+		-webkit-transition: all 0.3s ease;
+		  -moz-transition: all 0.3s ease;
+		   -ms-transition: all 0.3s ease;
+		    -o-transition: all 0.3s ease;
+		       transition: all 0.3s ease;
+		-webkit-backface-visibility: hidden;
+	}
+	.project-img:hover .mask {
+		opacity: 1;
+	}
+	.project-item .icon-image {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin-top: -30px;
+		margin-left: -30px;
+		width: 60px;
+		height: 60px;
+		border-radius: 50%;
+		text-align: center;
+		line-height: 60px;
+		background: #fff;
+		text-decoration: none;
+		-webkit-transition: all 0.2s ease-out;
+		-moz-transition: all 0.2s ease-out;
+		transition: all 0.2s ease-out;
+	}
+	.project-item .icon-image:hover {
+		background: #30abe2;
+		text-decoration: none;
+	}
+	.project-item .icon-image i {
+		color: #30abe2;
+		font-size: 28px;
+		line-height: 60px;
+		-webkit-transition: all 0.2s ease-out;
+		-moz-transition: all 0.2s ease-out;
+		transition: all 0.2s ease-out;
+	}
+	.project-item .icon-image:hover i {
+		color: #fff;
+	}
+
+	/*  Isotope Plugin  */
+
+	.isotope-item {
+		z-index: 2;
+	}
+	.isotope-hidden.isotope-item {
+		z-index: 1;
+		pointer-events: none;
+	}
+	.isotope, .isotope .isotope-item {
+		-webkit-transition-duration: 0.8s;
+		  -moz-transition-duration: 0.8s;
+		       transition-duration: 0.8s;
+	}
+	.isotope {
+		-webkit-transition-property: height, width;
+		  -moz-transition-property: height, width;
+		       transition-property: height, width;
+	}
+	.isotope .isotope-item {
+		-webkit-transition-property: -webkit-transform, opacity;
+		  -moz-transition-property:    -moz-transform, opacity;
+		   -ms-transition-property:     -ms-transform, opacity;
+		    -o-transition-property:         top, left, opacity;
+		       transition-property:         transform, opacity;
+	}
+
+
+
+	/*  Project Details */
+
+	.project-details-holder {
+		margin-bottom: 60px;
+	}
+
+	.project-thumbnail {
+		height: auto !important;
+		border: 2px solid #fff;
+	}
+
+	.project-details {
+
+	}
+		.project-details h3 {
+			font-size: 16px;
+			color: #282828;
+			margin-bottom: .75em;
+		}
+		.project-details .spacer {
+			height: 30px;
+		}
+
+/*  Forms lera */
+.box1 { 
+    background: #d5e4c8; 
+    width: 350px; 
+    padding:10px; 
+      margin: auto; 
+    border: 15px solid #fff;
+               }
+.form-row {
+	margin-bottom: 8px;
+	overflow: hidden;          
+}
+.form-row input {
+	float: right;
+	height: 19px;
+	line-height: 19px;
+	margin: 0px;
+	padding: 0px 5px;
+		border: 1px solid #ABADB3;
+}
+
+.reg-form {
+	width: 416px;
+	margin: 0 auto;
+}
+.form-row textarea {
+	height: 90px;
+    line-height: 16px;
+    font-size: 12px;
+ 
+    width: 100%;
+    border: 1px solid #ABADB3;
+}
+
+.form-row input[type=submit] {
+	padding:5px;
+	height:25px;
+	width:100%;
+	line-height: 10px;
+	background: #4caf50;
+	color:white;
+}
+
+.butsub{
+    padding:5px;
+	height:25px;
+	width:143px;
+    float:left;
+       	line-height: 10px;
+	background: #4caf50;
+    text-transform: uppercase;
+    color:white;
+        }
+.btom12{
+ display: inline-block;
+}
+.butback
+{
+    padding:5px;
+	height:25px;
+	width:143px;
+    float:right;
+	line-height: 10px;
+    background:#848484;
+    text-transform: uppercase;
+    color:white;
+        }
+.h1
+{
+    text-align: center;
+     margin-top:-10px;
+}
+
+.autorizb
+{
+    padding:5px;
+	height:35px;
+	width:auto;
+    float:right;
+       	line-height: 10px;
+	background: #4caf50;
+    text-transform: uppercase;
+    color:white;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-right: 20px
+        }
+.autorizb2
+{
+    padding:5px;
+	height:35px;
+	width:auto;
+    float:right;
+       	line-height: 10px;
+	background: #f89b35;
+    text-transform: uppercase;
+    color:white;
+    font-size: 18px;
+      margin-top: 30px;
+     margin-right: 10px
+        }
+.reg
+{
+    padding:5px;
+	height:25px;
+	width:100%;
+  	line-height: 10px;
+    background:#f89b35;
+    text-transform: uppercase;
+    color:white;
+        }
+.a
+{
+   text-decoration: none;
+}
+.vr
+{
+   text-align: right
+}

@@ -1,0 +1,18 @@
+<!-- Встраеваемый контент-->
+      <form class="container form-auth" action="auth" method="post" enctype="multipart/form-data">
+      <h1>Авторизация</h1>
+        {% if err is not empty %}
+        <div class="error">
+                  <b>При авторизации произошли следующие ошибки:</b><br>
+                  {% for error in err %}
+                      {{ error }},
+                  {% endfor %}
+              </div>
+        {% endif %}
+        <input class="form-input" type='text' id='' name='email' value="{{ POST }}" placeholder="Email">
+        <input type="password" name="password" value="" placeholder="Password">
+        <input class="btn btn-normal content" type="submit" name="submit" value="Войти">
+        <input class="btn btn-normal content" type="button" value="Отмена" onclick="history.go(-1);">
+        <input class="btn btn-normal" type="button" value="Зарегистироваться">
+    </form>
+<!-- Встраеваемый контент!-->

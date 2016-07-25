@@ -1,0 +1,41 @@
+[
+  {
+    "events": "Event#image",
+    "bicycle": "Bike#image",
+    "eco-cafe": "Cafee#image",
+    "shelter": "Pet#image",
+    "vegan": "Shop#image",
+    "eco-goods": "islands#greenDotIcon"
+  },
+  {
+    "dangerousGarbage ": "DG#image",
+    "paper ": "Paper#image",
+    "glass ": "Glass#image",
+    "plastic ": "Plast#image",
+    "metal ": "Met#image",
+    "clothes ": "Cloth#image",
+    "other ": "Other#image",
+    "dangerousGarbage metal ": "DGMet#image",
+    "dangerousGarbage other ": "DgOth#image",
+    "dangerousGarbage metal other ": "DGOthMet#image",
+    "paper metal ": "PaperMet#image",
+    "paper glass plastic metal other ": "OthMetPlastGlassPaper#image",
+    "paper glass plastic metal ": "PaperGlassPlastMet#image",
+    "paper plastic ": "PlastPaper#image",
+    "paper glass plastic ": "PlasticGlassPaper#image",
+    "paper glass metal clothes ": "ClothMetGlassPaper#image",
+    "paper plastic metal ": "MetPlastPaper#image",
+    "paper glass ": "GlassPaper#image",
+    "dangerousGarbage paper glass plastic ": "DGPlastGlassPaper#image",
+    "dangerousGarbage paper metal ": "DGMetPaper#image",
+    "paper glass metal ": "MetGlassPaper#image",
+    "paper glass plastic metal clothes ": "ClothMetPlastGlassPaper#image",
+    "paper plastic metal other ": "OthMetPlastPaper#image",
+    "glass plastic metal ": "MetPlastGlass#image",
+    "glass metal ": "MetGlass#image",
+    "glass plastic metal other ": "OtherMetPlastGlass#image",
+    "dangerousGarbage paper glass plastic metal clothes other ": "PaperGlassPlastMetClothOtherDG#image",
+    "metal other ": "OthMet#image",
+    "clothes other ": "OthCloth#image"
+  }
+]
