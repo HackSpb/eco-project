@@ -1,6 +1,6 @@
 <?php
 
-function authorization_check(){
+function authorizationCheck(){
 
     global  $app, $db, $form_err;
 

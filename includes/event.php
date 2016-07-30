@@ -1,13 +1,12 @@
 <?php
 
-function event_create(){
+function eventCreate(){
 
 	global  $app, $db, $form_err;
-
 	// если нажали на кнопку
 	if (isset($_POST['submit'])) {
 
-		if (isset($_POST['tag']) && empty($_POST['title'])) {
+		if (isset($_POST['title']) && empty($_POST['title'])) {
 			$form_err[] = "Необходимо заполнить название.";
 		}
 
@@ -26,11 +25,11 @@ function event_create(){
 	    	$description = $_POST['description'];
 
 	    	// экранирование необязательных входных данных
-			$begin_date = ( isset($_POST['begin_date']) && !empty($_POST['begin_date']) ) ? $_POST['begin_date'] : "NULL";
-			$end_date = ( isset($_POST['end_date']) && !empty($_POST['end_date']) ) ? $_POST['end_date'] : "NULL";
-			$begin_time = ( isset($_POST['begin_time']) && !empty($_POST['begin_time']) ) ? $_POST['begin_time'] : "NULL";
-			$end_time = ( isset($_POST['end_time']) && !empty($_POST['end_time']) ) ? $_POST['end_time'] : "NULL";
-			$address = ( isset($_POST['location']) && !empty($_POST['location']) ) ? $_POST['location'] : "NULL";
+			$begin_date = ( isset($_POST['begin_date']) && !empty($_POST['begin_date']) ) ? '\''.$_POST['begin_date'].'\'' : 'NULL';
+			$end_date = ( isset($_POST['end_date']) && !empty($_POST['end_date']) ) ? '\''.$_POST['end_date'].'\'' : 'NULL';
+			$begin_time = ( isset($_POST['begin_time']) && !empty($_POST['begin_time']) ) ? '\''.$_POST['begin_time'].'\'' : 'NULL';
+			$end_time = ( isset($_POST['end_time']) && !empty($_POST['end_time']) ) ? '\''.$_POST['end_time'].'\'' : 'NULL';
+			$address = ( isset($_POST['location']) && !empty($_POST['location']) ) ? '\''.$_POST['location'].'\'' : 'NULL';
 			$user_id = 1;
 
 			// сохранение координаты (х, у) на карте
@@ -57,15 +56,27 @@ function event_create(){
 			    // Проверяем загружен ли файл
 			    if(is_uploaded_file($_FILES['image']['tmp_name'])) {
 
-			    	$image = $_FILES['image']['name'];
+			    	// узнаем макс id в табл events
+					$sth = $db->prepare('
+						SELECT 
+							MAX(`ev_id`)
+					    FROM 
+					    	`events`
+					');
+					$sth->execute();
+					// id нового события
+					$event_id = $sth->fetchColumn()+1;
+					// название картинки (id_ориг-имя.расширение)
+			    	$image = $event_id.'_'.$_FILES['image']['name'];
 				    // Если файл загружен успешно, перемещаем его
 				    // из временной директории в конечную
-				    move_uploaded_file($_FILES["image"]["tmp_name"], "images/event/".$_FILES["image"]["name"]);
+				    copy($_FILES["image"]["tmp_name"], "images/event/".$image);
+				    $image = '\''.$image.'\'';
 				} else {
 				    $form_err[] = "Ошибка загрузки файла";
 				}
 	        } else {
-	        	$image = NULL;
+	        	$image = 'NULL';
 	        }
 
 	        // Если нет ошибок, то сохраняем новость в БД
@@ -78,13 +89,13 @@ function event_create(){
 	                    `ev_title`         	= '".$title."',
 	                    `ev_description`   	= '".$description."',
 	                    `ev_create_date`   	= NOW(),
-	                    `ev_begin_date`    	= '".$begin_date."',
-	                    `ev_begin_time`    	= '".$begin_time."',
-	                    `ev_end_date`      	= '".$end_date."',
-	                    `ev_end_time`      	= '".$end_time."',
-	                    `ev_address`       	= '".$address."',
+	                    `ev_begin_date`    	= ".$begin_date.",
+	                    `ev_begin_time`    	= ".$begin_time.",
+	                    `ev_end_date`      	= ".$end_date.",
+	                    `ev_end_time`      	= ".$end_time.",
+	                    `ev_address`       	= ".$address.",
 	                    `tag_id`        	= '".$tag."',
-	                    `ev_image`         	= '".$image."',
+	                    `ev_image`         	= ".$image.",
 	                    `u_id`				= '".$user_id."'
 	               ";
 	            global $db;
@@ -98,6 +109,7 @@ function event_create(){
 
     // иначе первый раз зашли на страницу
     } else {
+
         $form_err = false;
         $_POST = [
             "title" => false,
@@ -115,6 +127,12 @@ function event_create(){
         ];
     }
 
+  	$sql ="SELECT `tag_id`, `tag_name` FROM `tags` WHERE 1 ORDER BY `tag_name`";
+    foreach ($db->query($sql) as $row) {
+        $tags[$row[0]] = $row[1];
+    }
+
+	$app['twig']->addGlobal('tags', $tags);
     $app['twig']->addGlobal('POST', $_POST);
     $app['twig']->addGlobal('form_err', $form_err);
 }

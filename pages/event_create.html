@@ -35,7 +35,12 @@
             </div>
             <div class='form-row'>
                 <label >Тег<span class="star">*</span></label>
-                <input type="text" name="tag" class="inp" value="{{ POST.tag }}">
+                <select name="tag" class="inp">
+                <option value="0" selected >--------------------</option>
+                {% for key, tag in tags %}
+                    <option value="{{ key }}" {% if key == POST.tag %} selected  {% endif %} >{{ tag|e }}</option>
+                {% endfor %}
+                </select>
             </div>
             <div class='form-row'>
                 <label >Ссылка на мероприятие</label>
@@ -53,7 +58,8 @@
         		<textarea name='description' value="{{ POST.description }}"></textarea>
         	</div>
             <div class='form-row'>
-                <input type="file" name="image" accept="image">
+                <label>Загрузка фотографии</label>
+                <input type="file" name="image" accept="image" [size="50"]>
             </div>
             <div class="btom12"><input type="submit" name="submit" value="сохранить" class="butsub"></div>
             <div class="btom12"><input type="button" value="отмена" class="butback" onclick="history.go(-1);"></div>

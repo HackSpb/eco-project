@@ -1,5 +1,5 @@
 <?php
-function reg_save () {
+function regSave () {
 
     global  $app, $db, $form_err;
 
@@ -29,9 +29,10 @@ function reg_save () {
                 global $db;
 
                 // узнаем пользователь с таким  уже существует
-                $query = $db->query("SELECT * FROM `users` WHERE `u_email` = '".$email."'");
-
-                if($query->rowCount() > 0) {
+                $res = $db->query("SELECT COUNT(`u_id`) FROM `users` WHERE `u_email` = '".$email."'");
+                $count = $res->fetchColumn();
+              
+                if($count > 0) {
                     $form_err[] = 'Пользователь с таким email уже существует в базе данных';
                 } 
 
@@ -48,7 +49,9 @@ function reg_save () {
                 VALUES ('".$password."', '".$email."', 1, NOW(), NOW() ); ";
             $db->query($sql);
 
+            session_destroy();
             session_start();
+            $_SESSION = array();
             $_SESSION['user'] = $user;
             $app['twig']->addGlobal('user', $_SESSION['user']);
 

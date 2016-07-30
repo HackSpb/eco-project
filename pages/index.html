@@ -10,16 +10,31 @@
                         {% for event in events %}
                         <div class="col-xs-12 col-sm-4 col-md-4">
                             <div class="post type-2">
-                                {% if (event.ev_image is empty ) %} 
-                                        <img src="images/event/eco_post2.jpg" alt="" />
+                                {% if (event.ev_image is null ) %} 
+                                    <img src="images/event/eco_post2.jpg" alt="" />
                                 {% else %} 
-                                        <img src="images/event/{{event.ev_image}}" alt="" /> 
+                                    <img src="images/event/{{event.ev_image}}" alt="" /> 
                                 {% endif %}
                                 <div class="post-data">
-                                     <a href="#"><h2>{{event.ev_title}}</h2></a>
-                                    <p>{{event.ev_description}}</p>
-                                    <p style="margin-bottom:0px;"><span class="glyphicon glyphicon-calendar"></span>{{event.ev_begin_date}}</p>
-                                     <p style="margin-bottom:0px;"><span class="glyphicon glyphicon-map-marker"></span><a href="#">{{event.ev_address}}</a></p>
+                                    <b>#{{event.tag_name}}</b>
+                                    <a href="#"><h2>{{event.ev_title}}</h2></a>
+                                    {% if (event.ev_begin_time is not null ) %}
+                                        <p style="margin-bottom:0px;"> время:{{event.ev_begin_time}}
+                                        {% if (event.ev_end_time is not null ) %}
+                                         - {{event.ev_end_time}}
+                                        {% endif %}
+                                        </p>
+                                    {% endif %}
+                                    {% if (event.ev_begin_date is not null ) %}
+                                        <p style="margin-bottom:0px;"><span class="glyphicon glyphicon-calendar"></span>{{event.ev_begin_date}}
+                                        {% if (event.ev_end_date is not null ) %}
+                                         - {{event.ev_end_date}}
+                                        {% endif %}
+                                        </p>
+                                    {% endif %}
+                                    {% if (event.ev_address is not null ) %}
+                                    <p style="margin-bottom:0px;"><span class="glyphicon glyphicon-map-marker"></span><a href="#">{{event.ev_address}}</a></p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
