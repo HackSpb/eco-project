@@ -46,10 +46,18 @@ function regSave () {
         // Если нет ошибок, то добавляем в БД нового пользователя
         if(count($form_err) == 0) {
 
-            $sql ="INSERT INTO USERS (`u_password`, `u_email`, `role_id`, `u_create_date`, `u_active_date`)
-                VALUES ('".$password."', '".$email."', 1, NOW(), NOW() ); ";
+            $sql ="
+            	INSERT INTO 
+            		`users`
+            	SET 
+            		`u_password`	= '".$password."',
+            		`u_email`		= '".$email."',
+            		`role_id`		= 1, 
+            		`u_create_date`	= NOW(), 
+            		`u_active_date`	= NOW()
+            ";
             $db->query($sql);
-
+print_r($sql); exit();
             session_destroy();
             session_start();
             $_SESSION = array();
