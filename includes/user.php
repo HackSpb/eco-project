@@ -57,7 +57,7 @@ function regSave () {
             		`u_active_date`	= NOW()
             ";
             $db->query($sql);
-print_r($sql); exit();
+
             session_destroy();
             session_start();
             $_SESSION = array();

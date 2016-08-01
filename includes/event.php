@@ -97,18 +97,11 @@ function eventCreate(){
 	                    `ev_image`         	= ".$image.",
 	                    `u_id`				= '".$user_id."'
 	               ";
-	            // $db->query($sql);
-	           $db->exec($sql);
+	            $db->query($sql);
 
-	            // если сохранение прошло успешно
-	            if ( $count) {
-		            // возвращаемся на главную  страницу
-		            header("Location: /"); exit();
+	            // возвращаемся на главную  страницу
+	            header("Location: /"); exit();
 
-		        // иначе сообщение об ошибке
-	            } else {
-	            	$form_err[] = 'Извините, запрос не прошел.'
-	            }
         	}
 
         }
