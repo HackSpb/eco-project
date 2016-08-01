@@ -5,7 +5,6 @@ function eventCreate(){
 	global  $app, $db, $form_err;
 	// если нажали на кнопку
 	if (isset($_POST['submit'])) {
-
 		if (isset($_POST['title']) && empty($_POST['title'])) {
 			$form_err[] = "Необходимо заполнить название.";
 		}
@@ -30,7 +29,7 @@ function eventCreate(){
 			$begin_time = ( isset($_POST['begin_time']) && !empty($_POST['begin_time']) ) ? '\''.$_POST['begin_time'].'\'' : 'NULL';
 			$end_time = ( isset($_POST['end_time']) && !empty($_POST['end_time']) ) ? '\''.$_POST['end_time'].'\'' : 'NULL';
 			$address = ( isset($_POST['location']) && !empty($_POST['location']) ) ? '\''.$_POST['location'].'\'' : 'NULL';
-			$user_id = 1;
+			$user_id = $_SESSION['user']['u_id'];
 
 			// сохранение координаты (х, у) на карте
 	        if (isset($_POST['coord_x']) && !empty($_POST['coord_x']) && isset($_POST['coord_y']) && !empty($_POST['coord_y'])) {
@@ -66,8 +65,8 @@ function eventCreate(){
 					$sth->execute();
 					// id нового события
 					$event_id = $sth->fetchColumn()+1;
-					// название картинки (id_ориг-имя.расширение)
-			    	$image = $event_id.'_'.$_FILES['image']['name'];
+					// название картинки (id_время_ориг-имя.расширение)
+			    	$image = $event_id.'_'.time().'_'.$_FILES['image']['name'];
 				    // Если файл загружен успешно, перемещаем его
 				    // из временной директории в конечную
 				    copy($_FILES["image"]["tmp_name"], "images/event/".$image);
@@ -107,26 +106,8 @@ function eventCreate(){
 
         }
 
-    // иначе первый раз зашли на страницу
-    } else {
-
-        $form_err = false;
-        $_POST = [
-            "title" => false,
-            "description" => false,
-            "begin_date" => false,
-            "end_date" => false,
-            "begin_time" => false,
-            "end_time" => false,
-            "tag" => false,
-            "image" => false,
-            "location" => false,
-            "coord_x" => false,
-            "coord_y" => false,
-            "url" => false,
-        ];
-    }
-
+    } 
+    
   	$sql ="SELECT `tag_id`, `tag_name` FROM `tags` WHERE 1 ORDER BY `tag_name`";
     foreach ($db->query($sql) as $row) {
         $tags[$row[0]] = $row[1];

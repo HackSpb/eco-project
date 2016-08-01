@@ -47,8 +47,8 @@ if( isset($_SESSION['user']) ){
 // вывод главное страницы - все анонсы
 $app->get('//', function() use ($app) {
 
-    include_once '/includes/event_list.php';
-    loadDataFromDB();
+    include_once 'includes/event_list.php';
+    loadLastEvents();
 
 	return $app['twig']->render('index.html');
 })->bind('index');
@@ -56,7 +56,7 @@ $app->get('//', function() use ($app) {
 // создание события
 $app->match('/event_create', function() use ($app) {
 
-    include_once '/includes/event.php';
+    include_once 'includes/event.php';
     eventCreate();
   
 	return $app['twig']->render('event_create.html');
@@ -70,7 +70,7 @@ $app->get('/calendar', function() use ($app) {
 // Страница регистрации нового пользователя
 $app->match('/reg', function() use ($app) {
 
-    include_once '/includes/reg.php';
+    include_once 'includes/user.php';
     regSave();
     
 	return $app['twig']->render('reg.html');
@@ -87,10 +87,19 @@ $app->get('/admin/addPoint', function() use ($app) {
 // Страница авторизации
 $app->match('/auth', function() use ($app) {
 
-    include_once '/includes/authorization.php';
+    include_once 'includes/user.php';
     authorizationCheck();
     
     return $app['twig']->render('authorization.html');
 })->bind('auth');
+
+// анкета пользователя
+$app->match('/user_profil_edit', function() use ($app) {
+
+    include_once 'includes/user.php';
+    profilEdit();
+    
+    return $app['twig']->render('user_profil_edit.html');
+})->bind('profil_edit');
 
 $app->run();

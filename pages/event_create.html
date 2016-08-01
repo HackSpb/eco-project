@@ -5,7 +5,7 @@
     <div class="container">   
         <div class="box1">
             <div class='h1'><h1>Добавление новостей</h1></div>
-            {% if form_err|length > 0 %}
+            {% if (form_err is defined) and (form_err|length > 0) %}
             <div class="form-row error">
                 <b>При добавлении новости произошли следующие ошибки:</b><br>
                 {% for error in form_err %}
@@ -15,51 +15,51 @@
             {% endif %}
             <div class='form-row'>
         		<label>Название<span class="star">*</span></label>
-        		<input type='text' name='title' value="{{ POST.title }}">
+        		<input type='text' name='title' value="{% if (POST.title is defined) %} {{POST.title}} {% endif %}">
     		</div>
     		<div class='form-row'>
                 <label>Дата начала</label>
-                <input type="date" name="begin_date" class="inp" value="{{ POST.begin_date }}">
+                <input type="date" name="begin_date" class="inp" value="{% if (POST.begin_date is defined) %} {{POST.begin_date}} {% endif %}">
             </div>
             <div class='form-row'>
                 <label>Время начала</label>
-                <input type="time" name="begin_time" class="inp" value="{{ POST.begin_time }}">
+                <input type="time" name="begin_time" class="inp" value="{% if (POST.begin_time is defined) %} {{POST.begin_time}} {% endif %}">
             </div>
         	<div class='form-row'>
         		<label>Дата окончания</label>
-        		<input type="date" name="end_date" class="inp" value="{{ POST.end_date }}">
+        		<input type="date" name="end_date" class="inp" value="{% if (POST.end_date is defined) %} {{POST.end_date}} {% endif %}">
         	</div>
             <div class='form-row'>
                 <label>Время окончания</label>
-                <input type="time" name="end_time" class="inp" value="{{ POST.end_time }}">
+                <input type="time" name="end_time" class="inp" value="{% if (POST.end_time is defined) %} {{POST.end_time}} {% endif %}">
             </div>
             <div class='form-row'>
                 <label >Тег<span class="star">*</span></label>
                 <select name="tag" class="inp">
                 <option value="0" selected >--------------------</option>
                 {% for key, tag in tags %}
-                    <option value="{{ key }}" {% if key == POST.tag %} selected  {% endif %} >{{ tag|e }}</option>
+                    <option value="{{ key }}" {% if (POST.tag is defined) and (key == POST.tag) %} selected  {% endif %} >{{ tag|e }}</option>
                 {% endfor %}
                 </select>
             </div>
             <div class='form-row'>
                 <label >Ссылка на мероприятие</label>
-                <input type="text" name="url" class="inp" value="{{ POST.url }}">
+                <input type="text" name="url" class="inp" value="{% if (POST.url is defined) %} {{POST.url}} {% endif %}">
             </div>
             <div style="width: 300px; height: 300px" id="map"></div><br>
             <div class='form-row'>
             	<label>Адрес</label>
-            	<input type='text' id='location' name='location' value="{{ POST.location }}">
-                <input type='hidden' id='coord_x' name='coord_x' value="{{ POST.coord_x}}">
-                <input type='hidden' id='coord_y' name='coord_y' value="{{ POST.coord_y}}">
+            	<input type='text' id='location' name='location' value="{% if (POST.location is defined) %} {{POST.location}} {% endif %}">
+                <input type='hidden' id='coord_x' name='coord_x' value="{% if (POST.coord_x is defined) %} {{POST.coord_x}} {% endif %}">
+                <input type='hidden' id='coord_y' name='coord_y' value="{% if (POST.coord_y is defined) %} {{POST.coord_y}} {% endif %}">
             </div>
             <div class='form-row'>
                 <label>Описание<span class="star">*</span></label>
-        		<textarea name='description' value="{{ POST.description }}"></textarea>
+        		<textarea name='description' value="{% if (POST.description is defined) %} {{POST.description}} {% endif %}"></textarea>
         	</div>
             <div class='form-row'>
                 <label>Загрузка фотографии</label>
-                <input type="file" name="image" accept="image" [size="50"]>
+                <input type="file" name="image" accept="image">
             </div>
             <div class="btom12"><input type="submit" name="submit" value="сохранить" class="butsub"></div>
             <div class="btom12"><input type="button" value="отмена" class="butback" onclick="history.go(-1);"></div>

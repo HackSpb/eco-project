@@ -1,6 +1,6 @@
 <?php
 
-function loadDataFromDB(){
+function loadLastEvents(){
 
 	global $db, $app;
 
