@@ -1,0 +1,52 @@
+/* 
+* ECO Project
+* Project Page - http://myeco.city
+* Author - Fiodorov Nikita
+* Site - http://nikitait.github.io/
+*/
+
+/*
+http://www.apache.org/licenses/
+
+font-weight: bold|bolder|lighter|normal|100|200|300|400|500|600|700|800|900
+
+font-style: normal | italic | oblique
+
+100 - Thin
+
+200 - Extra Light (Ultra Light)
+
+300 - Light
+
+400 - Normal
+
+500 - Medium
+
+600 - Semi Bold (Demi Bold)
+
+700 - Bold
+
+800 - Extra Bold (Ultra Bold)
+
+900 - Black (Heavy)
+*/
+
+$font-name:"Roboto";
+//100 - Thin
+@include font-face($font-name, "/fonts/roboto/Roboto-Thin", 100);
+@include font-face($font-name, "/fonts/roboto/Roboto-ThinItalic", 100, italic);
+//300 - Light
+@include font-face($font-name, "/fonts/roboto/Roboto-Light", 300);
+@include font-face($font-name, "/fonts/roboto/Roboto-LightItalic", 300, italic);
+//400 - Normal
+@include font-face($font-name, "/fonts/roboto/Roboto-Regular", normal);
+@include font-face($font-name, "/fonts/roboto/Roboto-Italic", normal, italic);
+//500 - Medium
+@include font-face($font-name, "/fonts/roboto/Roboto-Medium", 500);
+@include font-face($font-name, "/fonts/roboto/Roboto-MediumItalic", 500, italic);
+//700 - Bold
+@include font-face($font-name, "/fonts/roboto/Roboto-Bold", bold);
+@include font-face($font-name, "/fonts/roboto/Roboto-BoldItalic", bold, italic);
+//900 - Black (Heavy)
+@include font-face($font-name, "/fonts/roboto/Roboto-Black", 900);
+@include font-face($font-name, "/fonts/roboto/Roboto-BlackItalic", 900, italic);

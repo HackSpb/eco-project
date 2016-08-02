@@ -1,0 +1,20 @@
+.post-logo{
+  width: 100%;
+  height: auto;
+}
+.residents{
+  color: rgb(74, 20, 140);
+  text-align: right;
+  padding: 5px 30px;
+  text-transform: uppercase;
+}
+.card-info{
+  margin: 0px;//для тени
+  @extend .shadow-box;
+  padding: 13px;
+  min-width: auto;
+  p,h3{
+    padding: 0;
+    margin: 0;
+  }
+}

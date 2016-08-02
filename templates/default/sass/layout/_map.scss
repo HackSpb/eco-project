@@ -1,0 +1,59 @@
+//убераем лишнее
+.ymaps-2-1-42-traffic{
+  display: none!important;
+}
+//настраеваем форму карты
+.map-container{
+  padding: 60px 20px;
+}
+//переопределяем стили элементов карты
+.ymaps-2-1-42-button{
+  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.57)!important;
+}
+.ymaps-2-1-42-button_theme_action:before{
+  background-color: #ffb74d!important;
+  background-image: -webkit-linear-gradient(top, #ffb74d 0, #fc0 100%)!important;
+  background-image: linear-gradient(to bottom,#ffb74d 0, #fc0 100%)!important;
+}
+.ymaps-2-1-42-button_theme_normal:before{
+  background-color: rgb(5, 214, 0)!important;
+  background-image: -webkit-linear-gradient(top, rgb(5, 114, 0) 0, rgb(5, 214, 0) 100%)!important;
+  background-image: linear-gradient(to bottom,rgb(5, 114, 0) 0, rgb(5, 214, 0) 100%)!important;
+  
+}
+
+.ymaps-2-1-42-balloon{
+  font-size: 14px!important;
+  font-family: "Roboto"!important;
+  color: rgb(0, 0, 0)!important;
+  line-height: 1.2!important;
+  text-align: left!important;
+  background-color: rgba(193,178,154,0.91)!important;
+  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.57)!important;
+}
+.ymaps-2-1-42-balloon__content{
+    position: relative;
+    z-index: 1;
+    display: block;
+    min-width: 60px;
+    height: 100%;
+    min-height: 15px;
+    margin: 0;
+    padding: 10px 12px;
+    background: none!important;
+  font-size: 14px!important;
+  font-family: "Roboto"!important;
+  color: rgb(0, 0, 0)!important;
+  line-height: 1.2!important;
+  text-align: left!important;
+}
+.ymaps-2-1-42-balloon__layout{
+  background: none!important;
+}
+//.фон_календаря {
+//  background-color: rgb(167, 255, 235);
+//RGB(206,255,247)
+//}
+.ymaps-2-1-42-user-selection-none{
+  //background-color: rgba(206,255,247,0.112)!important;
+}

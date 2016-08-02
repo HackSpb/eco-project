@@ -1,0 +1,30 @@
+<!--{% include 'header.html' %}-->
+
+
+<!-- Встраеваемый контент-->
+<script type="text/javascript" src="../js/UI/authorization.js"></script>         
+        <div class="grid header-padding">
+        <form class="container form-auth" action="auth" method="post" enctype="multipart/form-data">
+          <div class="form-auth-content shadow-box">
+            <h1 class="form-auth--header">Авторизация</h1> 
+            {% if err is not empty %}
+            <div class="error"> <b>При авторизации произошли следующие ошибки:</b>
+            {% for error in err %} {{ error }}, {% endfor %} </div> {% endif %}
+            <input class="form-auth-input" type='text' name='email' value="{{ POST }}" placeholder="Email">
+            <input class="form-auth-input" type="password" name="password" value="" placeholder="Пароль">
+            <input id="check" name="check" type="checkbox" checked><label for="check" class="for-check">Запомнить меня</label>
+            <input class="form-auth-input btn btn-normal content" type="submit" name="submit" value="Войти">
+            <p class="for-note">Забыли свой пароль?</p>
+            <p class="note">Нажми <a href="reg/">тут</a>, чтобы восстановить доступ</p>
+          </div>
+          <div class="form-auth-content">
+          <p>Все еще нет аккаунта? <a href="reg/"> Зарегистироваться</a></p>
+          </div>
+        </form>
+        </div>
+        <!--  Исключенные элементы-->
+        <!--        <input class="btn btn-normal content" type="button" value="Отмена" onclick="history.go(-1);">-->
+        <!-- Встраеваемый контент!-->
+
+
+<!--{% include 'footer.html' %}-->

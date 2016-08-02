@@ -1,0 +1,8 @@
+.grid{
+  overflow:inherit !important;
+}
+*{box-sizing: border-box;}
+a{
+  color: rgb(255, 183, 77);
+}
+@media(max-width:1024px){.col-1-4{width: 50%;}}

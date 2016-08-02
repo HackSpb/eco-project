@@ -1,0 +1,102 @@
+.header-half{
+  @extend input;
+  width: 50%!important;
+  float: left;
+  text-align: center;
+  padding: 14px 0;
+}
+.form-auth--header {
+  font-size: 30px;
+  text-transform: capitalize;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+  line-height: 1;
+  margin: 0;
+  padding: 30px 0;
+  text-align: left;
+}
+.for-note{
+  padding-bottom: 0!important;
+  margin-bottom: 0!important;
+}
+.note {
+    font-size: 14px!important;
+    padding-top: 0!important;
+    margin-top: 0!important;
+  }
+.header-padding{
+  padding-top: 82px;
+}
+.error{
+  color: blue;
+  background-color: rgba(70, 0, 0, 0.4);
+  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4);
+}
+.form-auth{
+  .form-auth-content{
+    @media (max-width: 420px) {padding: 0 20px 0 20px;}
+    padding: 0 50px 0 50px;
+    &:nth-child(2){
+      p{
+        font-size: 14px;
+        padding: 25px;
+      }
+    }
+  }
+  font-weight: 300;
+  padding: 0;
+  background-color: rgba(255,255,255,0.271);
+  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4);
+  width: 450px;
+  @media (max-width: 496px) {width: 100%}
+  box-sizing: border-box;
+  p {
+    font-size: 20px;
+    line-height: 1.2;
+    padding: 19px 0;
+    clear: both;
+  }
+  .for-check{
+    float: left;
+      margin: 10px 6px;
+    }
+  input{
+    box-sizing: border-box;
+    margin: 0 0 25px 0;
+    border: none;
+    background-position: 0 30%;
+    color: black;
+    box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4);
+    &[type='text']{
+      background: rgb(255,255,255) url(/images/sprites/password.png) 8px 18px no-repeat;
+      padding-left: 25px;
+      padding-right: 25px;
+      box-shadow: none;
+    }
+    &[type="password"]{
+      background: rgb(255,255,255) url(/images/sprites/password.png) 8px 18px no-repeat;
+      padding-left: 25px;
+      padding-right: 25px;
+      box-shadow: none;
+    }
+    &[type="checkbox"]{
+      float: left;
+      margin: 10px 0;
+    }
+    
+    &[type="submit"]{
+      float: right;
+      height: 40px;
+      padding: 10px 20px;
+    }
+    
+    &.in{
+      width: 50%;
+      display: inline-block;
+    }
+    &.beack{
+      display: inline-block;
+      width: 40%;
+    }
+  }
+}

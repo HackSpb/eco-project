@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Мой Эко Город</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/logo.png">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+    $(function () {
+      var pull = $('#pull');
+      menu = $('nav ul');
+      menuHeight = menu.height();
+      $(pull).on('click', function (e) {
+        e.preventDefault();
+        menu.slideToggle();
+      });
+      $(window).resize(function () {
+        var w = $(window).width();
+        if (w > 320 && menu.is(':hidden')) {
+          menu.removeAttr('style');
+        }
+      });
+    });
+  </script>
+<body class="">
+  <div class="wrapper">
+    <div class="inner-wrapper">
+      <!--header start!-->
+      <header class="header" name="home">
+        <div class="grid grid-pad">
+          <div class="col-1-1">
+            <div class="content">
+              <figure class="header-logo left MyEcoSity"> <a href="">MyEcoCity</a>
+                <p>мой городской помошник</p>
+              </figure>
+              <ul class="right">
+                <li onclick="location.href='auth'">Стать жителем MyEcoSity</li>
+                <li>Уже прописаны у нас?</li>
+              </ul>
+              <div class="right add" onclick="location.href='event_create'"> <img class="add-logo right" src="images/sprites/%D0%9A%D0%9D%D0%9E%D0%9F%D0%9A%D0%90%20%D0%94%D0%9E%D0%91%D0%90%D0%92%D0%98%D0%A2%D0%AC.png" alt=""> </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!--header end!-->
+      <!--menu start-->
+      <nav class="nav clearfix">
+        <ul class="centr">
+          <!-- Грязный хак против отступов -->
+          <li> <a href="#Map">Карта</a></li><li> 
+          <a href="#News">Новости</a></li><li>
+          <a href="#Calendar">Календарь</a></li>
+          <!-- Грязный хак против отступов -->
+        </ul>
+        <div class="MyEcoSity"><a href="#" id="pull">MyEcoCity</a></div>
+      </nav>
+      <!--menu end!-->
+      <!--content start-->
+      <main class="page-content">
+ 

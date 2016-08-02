@@ -1,0 +1,101 @@
+/* 
+* ECO Project
+* Project Page - http://myeco.city
+* Author - Fiodorov Nikita
+* Site - http://nikitait.github.io/
+*/
+
+/* base.h */
+$footer-height:10px;
+
+
+/* 
+* used namespace normalize;
+* used namespace simplegrid;
+*/
+%headline{
+  font-family: 'Roboto', sans-serif;
+  color: rgb(0, 0, 0);
+  line-height: 1.2;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+h1{
+  @extend %headline;
+  font-size: 40px;
+  text-align: center;
+}
+h2{
+  @extend %headline;
+  font-size: 30px;
+  padding-top: 20px;
+}
+h3{
+  @extend %headline;
+  font-size: 20px;
+  padding: 0 10px;
+  font-weight: bold;
+}
+h4{
+  @extend %headline;
+  font-size: 22px;
+  text-align: center;
+}
+p {
+  font-family: 'Roboto', sans-serif;
+  color: rgb(0, 0, 0);
+  line-height: 1.2;
+  font-size: 18px;
+  padding: 0px 20px;
+}
+a,a:hover { text-decoration: none;}
+ul,ol{list-style: none;}
+.clearfix:before,
+.clearfix:after {
+ content: " ";
+ display: table;
+}
+.clearfix:after {clear: both;overflow: auto;}
+.left {float: left;}
+.right {float:right;}
+.centr{
+  display: block;
+  width: auto;
+  height: auto;
+  margin: 0 auto;
+}
+*{
+  margin: 0;
+  padding: 0;
+  outline: none;
+}
+html,
+body {
+  height: 100%;//Растяжка на весь экран
+  font-family: 'Roboto', sans-serif;
+  color: rgb(0, 0, 0);
+}
+.container {
+  margin: 0 auto;
+  padding: 20px;
+}
+.wrapper{
+  position: relative;//Растяжка на весь экран
+  min-height: 100%;//Растяжка на весь экран
+  background-color: #cccccc;
+  background: url(/images/Background/background.png) no-repeat fixed right top;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 60px 0%;
+}
+.page-content{
+  padding-bottom: $footer-height;
+  padding-top: 0px;
+}
+figure{margin: 0;}
+.inner-wrapper{
+  padding: 0 0;
+}
+.list-row li{
+  float: right;
+}

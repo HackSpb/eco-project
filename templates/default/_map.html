@@ -1,0 +1,57 @@
+<!--{% include 'header.html' %}-->
+ 
+ 
+  <!-- Встраеваемый контент-->
+   <div class="map-container grid grid-pad">
+    <div id="map" style="width: 100%; height: 500px;">
+      
+      <ul class="dropdown">
+ <li class="dropbtn">==</li>
+ <div class="dropdown-content">
+  <li class="dropdown-elem">Активизм
+    <ul class="">
+      <li><a href=""><input name="check" type="checkbox" id="check" checked><label for="check">Прием
+                вторсырья </label></a></li>
+      <li><a href=""><input name="acception[]" value="dangerousGarbage" type="checkbox" id="dangerousGarbage" checked="true"><label
+                    for="dangerousGarbage">Опасные отходы </label></a></li>
+      <li><a href=""><input name="acception[]" value="plastic" type="checkbox" id="glass" checked="true"><label
+                        for="glass">Стеклотара </label></a></li>
+      <li><a href=""></a></li>
+    </ul>
+  </li>
+  <li class="dropdown-elem">Развлечения
+    <ul>
+      <li></li>
+      <li><a href=""><input name="acception[]" value="clothes" type="checkbox" id="clothes" checked="true"><label
+                        for="clothes">Одежда </label></a></li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+    </ul>
+  </li>
+  <li class="dropdown-elem">пункты приема
+    <ul>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+      <li><a href=""></a></li>
+    </ul>
+  </li>
+  </div>
+</ul>
+        <div id="result"></div>
+    </div>
+</div>
+<script>
+    function checStateOfkCheckBox() {
+        if ($('#check').prop("checked"))
+            $('.accept').show("fast");
+        else
+            $('.accept').hide("fast");
+    }
+</script>
+<script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+<script src="../js/mapScripts/geoScript.js"></script>
+<!-- Встраеваемый контент!-->
+
+
+
+<!--{% include 'footer.html' %}-->
