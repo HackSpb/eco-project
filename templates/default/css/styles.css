@@ -217,7 +217,6 @@ hr {
  */
 button,
 input,
-.header-half,
 select,
 textarea {
   font: inherit;
@@ -236,8 +235,7 @@ optgroup {
  * 1. Show the overflow in Edge.
  */
 button,
-input,
-.header-half {
+input {
   /* 1 */
   overflow: visible; }
 
@@ -805,25 +803,25 @@ font-style: normal | italic | oblique
   font-style: italic;
   font-weight: 900;
   src: url("/fonts/roboto/Roboto-BlackItalic.eot?#iefix") format("embedded-opentype"), url("/fonts/roboto/Roboto-BlackItalic.woff2") format("woff2"), url("/fonts/roboto/Roboto-BlackItalic.woff") format("woff"), url("/fonts/roboto/Roboto-BlackItalic.ttf") format("truetype"), url("/fonts/roboto/Roboto-BlackItalic.svg#Roboto") format("svg"); }
-button, input[type="button"], [type="button"].header-half, input[type="reset"], [type="reset"].header-half, input[type="submit"], [type="submit"].header-half {
+button, input[type="button"], input[type="reset"], input[type="submit"] {
   background-color: #ffb74d; }
 
-input[type="color"], [type="color"].header-half, input[type="date"], [type="date"].header-half, input[type="datetime"], [type="datetime"].header-half, input[type="datetime-local"], [type="datetime-local"].header-half, input[type="email"], [type="email"].header-half, input[type="month"], [type="month"].header-half, input[type="number"], [type="number"].header-half, input[type="password"], [type="password"].header-half, input[type="search"], [type="search"].header-half, input[type="tel"], [type="tel"].header-half, input[type="text"], [type="text"].header-half, input[type="time"], [type="time"].header-half, input[type="url"], [type="url"].header-half, input[type="week"], [type="week"].header-half, input:not([type]), .header-half:not([type]), textarea {
+input[type="color"], input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"], input:not([type]), textarea {
   color: #717171;
   font-size: 20px;
   width: 100%;
   height: 50px;
   background-color: white; }
 
-input[type="color"]:focus, [type="color"].header-half:focus, input[type="date"]:focus, [type="date"].header-half:focus, input[type="datetime"]:focus, [type="datetime"].header-half:focus, input[type="datetime-local"]:focus, [type="datetime-local"].header-half:focus, input[type="email"]:focus, [type="email"].header-half:focus, input[type="month"]:focus, [type="month"].header-half:focus, input[type="number"]:focus, [type="number"].header-half:focus, input[type="password"]:focus, [type="password"].header-half:focus, input[type="search"]:focus, [type="search"].header-half:focus, input[type="tel"]:focus, [type="tel"].header-half:focus, input[type="text"]:focus, [type="text"].header-half:focus, input[type="time"]:focus, [type="time"].header-half:focus, input[type="url"]:focus, [type="url"].header-half:focus, input[type="week"]:focus, [type="week"].header-half:focus, input:not([type]):focus, .header-half:not([type]):focus, textarea:focus,
-input[type="color"]:hover,
-[type="color"].header-half:hover, input[type="date"]:hover, [type="date"].header-half:hover, input[type="datetime"]:hover, [type="datetime"].header-half:hover, input[type="datetime-local"]:hover, [type="datetime-local"].header-half:hover, input[type="email"]:hover, [type="email"].header-half:hover, input[type="month"]:hover, [type="month"].header-half:hover, input[type="number"]:hover, [type="number"].header-half:hover, input[type="password"]:hover, [type="password"].header-half:hover, input[type="search"]:hover, [type="search"].header-half:hover, input[type="tel"]:hover, [type="tel"].header-half:hover, input[type="text"]:hover, [type="text"].header-half:hover, input[type="time"]:hover, [type="time"].header-half:hover, input[type="url"]:hover, [type="url"].header-half:hover, input[type="week"]:hover, [type="week"].header-half:hover, input:not([type]):hover, .header-half:not([type]):hover, textarea:hover {
+input[type="color"]:focus, input[type="date"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="email"]:focus, input[type="month"]:focus, input[type="number"]:focus, input[type="password"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="text"]:focus, input[type="time"]:focus, input[type="url"]:focus, input[type="week"]:focus, input:not([type]):focus, textarea:focus,
+input[type="color"]:hover, input[type="date"]:hover, input[type="datetime"]:hover, input[type="datetime-local"]:hover, input[type="email"]:hover, input[type="month"]:hover, input[type="number"]:hover, input[type="password"]:hover, input[type="search"]:hover, input[type="tel"]:hover, input[type="text"]:hover, input[type="time"]:hover, input[type="url"]:hover, input[type="week"]:hover, input:not([type]):hover, textarea:hover {
   border: 1px solid #0f0; }
 
-input[type="color"]:active, [type="color"].header-half:active, input[type="date"]:active, [type="date"].header-half:active, input[type="datetime"]:active, [type="datetime"].header-half:active, input[type="datetime-local"]:active, [type="datetime-local"].header-half:active, input[type="email"]:active, [type="email"].header-half:active, input[type="month"]:active, [type="month"].header-half:active, input[type="number"]:active, [type="number"].header-half:active, input[type="password"]:active, [type="password"].header-half:active, input[type="search"]:active, [type="search"].header-half:active, input[type="tel"]:active, [type="tel"].header-half:active, input[type="text"]:active, [type="text"].header-half:active, input[type="time"]:active, [type="time"].header-half:active, input[type="url"]:active, [type="url"].header-half:active, input[type="week"]:active, [type="week"].header-half:active, input:not([type]):active, .header-half:not([type]):active, textarea:active {
+input[type="color"]:active, input[type="date"]:active, input[type="datetime"]:active, input[type="datetime-local"]:active, input[type="email"]:active, input[type="month"]:active, input[type="number"]:active, input[type="password"]:active, input[type="search"]:active, input[type="tel"]:active, input[type="text"]:active, input[type="time"]:active, input[type="url"]:active, input[type="week"]:active, input:not([type]):active, textarea:active {
   border: 1px solid #00f; }
 
 .btn {
+  display: block;
   background-color: #ffb74d;
   border: 0;
   cursor: pointer;
@@ -841,6 +839,8 @@ input[type="color"]:active, [type="color"].header-half:active, input[type="date"
   .btn-small {
     padding: 3.5px;
     margin: 10px; }
+  .btn-input {
+    height: 50px; }
 
 .dropbtn {
   background-color: rgba(255, 255, 255, 0.349);
@@ -921,9 +921,8 @@ label {
   margin-right: 15px;
   font-size: 14px; }
 
-input[type=radio], [type=radio].header-half,
-input[type=checkbox],
-[type=checkbox].header-half {
+input[type=radio],
+input[type=checkbox] {
   display: none; }
 
 label:before {
@@ -946,14 +945,14 @@ label.for-check {
 label.for-check:before {
   border-radius: 3px; }
 
-input[type=radio]:checked + label:before, [type=radio].header-half:checked + label:before {
+input[type=radio]:checked + label:before {
   content: "\2022";
   font-size: 25px;
   color: green;
   text-align: center;
   line-height: 18px; }
 
-input[type=checkbox]:checked + label:before, [type=checkbox].header-half:checked + label:before {
+input[type=checkbox]:checked + label:before {
   content: "\2713";
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   font-size: 25px;
@@ -1115,11 +1114,15 @@ p.copyright {
   .footer-contact {
     padding: 0;
     margin: 0; } }
-.ymaps-2-1-42-traffic {
-  display: none !important; }
-
+.map-small {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto; }
 .map-container {
   padding: 60px 20px; }
+
+.ymaps-2-1-42-traffic {
+  display: none !important; }
 
 .ymaps-2-1-42-button {
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.57) !important; }
@@ -1180,22 +1183,6 @@ p.copyright {
     padding: 0;
     margin: 0; }
 
-.header-half {
-  width: 50% !important;
-  float: left;
-  text-align: center;
-  padding: 14px 0; }
-
-.form-auth--header {
-  font-size: 30px;
-  text-transform: capitalize;
-  font-weight: 300;
-  color: black;
-  line-height: 1;
-  margin: 0;
-  padding: 30px 0;
-  text-align: left; }
-
 .for-note {
   padding-bottom: 0 !important;
   margin-bottom: 0 !important; }
@@ -1220,6 +1207,22 @@ p.copyright {
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4);
   width: 450px;
   box-sizing: border-box; }
+  .form-auth-input--half {
+    width: 50% !important;
+    float: left;
+    padding: 14px 0px 14px 14px;
+    box-sizing: border-box;
+    margin: 0 0 25px 0;
+    height: 50px; }
+  .form-auth--header {
+    font-size: 30px;
+    text-transform: capitalize;
+    font-weight: 300;
+    color: black;
+    line-height: 1;
+    margin: 0;
+    padding: 30px 0;
+    text-align: left; }
   .form-auth .form-auth-content {
     padding: 0 50px 0 50px; }
     @media (max-width: 420px) {
@@ -1239,34 +1242,34 @@ p.copyright {
   .form-auth .for-check {
     float: left;
     margin: 10px 6px; }
-  .form-auth input, .form-auth .header-half {
+  .form-auth input {
     box-sizing: border-box;
     margin: 0 0 25px 0;
     border: none;
     background-position: 0 30%;
     color: black;
     box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4); }
-    .form-auth input[type='text'], .form-auth [type='text'].header-half {
+    .form-auth input[type='text'] {
       background: white url(/images/sprites/password.png) 8px 18px no-repeat;
       padding-left: 25px;
       padding-right: 25px;
       box-shadow: none; }
-    .form-auth input[type="password"], .form-auth [type="password"].header-half {
+    .form-auth input[type="password"] {
       background: white url(/images/sprites/password.png) 8px 18px no-repeat;
       padding-left: 25px;
       padding-right: 25px;
       box-shadow: none; }
-    .form-auth input[type="checkbox"], .form-auth [type="checkbox"].header-half {
+    .form-auth input[type="checkbox"] {
       float: left;
       margin: 10px 0; }
-    .form-auth input[type="submit"], .form-auth [type="submit"].header-half {
+    .form-auth input[type="submit"] {
       float: right;
       height: 40px;
       padding: 10px 20px; }
-    .form-auth input.in, .form-auth .in.header-half {
+    .form-auth input.in {
       width: 50%;
       display: inline-block; }
-    .form-auth input.beack, .form-auth .beack.header-half {
+    .form-auth input.beack {
       display: inline-block;
       width: 40%; }
 

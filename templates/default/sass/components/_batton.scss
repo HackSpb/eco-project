@@ -20,6 +20,7 @@
 $padding-normal: 7px;
 $margin-normal: 20px;
 .btn{
+  display: block;
   background-color: rgb(255, 183, 77);
   border: 0;
   cursor: pointer;
@@ -39,5 +40,8 @@ $margin-normal: 20px;
   &-small{
     padding: $padding-normal/2;
     margin: $margin-normal/2;
+  }
+  &-input{
+    height: 50px;
   }
 }

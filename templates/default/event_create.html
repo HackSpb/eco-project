@@ -1,39 +1,50 @@
-<!-- Header -->
 {% include 'header.html' %}
-<!-- встраиваемый контент -->
+<!-- Встраеваемый контент-->
 <script type="text/javascript" src="../js/UI/authorization.js"></script>
-        <div class="grid header-padding">
-          <form class="container form-auth" action="event_create" method="post" name="main" enctype="multipart/form-data">
-            <div class="form-auth-content shadow-box">
-              <div class="form-auth--header">
-                <h1>Добавление новостей</h1></div> 
-                {% if (form_err is defined) and (form_err|length > 0) %}
-              <div class="error"> <b>При добавлении новости произошли следующие ошибки:</b> {% for error in form_err %} {{ error }} {% endfor %} </div> {% endif %}
-              <input class="form-auth-input" type='text' name='title' value="{% if (POST.title is defined) %} {{POST.title}} {% endif %}" placeholder="Название">
-              <input class="form-auth-input header-half" class="form-auth-input header-half" type="date" name="begin_date" class="inp" value="{% if (POST.begin_date is defined) %} {{POST.begin_date}} {% endif %}" placeholder="Дата начала" class="form-auth-input"><div class="form-auth-input header-half">Дата начала</div>
-              <input class="form-auth-input header-half" type="time" name="begin_time" class="inp" value="{% if (POST.begin_time is defined) %} {{POST.begin_time}} {% endif %}" placeholder="Время начала"><div class="form-auth-input header-half">Время начала</div>
-              <input class="form-auth-input header-half" type="date" name="end_date" class="inp" value="{% if (POST.end_date is defined) %} {{POST.end_date}} {% endif %}" placeholder="Дата окончания">
-              <div class="form-auth-input header-half">Дата окончания</div>
-              <input class="form-auth-input header-half" type="time" name="end_time" class="inp" value="{% if (POST.end_time is defined) %} {{POST.end_time}} {% endif %}" placeholder="Время окончания"><div class="form-auth-input header-half">Время окончания</div
-              <label>Тег<span class="star">*</span></label>
-              <select name="tag" class="inp">
-                <option value="0" selected>--------------------</option> {% for key, tag in tags %}
-                <option value="{{ key }}" {% if (POST.tag is defined) and (key==P OST.tag) %} selected {% endif %}>{{ tag|e }}</option> {% endfor %} </select>
-              <input type="text" name="url" class="inp" value="{% if (POST.url is defined) %} {{POST.url}} {% endif %}" placeholder="Ссылка на мероприятие">
-              <div style="width: 300px; height: 300px" id="map"></div>
-              <input type='text' id='location' name='location' value="{% if (POST.location is defined) %} {{POST.location}} {% endif %}" placeholder="Адрес">
-              <input type='hidden' id='coord_x' name='coord_x' value="{% if (POST.coord_x is defined) %} {{POST.coord_x}} {% endif %}">
-              <input type='hidden' id='coord_y' name='coord_y' value="{% if (POST.coord_y is defined) %} {{POST.coord_y}} {% endif %}">
-              <textarea name='description' value="{% if (POST.description is defined) %} {{POST.description}} {% endif %}" placeholder="Описание"></textarea>
-              <input type="file" name="image" accept="image" placeholder="Загрузка фотографии">
-              </div>
-              
-              <input type="submit" name="submit" value="сохранить" class="btn">
-            <a value="отмена" class="btn btn-normal content" onclick="history.go(-1);"></a>
-          </form>
-          <!-- Footer -->
-          <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
-          <script src="js/mapScripts/EventSMapScript.js" type="text/javascript"></script>
-          <!-- встраиваемый контент -->
+<div class="grid header-padding">
+<form class="container form-auth" action="event_create" method="post" name="main" enctype="multipart/form-data">
+ <div class="form-auth-content shadow-box">
+    <h1 class="form-auth--header">Добавление новостей</h1>
+    
+    {% if form_err|length > 0 %}
+  <div class="error"> <b>При добавлении новости произошли следующие ошибки:</b>
+    {% for error in form_err %}
+    {{ error }} {% endfor %} </div> {% endif %}
+    
+  <input type='text' name='title' value="{{ POST.title }}" placeholder="Название">
+  
+  <input class="form-auth-input--half" type="date" name="begin_date" class="inp" value="{{ POST.begin_date }}"><div class="form-auth-input--half">Дата начала</div>
+  
+  <input class="form-auth-input--half" type="time" name="begin_time" value="{{ POST.begin_time }}"><div class="form-auth-input--half">Время начала</div>
+  
+  <input class="form-auth-input--half" type="date" name="end_date" value="{{ POST.end_date }}"><div class="form-auth-input--half">Дата окончания</div>
+  
+  <input class="form-auth-input--half" type="time" name="end_time" value="{{ POST.end_time }}"><div class="form-auth-input--half">Время окончания</div>
+  
+  <input class="form-auth-input--half" type="text" name="tag" value="{{ POST.tag }}"><div class="form-auth-input--half">Тег</div>
+  
+  <input type="text" name="url" value="{{ POST.url }}" placeholder="Ссылка на мероприятие">
+  
+  <div id="map" class="map-small"></div>
+  
+  <input type='text' id='location' name='location' value="{{ POST.location }}" placeholder="Адрес">
+  
+  <input type='hidden' id='coord_x' name='coord_x' value="{{ POST.coord_x}}">
+  
+  <input type='hidden' id='coord_y' name='coord_y' value="{{ POST.coord_y}}">
 
-{% include 'footer.html' %}
+  <textarea name='description' value="{{ POST.description }}" placeholder="Описание"></textarea>
+  
+  <input type="file" name="image" accept="image">
+  </div>
+  <div class="form-auth-content">
+  <input class="btn btn-input" type="submit" name="submit" value="сохранить">
+  
+  <input type="submit" class="btn btn-input" onclick="history.go(-1);" value="Отмена" style="float: none;">
+  </div>
+  
+  </form>
+  </div>
+<!-- Footer -->
+<script src="//api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+<script src="js/mapScripts/EventSMapScript.js" type="text/javascript"></script> {% include 'footer.html' %}

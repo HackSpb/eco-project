@@ -1,11 +1,21 @@
+.map{
+  &-small{
+    width: 300px;
+    height: 300px;
+    margin: 0 auto;
+  }
+  //настраеваем форму карты
+  &-container{
+    padding: 60px 20px;
+  }
+}
+
+
 //убераем лишнее
 .ymaps-2-1-42-traffic{
   display: none!important;
 }
-//настраеваем форму карты
-.map-container{
-  padding: 60px 20px;
-}
+
 //переопределяем стили элементов карты
 .ymaps-2-1-42-button{
   box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.57)!important;
