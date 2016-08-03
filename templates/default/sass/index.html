@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" href="images/logo.png">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script>
+    $(function () {
+      var pull = $('#pull');
+      menu = $('nav ul');
+      menuHeight = menu.height();
+      $(pull).on('click', function (e) {
+        e.preventDefault();
+        menu.slideToggle();
+      });
+      $(window).resize(function () {
+        var w = $(window).width();
+        if (w > 320 && menu.is(':hidden')) {
+          menu.removeAttr('style');
+        }
+      });
+    });
+  </script>
+<body class="">
+  <div class="wrapper">
+    <div class="inner-wrapper">
+      <!--header start!-->
+      <header class="header" name="home">
+        <div class="grid grid-pad">
+          <div class="col-1-1">
+            <div class="content">
+              <figure class="header-logo left MyEcoSity"> <a href="">MyEcoSity</a>
+                <p>мой городской помошник</p>
+              </figure>
+              <ul class="right">
+                <li>Стать жителем MyEcoSity</li>
+                <li>Уже прописаны у нас?</li>
+              </ul>
+              <div class="right add"> <img class="add-logo right" src="images/sprites/%D0%9A%D0%9D%D0%9E%D0%9F%D0%9A%D0%90%20%D0%94%D0%9E%D0%91%D0%90%D0%92%D0%98%D0%A2%D0%AC.png" alt=""> </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <!--header end!-->
+      <!--menu start-->
+      <nav class="nav clearfix">
+        <ul class="centr">
+          <!-- Грязный хак против отступов -->
+          <li> <a href="#Map">Карта</a></li><li> 
+          <a href="#News">Новости</a></li><li>
+          <a href="#Calendar">Календарь</a></li>
+          <!-- Грязный хак против отступов -->
+        </ul>
+        <div class="MyEcoSity"><a href="#" id="pull">MyEcoSity</a></div>
+      </nav>
+      <!--menu end!-->
+      <!--content start-->
+      <main class="page-content">
+ 
+     <!-- Встраеваемый контент-->
+<script type="text/javascript" src="../js/UI/authorization.js"></script>         
+        <div class="grid header-padding">
+        <form class="container form-auth" action="auth" method="post" enctype="multipart/form-data">
+          <div class="form-auth-content shadow-box">
+            <h1 class="form-auth--header">Авторизация</h1> 
+            {% if err is not empty %}
+            <div class="error"> <b>При авторизации произошли следующие ошибки:</b>
+            {% for error in err %} {{ error }}, {% endfor %} </div> {% endif %}
+            <input class="form-auth-input" type='text' name='email' value="{{ POST }}" placeholder="Email">
+            <input class="form-auth-input" type="password" name="password" value="" placeholder="Пароль">
+            <input id="check" name="check" type="checkbox" checked><label for="check" class="for-check">Запомнить меня</label>
+            <input class="form-auth-input btn btn-normal content" type="submit" name="submit" value="Войти">
+            <p class="for-note">Забыли свой пароль?</p>
+            <p class="note">Нажми <a href="reg/">тут</a>, чтобы восстановить доступ</p>
+          </div>
+          <div class="form-auth-content">
+          <p>Все еще нет аккаунта? <a href="reg/"> Зарегистироваться</a></p>
+          </div>
+        </form>
+        </div>
+        <!--  Исключенные элементы-->
+        <!--        <input class="btn btn-normal content" type="button" value="Отмена" onclick="history.go(-1);">-->
+        <!-- Встраеваемый контент!-->
+     
+      </main>
+      <!--content end-->
+      <!--footer start-->
+      <footer class="footer" id="Contact">
+        <div class="grid grid-pad">
+          <div class="col-1-4 mobile-col-1-2">
+            <div class="content">
+              <ul class="footer-contact">
+                <li><a href="">Написать нам</a></li>
+                <li><a href="">Наша миссия</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-1-4 mobile-col-1-2">
+            <div class="content">
+              <ul class="footer-contact">
+                <li><a href="">Архив</a></li>
+                <li><a href="">Карта сайта</a></li>
+              </ul>
+              <p class="copyright">Copyright © 2015 Fiodorov Nikita. All rights reserved.</p>
+            </div>
+          </div>
+        </div>
+      </footer>
+      <!--footer end-->
+    </div>
+    <!-- end="inner-wrapper" -->
+  </div>
+  <script src="../lib/jquery.min.js"></script>
+</body>
+
+</html>
