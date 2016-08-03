@@ -1,9 +1,9 @@
 <?php
 
 require_once __DIR__.'/vendor/autoload.php';
-include_once 'lib/php/map_lib/DataBaseConnection.php';
-include_once 'lib/php/map_lib/EventGeoObjToDB.php';
-include_once 'lib/php/map_lib/BalloonTempComposer.php';
+include_once 'includes/map_lib/DataBaseConnection.php';
+include_once 'includes/map_lib/EventGeoObjToDB.php';
+include_once 'includes/map_lib/BalloonTempComposer.php';
 
 include 'config.php';
 if(file_exists('local.config.php'))include 'local.config.php';
@@ -20,7 +20,7 @@ $app = new Silex\Application();
 $app['debug'] = true;
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
-	'twig.path' => __DIR__.'/pages',
+	'twig.path' => __DIR__.'/templates/default',
 ));
 
 $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
@@ -64,7 +64,11 @@ $app->match('/event_create', function() use ($app) {
 
 // страница с гугл календарем
 $app->get('/calendar', function() use ($app) {
-	return $app['twig']->render('google-calendar.html');
+        include_once 'includes/event_list.php';
+    loadLastEvents();
+
+    return $app['twig']->render('index.html');
+	//return $app['twig']->render('google-calendar.html');
 })->bind('calendar');
 
 // Страница регистрации нового пользователя
@@ -77,7 +81,12 @@ $app->match('/reg', function() use ($app) {
 })->bind('reg');
 
 $app->get('/map', function() use ($app) {
-    return $app['twig']->render('map.html');
+    
+    include_once 'includes/event_list.php';
+    loadLastEvents();
+
+    return $app['twig']->render('index.html');
+    //return $app['twig']->render('map.html');
 })->bind('map');
 
 $app->get('/admin/addPoint', function() use ($app) {
