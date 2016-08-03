@@ -32,21 +32,23 @@ font-style: normal | italic | oblique
 */
 
 $font-name:"Roboto";
+$font-folder:"/fonts/roboto";
+$font-fullPATH: $rootPATH+$font-folder;
 //100 - Thin
-@include font-face($font-name, "/fonts/roboto/Roboto-Thin", 100);
-@include font-face($font-name, "/fonts/roboto/Roboto-ThinItalic", 100, italic);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-Thin", 100);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-ThinItalic", 100, italic);
 //300 - Light
-@include font-face($font-name, "/fonts/roboto/Roboto-Light", 300);
-@include font-face($font-name, "/fonts/roboto/Roboto-LightItalic", 300, italic);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-Light", 300);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-LightItalic", 300, italic);
 //400 - Normal
-@include font-face($font-name, "/fonts/roboto/Roboto-Regular", normal);
-@include font-face($font-name, "/fonts/roboto/Roboto-Italic", normal, italic);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-Regular", normal);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-Italic", normal, italic);
 //500 - Medium
-@include font-face($font-name, "/fonts/roboto/Roboto-Medium", 500);
-@include font-face($font-name, "/fonts/roboto/Roboto-MediumItalic", 500, italic);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-Medium", 500);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-MediumItalic", 500, italic);
 //700 - Bold
-@include font-face($font-name, "/fonts/roboto/Roboto-Bold", bold);
-@include font-face($font-name, "/fonts/roboto/Roboto-BoldItalic", bold, italic);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-Bold", bold);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-BoldItalic", bold, italic);
 //900 - Black (Heavy)
-@include font-face($font-name, "/fonts/roboto/Roboto-Black", 900);
-@include font-face($font-name, "/fonts/roboto/Roboto-BlackItalic", 900, italic);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-Black", 900);
+@include font-face($font-name, "#{$font-fullPATH}/Roboto-BlackItalic", 900, italic);

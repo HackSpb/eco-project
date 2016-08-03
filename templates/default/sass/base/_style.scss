@@ -83,7 +83,7 @@ body {
   position: relative;//Растяжка на весь экран
   min-height: 100%;//Растяжка на весь экран
   background-color: #cccccc;
-  background: url(/images/Background/background.png) no-repeat fixed right top;
+  background: url('#{$rootPATH}/images/background.png') no-repeat fixed right top;
   box-sizing: border-box;
   width: 100%;
   padding: 60px 0%;

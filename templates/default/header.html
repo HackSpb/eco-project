@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Мой Эко Город</title>
+  <base href="/templates/default/">
   <link rel="stylesheet" href="/templates/default/css/styles.css">
   <link rel="icon" href="/templates/default/images/logo.png">
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>
@@ -41,7 +42,7 @@
                 <li onclick="location.href='auth'">Стать жителем MyEcoSity</li>
                 <li>Уже прописаны у нас?</li>
               </ul>
-              <div class="right add" onclick="location.href='event_create'"> <img class="add-logo right" src="images/sprites/%D0%9A%D0%9D%D0%9E%D0%9F%D0%9A%D0%90%20%D0%94%D0%9E%D0%91%D0%90%D0%92%D0%98%D0%A2%D0%AC.png" alt=""> </div>
+              <div class="right add" onclick="location.href='event_create'"> <img class="add-logo right" src="images/sprites/btn-add.png" alt=""> </div>
             </div>
           </div>
         </div>
@@ -51,9 +52,9 @@
       <nav class="nav clearfix">
         <ul class="centr">
           <!-- Грязный хак против отступов -->
-          <li> <a href="map">Карта</a></li><li> 
+          <li> <a href="/map">Карта</a></li><li> 
           <a href="/">Новости</a></li><li>
-          <a href="calendar">Календарь</a></li>
+          <a href="/calendar">Календарь</a></li>
           <!-- Грязный хак против отступов -->
         </ul>
         <div class="MyEcoSity"><a href="#" id="pull">MyEcoCity</a></div>
