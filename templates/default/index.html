@@ -7,17 +7,21 @@
       <script>
       $(document).on('ready', function() {
       $('.slide').slick({
-        dots: true,
-        infinite: true,
-        speed: 300,
+        //dots: true,
+        infinite: false,
+        speed: 200,
         slidesToShow: 1,
-        adaptiveHeight: true
+        adaptiveHeight: true,
+        focusOnSelect:true,
+        edgeFriction:0,//НЕЛЬЗЯ В КРАЙ ТЯНУТЬ
+        initialSlide:1,
+        mobileFirst:false,
       }); 
       }); 
       </script>
 <div class="slide">
+  <div>{% include 'map.html' %}</div>
   <div>{% include 'events.html' %}</div>
-<div>{% include 'map.html' %}</div>
-<div>{% include 'google-calendar.html' %}</div>
+  <div>{% include 'google-calendar.html' %}</div>
 </div>
 {% include 'footer.html' %}

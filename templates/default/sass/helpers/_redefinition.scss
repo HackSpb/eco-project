@@ -5,4 +5,6 @@
 a{
   color: rgb(255, 183, 77);
 }
-@media(max-width:1024px){.col-1-4{width: 50%;}}
+@media(max-width:1024px) and (min-width: 767px){
+  .col-1-4{width: 50%;}
+}

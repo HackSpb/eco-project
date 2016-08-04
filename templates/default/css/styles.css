@@ -603,7 +603,7 @@ textarea {
 a {
   color: #ffb74d; }
 
-@media (max-width: 1024px) {
+@media (max-width: 1024px) and (min-width: 767px) {
   .col-1-4 {
     width: 50%; } }
 /* 
@@ -961,6 +961,7 @@ input[type=checkbox]:checked + label:before {
   line-height: 15px; }
 
 .header {
+  z-index: 1000;
   background-color: rgba(255, 255, 255, 0.349);
   height: 60px;
   /*header ╨▓╨▓╨╡╤А╤Е ╤Б╤В╤А╨░╨╜╨╕╤Ж╤Л*/
@@ -996,6 +997,7 @@ input[type=checkbox]:checked + label:before {
     padding: 5px; }
 
 .nav {
+  z-index: 1001;
   /* ╨ж╨╡╨╜╤В╤А╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡*/
   position: fixed;
   left: 50%;
