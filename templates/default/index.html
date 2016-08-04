@@ -1,8 +1,8 @@
 {% include 'header.html' %}
 <link rel="stylesheet" type="text/css" href="js/slick/slick.css"/>
-<link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css"/>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<!-- <link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css"/> -->
+<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
+<!-- <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
 <script type="text/javascript" src="js/slick/slick.min.js"></script>
       <script>
       $(document).on('ready', function() {
@@ -16,90 +16,7 @@
       }); 
       </script>
 <div class="slide">
-  <div>
-<!--filter start-->
-<div class="grid grid-pad drop-flow">
-<ul class="dropdown">
- <li class="dropbtn">Фильтр</li>
- <div class="dropdown-content">
-  <li class="dropdown-elem">Среда
-    <ul class="">
-      <li><a href="">Мероприятия</a></li>
-      <li><a href="">Очистка прибрежных территорий</a></li>
-      <li><a href="">Очистка лесов</a></li>
-      <li><a href="">Городские субботники</a></li>
-    </ul>
-  </li>
-  <li class="dropdown-elem">Животные
-    <ul>
-      <li></li>
-      <li><a href="">Мероприятия</a></li>
-      <li><a href="">Пикеты, марши</a></li>
-      <li><a href="">Волонтерство в притоках</a></li>
-    </ul>
-  </li>
-  <li class="dropdown-elem">Горожане
-    <ul>
-      <li><a href="">Образовательное</a></li>
-      <li><a href="">Зеленый транспорт</a></li>
-      <li><a href="">Мероприятия</a></li>
-    </ul>
-  </li>
-  </div>
-</ul>
-  </div>
-<!--filter end!-->
-
-<!--Встраеваемый контент начало-->
-<div class="grid grid-pad">
-  <div class="col-1-4">
-    <div class="content">
-      <img class="post-logo" src="/img/events/eco_post1.jpg" alt="">
-      <figcaption class="card-info">
-        <p class="residents">ЖИТЕЛИ</p>
-        <h3>Очень длинный и информативный  заголовок</h3>
-        <p class="timeinfo">Время начало конец Место Jpthrb Ст Метро  улица дом</p>
-      </figcaption>
-      <button class="btn btn-small">Присоединяйся</button>
-    </div>
-  </div>
-  <div class="col-1-4">
-    <div class="content">
-      <img class="post-logo" src="/img/events/eco_post1.jpg" alt="">
-      <figcaption class="card-info">
-        <p class="residents">ЖИТЕЛИ</p>
-        <h3>Очень длинный и информативный  заголовок</h3>
-        <p class="timeinfo">Время начало конец Место Jpthrb Ст Метро  улица дом</p>
-      </figcaption>
-      <button class="btn btn-small">Присоединяйся</button>
-    </div>
-  </div>
-  <div class="col-1-4">
-    <div class="content">
-      <img class="post-logo" src="/img/events/eco_post1.jpg" alt="">
-      <figcaption class="card-info">
-        <p class="residents">ЖИТЕЛИ</p>
-        <h3>Очень длинный и информативный  заголовок</h3>
-        <p class="timeinfo">Время начало конец Место Jpthrb Ст Метро  улица дом</p>
-      </figcaption>
-      <button class="btn btn-small">Присоединяйся</button>
-    </div>
-  </div>
-  <div class="col-1-4">
-    <div class="content">
-      <img class="post-logo" src="/img/events/eco_post1.jpg" alt="">
-      <figcaption class="card-info">
-        <p class="residents">ЖИТЕЛИ</p>
-        <h3>Очень длинный и информативный  заголовок</h3>
-        <p class="timeinfo">Время начало конец Место Jpthrb Ст Метро  улица дом</p>
-      </figcaption>
-      <button class="btn btn-small">Присоединяйся</button>
-    </div>
-  </div>
-
-</div>
-<!--Встраеваемый контент конец-->
-</div>
+  <div>{% include 'events.html' %}</div>
 <div>{% include 'map.html' %}</div>
 <div>{% include 'google-calendar.html' %}</div>
 </div>
