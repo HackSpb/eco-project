@@ -26,7 +26,13 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
     $twig->addFunction(new \Twig_SimpleFunction('asset', function ($asset) use ($app) {
         return sprintf('%s/%s', trim($app['request']->getBasePath()), ltrim($asset, '/'));
+
     }));
+        
+        //регистрируем свои функции и теги
+    include_once 'includes/twigExtFunctions.php';
+    $twig->addExtension(new MyTagExtension());
+
     return $twig;
 }));
 
@@ -44,6 +50,9 @@ session_start();
 if( isset($_SESSION['user']) ){
      $app['twig']->addGlobal('user', $_SESSION['user']);
 }
+
+
+
 // вывод главное страницы - все анонсы
 $app->get('//', function() use ($app) {
 

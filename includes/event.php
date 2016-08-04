@@ -100,7 +100,8 @@ function eventCreate(){
 	            $db->query($sql);
 
 	            // возвращаемся на главную  страницу
-	            header("Location: /"); exit();
+	            //header("Location: /"); exit();
+	            $app['twig']->addGlobal('success', 'Форма сохранена успешно');
 
         	}
 

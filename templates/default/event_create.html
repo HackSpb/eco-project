@@ -2,7 +2,7 @@
 <!-- Встраеваемый контент-->
 <script type="text/javascript" src="../js/UI/authorization.js"></script>
 <div class="grid header-padding">
-<form class="container form-auth" action="event_create" method="post" name="main" enctype="multipart/form-data">
+<form class="container form-auth" action="/event_create" method="post" name="main" enctype="multipart/form-data">
  <div class="form-auth-content shadow-box">
     <h1 class="form-auth--header">Добавление новостей</h1>
     
@@ -11,29 +11,30 @@
     {% for error in form_err %}
     {{ error }} {% endfor %} </div> {% endif %}
     
-  <input type='text' name='title' value="{{ POST.title }}" placeholder="Название">
+  <input type='text' name='title' value="{% paste POST.title %}" placeholder="Название">
   
-  <input class="form-auth-input--half" type="date" name="begin_date" class="inp" value="{{ POST.begin_date }}"><div class="form-auth-input--half">Дата начала</div>
+  <input class="form-auth-input--half" type="date" name="begin_date" class="inp" value="
+  {% paste POST.begin_date %}"><div class="form-auth-input--half">Дата начала</div>
   
-  <input class="form-auth-input--half" type="time" name="begin_time" value="{{ POST.begin_time }}"><div class="form-auth-input--half">Время начала</div>
+  <input class="form-auth-input--half" type="time" name="begin_time" value="{% paste POST.begin_time %}"><div class="form-auth-input--half">Время начала</div>
   
-  <input class="form-auth-input--half" type="date" name="end_date" value="{{ POST.end_date }}"><div class="form-auth-input--half">Дата окончания</div>
+  <input class="form-auth-input--half" type="date" name="end_date" value="{% paste POST.end_date %}"><div class="form-auth-input--half">Дата окончания</div>
   
-  <input class="form-auth-input--half" type="time" name="end_time" value="{{ POST.end_time }}"><div class="form-auth-input--half">Время окончания</div>
+  <input class="form-auth-input--half" type="time" name="end_time" value="{% paste POST.end_time %}"><div class="form-auth-input--half">Время окончания</div>
   
-  <input class="form-auth-input--half" type="text" name="tag" value="{{ POST.tag }}"><div class="form-auth-input--half">Тег</div>
+  <input class="form-auth-input--half" type="text" name="tag" value="{% paste POST.tag %}"><div class="form-auth-input--half">Тег</div>
   
-  <input type="text" name="url" value="{{ POST.url }}" placeholder="Ссылка на мероприятие">
+  <input type="text" name="url" value="{% paste POST.url %}" placeholder="Ссылка на мероприятие">
   
   <div id="map" class="map-small"></div>
   
-  <input type='text' id='location' name='location' value="{{ POST.location }}" placeholder="Адрес">
+  <input type='text' id='location' name='location' value="{% paste POST.location %}" placeholder="Адрес">
   
-  <input type='hidden' id='coord_x' name='coord_x' value="{{ POST.coord_x}}">
+  <input type='hidden' id='coord_x' name='coord_x' value="{% paste POST.coord_x %}">
   
-  <input type='hidden' id='coord_y' name='coord_y' value="{{ POST.coord_y}}">
+  <input type='hidden' id='coord_y' name='coord_y' value="{% paste POST.coord_y %}">
 
-  <textarea name='description' value="{{ POST.description }}" placeholder="Описание"></textarea>
+  <textarea name='description' value="{% paste POST.description %}" placeholder="Описание"></textarea>
   
   <input type="file" name="image" accept="image">
   </div>

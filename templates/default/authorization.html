@@ -7,7 +7,7 @@
         <form class="container form-auth" action="auth" method="post" enctype="multipart/form-data">
           <div class="form-auth-content shadow-box">
             <h1 class="form-auth--header">Авторизация</h1> 
-            {% if err is not empty %}
+            {% if err  is defined %}
             <div class="error"> <b>При авторизации произошли следующие ошибки:</b>
             {% for error in err %} {{ error }}, {% endfor %} </div> {% endif %}
             <input class="form-auth-input" type='text' name='email' value="{{ POST }}" placeholder="Email">
