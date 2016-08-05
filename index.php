@@ -121,4 +121,8 @@ $app->match('/user_profil_edit', function() use ($app) {
     return $app['twig']->render('user_profil_edit.html');
 })->bind('profil_edit');
 
+$app->error( function (Exception $e) use ($app) {
+    return $app['twig']->render('error404.html');
+});
+
 $app->run();
