@@ -1,12 +1,13 @@
 <?php
 
 require_once __DIR__.'/vendor/autoload.php';
-include_once 'includes/map_lib/DataBaseConnection.php';
+/*include_once 'includes/map_lib/DataBaseConnection.php';
 include_once 'includes/map_lib/EventGeoObjToDB.php';
-include_once 'includes/map_lib/BalloonTempComposer.php';
+include_once 'includes/map_lib/BalloonTempComposer.php';*/
 
 include 'config.php';
 if(file_exists('local.config.php'))include 'local.config.php';
+
 
 try {
     $db = new PDO($dsn, $user_db, $password_db);
@@ -30,7 +31,7 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
     }));
         
         //регистрируем свои функции и теги
-    include_once 'includes/twigExtFunctions.php';
+    include_once 'includes/twigExtending.php';
     $twig->addExtension(new MyTagExtension());
 
     return $twig;
@@ -56,7 +57,7 @@ if( isset($_SESSION['user']) ){
 // вывод главное страницы - все анонсы
 $app->get('//', function() use ($app) {
 
-    include_once 'includes/event_list.php';
+    include_once 'includes/eventsList.php';
     loadLastEvents();
 
 	return $app['twig']->render('index.html');
@@ -65,7 +66,7 @@ $app->get('//', function() use ($app) {
 // создание события
 $app->match('/event_create', function() use ($app) {
 
-    include_once 'includes/event.php';
+    include_once 'includes/eventAdd.php';
     eventCreate();
   
 	return $app['twig']->render('event_create.html');
@@ -83,7 +84,7 @@ $app->get('/calendar', function() use ($app) {
 // Страница регистрации нового пользователя
 $app->match('/reg', function() use ($app) {
 
-    include_once 'includes/user.php';
+    include_once 'includes/userForms.php';
     regSave();
     
 	return $app['twig']->render('reg.html');
@@ -105,7 +106,7 @@ $app->get('/admin/addPoint', function() use ($app) {
 // Страница авторизации
 $app->match('/auth', function() use ($app) {
 
-    include_once 'includes/user.php';
+    include_once 'includes/userForms.php';
     authorizationCheck();
     
     return $app['twig']->render('authorization.html');
@@ -114,7 +115,7 @@ $app->match('/auth', function() use ($app) {
 // анкета пользователя
 $app->match('/user_profil_edit', function() use ($app) {
 
-    include_once 'includes/user.php';
+    include_once 'includes/userForms.php';
     profilEdit();
     
     return $app['twig']->render('user_profil_edit.html');

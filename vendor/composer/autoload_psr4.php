@@ -14,4 +14,6 @@ return array(
     'Symfony\\Component\\Debug\\' => array($vendorDir . '/symfony/debug'),
     'Symfony\\Bridge\\Twig\\' => array($vendorDir . '/symfony/twig-bridge'),
     'Silex\\' => array($vendorDir . '/silex/silex/src/Silex'),
+    'MapLib\\' => array($baseDir . '/includes/MapLib'),
+    'CoreClasses\\' => array($baseDir . '/includes/CoreClasses'),
 );
