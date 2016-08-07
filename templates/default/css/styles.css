@@ -675,6 +675,9 @@ ul, ol {
   height: auto;
   margin: 0 auto; }
 
+.t-centr {
+  text-align: center; }
+
 * {
   margin: 0;
   padding: 0;

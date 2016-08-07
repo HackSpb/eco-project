@@ -24,7 +24,7 @@ function init () {
         clusterize: false
     });
 
-    $.getJSON('../../js/mapScripts/icon.json', function (data) {
+    $.getJSON('/js/mapScripts/icon.json', function (data) {
         for (var i = 0; i < 9; i++) {
             var iconLayout = data[i]['iconLayout'];
             var iconImageHref = data[i]['iconImageHref'];
@@ -87,7 +87,7 @@ function init () {
     myMap.geoObjects.add(objectManager);
 
     $.ajax({
-        url: "../../map_files/data.json"
+        url: "/map_files/data.json"
     }).done(function(data) {
         objectManager.add(data);
     });

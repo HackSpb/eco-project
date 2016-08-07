@@ -1,6 +1,7 @@
+// Пример правильного пути '/js/mapScripts/icon.json'
 $(document).ready(function () {
     console.log('1');
-    $.post('../../map_files/checkExpiredEvents.php');
+    $.post('/map_files/checkExpiredEvents.php');
 });
 
 ymaps.ready(init);
@@ -40,8 +41,9 @@ function init () {
     /**
      * Добавляем новые иконки в хранилище опций presetStorage
      */
-
-    $.getJSON('js/mapScripts/icon.json', function (data) {
+    console.log('2');
+    $.getJSON('/js/mapScripts/icon.json', function (data) {
+      console.log('2');
         for (var i = 0; i < 9; i++) {
             var iconLayout = data[i]['iconLayout'];
             var iconImageHref = data[i]['iconImageHref'];
@@ -98,7 +100,7 @@ function init () {
             }
         }
 
-        $.getJSON('../js/mapScripts/preset.json', function (data) {
+        $.getJSON('/js/mapScripts/preset.json', function (data) {
             if (document.getElementById('check').checked) {
                 $.each(data[1], function(key, value) {
                     var keys = key.split(" ");
@@ -156,7 +158,7 @@ function init () {
 
 
     $.ajax({
-        url: "../../map_files/data.json"
+        url: "/map_files/data.json"
     }).done(function (data) {
         objectManager.add(data);
     });
