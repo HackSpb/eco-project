@@ -1,13 +1,13 @@
 {% include 'header.html' %}
 <link rel="stylesheet" type="text/css" href="js/slick/slick.css"/>
-<!-- <link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css"/> -->
+ <link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css"/> 
 <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
 <!-- <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
 <script type="text/javascript" src="js/slick/slick.min.js"></script>
       <script>
       $(document).on('ready', function() {
       $('.slide').slick({
-        //dots: true,
+        dots: true,
         infinite: false,
         speed: 200,
         slidesToShow: 1,
@@ -16,8 +16,13 @@
         edgeFriction:0,//НЕЛЬЗЯ В КРАЙ ТЯНУТЬ
         initialSlide:1,
         mobileFirst:false,
-        touchThreshold:4,// 1 - 100vw сколька протянуть для свайпа
-      }); 
+        touchThreshold:4,// 1 - 100vw сколько протянуть для свайпа
+        prevArrow:'<button class="PrevArrow"></button>',
+        nextArrow:'<button class="NextArrow"></button>',
+      });
+      $(".slick-dots li:nth-child(1)").text("Карта");
+      $(".slick-dots li:nth-child(2)").text("Новости");
+      $(".slick-dots li:nth-child(3)").text("Календарь");  
       }); 
       </script>
 <div class="slide">

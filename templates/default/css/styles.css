@@ -1008,6 +1008,8 @@ input[type=checkbox]:checked + label:before {
   width: 540px;
   /* ╨ж╨╡╨╜╤В╤А╨╕╤А╨╛╨▓╨░╨╜╨╕╨╡*/
   text-align: center; }
+  .nav-select {
+    background-color: #ffb74d !important; }
   .nav ul {
     margin: 0 auto;
     top: 60px;
@@ -1021,8 +1023,6 @@ input[type=checkbox]:checked + label:before {
     padding-bottom: 2px; }
     .nav li:hover a {
       color: #0089cf; }
-    .nav li:nth-child(2) {
-      background-color: #ffb74d; }
   .nav a {
     font-size: 19px;
     font-family: "Roboto", sans-serif;
