@@ -76,7 +76,7 @@
 .slick-dotted.slick-slider {
   margin-bottom: 30px; }
 
-.nav {
+.nav ul {
   display: none; }
 
 .slick-dots {
@@ -107,6 +107,8 @@
       .slick-dots li button:hover, .slick-dots li button:focus {
         outline: none; }
     .slick-dots li.slick-active {
-      background-color: #ffb74d; }
+      background-color: #ffb74d;
+      font-size: 19px;
+      font-family: "Roboto", sans-serif; }
 
 /*# sourceMappingURL=slick-theme.css.map */

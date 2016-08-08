@@ -135,7 +135,7 @@ $slick-opacity-not-active: 0.25 !default;
 .slick-dotted.slick-slider {
   margin-bottom: 30px;
 }
-.nav{display: none;}
+.nav ul{display: none;}
 .slick-dots {
   position: fixed;
   left:50%; 
@@ -169,6 +169,8 @@ $slick-opacity-not-active: 0.25 !default;
     }
     &.slick-active {
       background-color: $slick-dot-color-active;
+      font-size: 19px;
+      font-family: "Roboto", sans-serif;
     }
   }
 }
