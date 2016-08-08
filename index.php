@@ -6,7 +6,10 @@ include_once 'includes/map_lib/EventGeoObjToDB.php';
 include_once 'includes/map_lib/BalloonTempComposer.php';*/
 
 include 'config.php';
+
 if(file_exists('local.config.php'))include 'local.config.php';
+
+include_once 'includes/globalFunctions.php';
 
 
 try {
@@ -65,7 +68,9 @@ $app->get('//', function() use ($app) {
 
 // создание события
 $app->match('/event_create', function() use ($app) {
-
+    
+    if(!checkRights('user',$_SESSION['user'])) exit("permission failed");
+    
     include_once 'includes/eventAdd.php';
     eventCreate();
   
@@ -74,7 +79,7 @@ $app->match('/event_create', function() use ($app) {
 
 // страница с гугл календарем
 $app->get('/calendar', function() use ($app) {
-        include_once 'includes/event_list.php';
+        include_once 'includes/eventList.php';
     loadLastEvents();
 
     return $app['twig']->render('index.html');
@@ -92,7 +97,7 @@ $app->match('/reg', function() use ($app) {
 
 $app->get('/map', function() use ($app) {
     
-    include_once 'includes/event_list.php';
+    include_once 'includes/eventList.php';
     loadLastEvents();
 
     return $app['twig']->render('index.html');

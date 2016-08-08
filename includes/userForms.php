@@ -52,7 +52,7 @@ function regSave () {
             	SET 
             		`u_password`	= '".$password."',
             		`u_email`		= '".$email."',
-            		`role_id`		= 1, 
+            		`role_id`		= 3, 
             		`u_create_date`	= NOW(), 
             		`u_active_date`	= NOW()
             ";
@@ -96,24 +96,28 @@ function authorizationCheck(){
                 $email = $_POST["email"];   
 
                 // Вытаскиваем из БД запись, у которой логин равняеться введенному
-                $result = $db->query("
+                if($result = $db->query("
                     SELECT
                         *
                     FROM
                         `users`
+                        LEFT JOIN roles USING (role_id)
                     WHERE 
                             `u_email` = '".$email."'
-                    LIMIT 1");
+                    LIMIT 1"))
+                {
 
-                $user = $result->fetch();
-                $hash_password = $user[3];
+                $user = $result->fetch(PDO::FETCH_ASSOC);
+                $hash_password = $user['u_password'];
 
                 $password = trim($_POST["password"]);
-
+                
                 if ( !password_verify($password, $hash_password) ) {
 
-                    $form_err[] = "Вы ввели неправильный пароль"; 
+                    $form_err[] = "Вы ввели неправильный пароль или емейл"; 
                 }
+                }
+                else  $form_err[] = "Вы ввели неправильный пароль или емейл"; 
 
             }
 
@@ -129,6 +133,7 @@ function authorizationCheck(){
             // Если нет ошибок, то возвращаемся на главную страницу
             header("Location: /"); exit();
         }
+        //else print_r($form_err);
 
     // иначе первый раз зашли на страницу
     } else {
@@ -136,7 +141,7 @@ function authorizationCheck(){
         $form_err = false;
         $_POST['email'] = false;
     }
-
+    
     $app['twig']->addGlobal('form_err', $form_err);
     $app['twig']->addGlobal('POST', $_POST['email']);
 }
