@@ -10,13 +10,13 @@ $(document).ready(function() {
     {
     console.info("Имейл правильный");
     formEmail.css({
-      "background": "url('images/sprites/password.png') 8px 18px no-repeat, url('images/sprites/validYes.png') 98% 10px no-repeat",
+      "background": "url('images/sprites/form/password.png') 8px 18px no-repeat, url('images/sprites/validYes.png') 98% 10px no-repeat",
       "background-color": "white"
     });
     } else {
     console.info("Имейл неправильный");
     formEmail.css({
-      "background": "url('images/sprites/password.png') 8px 18px no-repeat, url('images/sprites/validNo.png') 98% 10px no-repeat",
+      "background": "url('images/sprites/form/password.png') 8px 18px no-repeat, url('images/sprites/validNo.png') 98% 10px no-repeat",
       "background-color": "white"
     });
     }
