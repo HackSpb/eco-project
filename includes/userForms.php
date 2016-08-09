@@ -64,7 +64,9 @@ function regSave () {
             $_SESSION['user'] = $user;
             $app['twig']->addGlobal('user', $_SESSION['user']);
 
+            authorizationCheck();
             // переход на главную страницу
+
             header("Location: /"); exit();
         }
     // иначе первый раз зашли на страницу

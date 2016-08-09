@@ -93,8 +93,8 @@ function eventCreate(){
 	                    `ev_end_date`      	= ".$end_date.",
 	                    `ev_end_time`      	= ".$end_time.",
 	                    `ev_address`       	= ".$address.",
-	                    `tag_id`        	= '".$tag."',
-	                    `ev_image`         	= ".$image.",
+	                   
+	                    `ev_img`         	= ".$image.",
 	                    `u_id`				= '".$user_id."'
 	               ";
 	            $db->query($sql);
