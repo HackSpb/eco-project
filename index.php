@@ -126,11 +126,15 @@ $app->match('/user_profil_edit', function() use ($app) {
     
     return $app['twig']->render('user_profil_edit.html');
 })->bind('profil_edit');
-/*
-$app->error( function (Exception $e) use ($app) {
-    if( in_array($e->getStatusCode() , array(404,500)) )
+
+$app->error( function (Exception $e, $code) use ($app) {
+    if( $code==404 )
         return $app['twig']->render('error404.html');
-    else {echo 'TWIG ERROR'; return $app['twig']->render('error404.html');}
-});*/
+    else {
+        echo 'ERROR:<br />' . get_class ($e)) .
+        '<br />' . $e->getMessage();       
+        return true;
+    }
+});
 
 $app->run();
