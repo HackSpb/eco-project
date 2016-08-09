@@ -1,10 +1,10 @@
 <!-- Header -->
 {% include 'header.html' %}
 <!-- / Main content -->
-<form action="/reg" method="post" enctype="multipart/form-data">
-    <div class="container">   
-        <div class="box1"> 
-            <div class='h1'><h1>Регистрация</h1></div>
+<div class="grid header-padding">
+<form class="container form-auth" action="/reg" method="post" enctype="multipart/form-data">
+    <div class="form-auth-content shadow-box">
+    <h1 class="form-auth--header"> Регистрация</h1>
             {% if form_err|length > 0 %}
                 <div class="form-row error">
                     <b>При регистрации произошли следующие ошибки:</b><br>
@@ -13,22 +13,16 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <div class='form-row'>
-    			<label>Email<span class="star">*</span></label>
-        		<input type='text' name='email' value="{{ POST }}">
-  		    </div>
-            <div class='form-row'>
-        	   <label>Пароль<span class="star">*</span></label>
-        	   <input type="password" name="password" value="">
-            </div>
-            <div class='form-row'>
-        		<label>Повторите пароль<span class="star">*</span></label>
-                <input type="password" name="password_repeat" value="">
-            </div>
-            <div class="btom12"><input name="submit" type="submit" value="сохранить" class="butsub"></div>
-            <div class="btom12"><input type="button" value="отмена" class="butback" onclick="history.go(-1);"></div>
+            <input class="form-auth-input" type='text' name='email' value="{{ POST }}" placeholder="Email">
+            <input class="form-auth-input" type="password" name="password" value="" placeholder="Пароль">
+            <input class="form-auth-input" type="password" name="password_repeat" value="" placeholder="Повторите пароль">
         </div>
-    </div>
-</form>
+        <div class="form-auth-content">
+            <input class="form-auth-input btn btn-normal content" type="submit" name="submit" value="Сохранить">
+            <input type="submit" class="btn btn-input" onclick="history.go(-1);" value="Отмена" style="float: none;">
+        </div>
+  
+  </form>
+  </div>
 <!-- Footer -->
 {% include 'footer.html' %}
