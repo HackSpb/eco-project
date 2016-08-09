@@ -101,7 +101,7 @@ function eventCreate(){
 
 	            // возвращаемся на главную  страницу
 	            //header("Location: /"); exit();
-	            $app['twig']->addGlobal('success', 'Форма сохранена успешно');
+	            $app['twig']->addGlobal('form_success', 'Форма сохранена успешно');
 
         	}
 

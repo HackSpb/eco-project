@@ -72,6 +72,7 @@ $app->match('/event_create', function() use ($app) {
     if(!checkRights('user',$_SESSION['user'])) exit("permission failed");
     
     include_once 'includes/eventAdd.php';
+    
     eventCreate();
   
 	return $app['twig']->render('event_create.html');
@@ -125,9 +126,11 @@ $app->match('/user_profil_edit', function() use ($app) {
     
     return $app['twig']->render('user_profil_edit.html');
 })->bind('profil_edit');
-
+/*
 $app->error( function (Exception $e) use ($app) {
-    return $app['twig']->render('error404.html');
-});
+    if( in_array($e->getStatusCode() , array(404,500)) )
+        return $app['twig']->render('error404.html');
+    else {echo 'TWIG ERROR'; return $app['twig']->render('error404.html');}
+});*/
 
 $app->run();
