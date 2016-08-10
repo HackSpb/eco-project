@@ -1,7 +1,7 @@
 <?php
 
-//include_once '/map_lib/MapRefresher.php';
+include_once '../includes/MapLib/MapRefresher.php';
 
-$refresh = new MapLib\MapRefresher();
+$refresh = new MapRefresher();
 $refresh->refresh();
 

@@ -11,13 +11,24 @@ if(file_exists('local.config.php'))include 'local.config.php';
 
 include_once 'includes/globalFunctions.php';
 
+if($DEBUG_MODE){
+    ini_set('display_errors', 'on');
+    error_reporting('E_ALL');
+    error_reporting(-1);
+}
+else{
+    ini_set('display_errors', 'off');
+    error_reporting(NULL);
+}
 
 try {
     $db = new PDO($dsn, $user_db, $password_db);
+    if($GLOBALS['DEBUG_MODE']) $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $db->query('SET NAMES \'utf8\'');
 
 } catch (\PDOException $e) {
-    print_r('connect to BD failed');
+    if($DEBUG_MODE)print_r('connect to BD failed');
 }
 
 $app = new Silex\Application();
@@ -130,11 +141,11 @@ $app->match('/user_profil_edit', function() use ($app) {
 $app->error( function (Exception $e, $code) use ($app) {
     if( $code==404 )
         return $app['twig']->render('error404.html');
-    else {
-        echo 'ERROR:<br />' . get_class ($e)) .
+    elseif($GLOBALS['DEBUG_MODE']) {
+        echo 'ERROR:<br />' . get_class ($e) .
         '<br />' . $e->getMessage();       
         return true;
-    }
+    }else return true;
 });
 
 $app->run();

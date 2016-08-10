@@ -48,7 +48,7 @@ class EventGeoObjToDB
     private function addToDB()
     {
 
-        $var = new MapLib\DataBase();  //подключаемся к БД
+        $var = new DataBase();  //подключаемся к БД
         $db = $var->getDb();
         $insertDataToDB = $db->prepare('INSERT INTO `balooncontent` (name, baloonContent_accept_id, time, adres, info)
                                         VALUES (:name, 0, :time, :adres, :info)');

@@ -39,10 +39,10 @@ function eventCreate(){
 	            $coord_y = $_POST['coord_y'];
 	            $coords = [$coord_x, $coord_y];
 
-	            $eventToDB = new \MapLib\EventGeoObjToDB($title, $begin_date, $address, $description, $coords,
+	           /* $eventToDB = new \MapLib\EventGeoObjToDB($title, $begin_date, $address, $description, $coords,
 	                $JSONPath, $tempPath);
 	            $eventToDB->addEventToMap();
-	            $geoobjectID = $eventToDB->getId();
+	            $geoobjectID = $eventToDB->getId();*/
 	        } 
 	        // если была загружена картинка
 	        if ($_FILES['image']['error'] == 0) {
@@ -66,16 +66,16 @@ function eventCreate(){
 					// id нового события
 					$event_id = $sth->fetchColumn()+1;
 					// название картинки (id_время_ориг-имя.расширение)
-			    	$image = $event_id.'_'.time().'_'.$_FILES['image']['name'];
+			    	$img = $event_id.'_'.time().'.jpg';
 				    // Если файл загружен успешно, перемещаем его
 				    // из временной директории в конечную
-				    copy($_FILES["image"]["tmp_name"], "images/event/".$image);
-				    $image = '\''.$image.'\'';
+				    copy($_FILES["image"]["tmp_name"], $GLOBALS['root_dir']."/img/events/".$img);
+				    
 				} else {
 				    $form_err[] = "Ошибка загрузки файла";
 				}
 	        } else {
-	        	$image = 'NULL';
+	        	$img = 'NULL';
 	        }
 
 	        // Если нет ошибок, то сохраняем новость в БД
@@ -94,7 +94,7 @@ function eventCreate(){
 	                    `ev_end_time`      	= ".$end_time.",
 	                    `ev_address`       	= ".$address.",
 	                   
-	                    `ev_img`         	= ".$image.",
+	                    `ev_img`         	='".$img."',
 	                    `u_id`				= '".$user_id."'
 	               ";
 	            $db->query($sql);
@@ -109,12 +109,14 @@ function eventCreate(){
 
     } 
     
-  	$sql ="SELECT `tag_id`, `tag_name` FROM `tags` WHERE 1 ORDER BY `tag_name`";
-    foreach ($db->query($sql) as $row) {
-        $tags[$row[0]] = $row[1];
-    }
-
-	$app['twig']->addGlobal('tags', $tags);
-    $app['twig']->addGlobal('POST', $_POST);
-    $app['twig']->addGlobal('form_err', $form_err);
+	$sql ="SELECT `tag_id`, `tag_name` FROM `tags` WHERE 1 ORDER BY `tag_name`";
+    $result = $db->query($sql);
+   
+    foreach ($db->query($sql) as $row ){ 
+    	$tags[] = $row;
+    	}
+		$app['twig']->addGlobal('tags', $tags);
+    	$app['twig']->addGlobal('POST', $_POST);
+    	$app['twig']->addGlobal('form_err', $form_err);
+	
 }

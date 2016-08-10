@@ -1,5 +1,5 @@
 <!--filter start-->
-<div class="grid grid-pad drop-flow">
+<!-- <div class="grid grid-pad drop-flow">
 <ul class="dropdown">
  <li class="dropbtn">Фильтр</li>
  <div class="dropdown-content">
@@ -28,12 +28,12 @@
   </li>
   </div>
 </ul>
-  </div>
+  </div> -->
 <!--filter end!-->
 
 <!--Встраеваемый контент начало-->
 <div class="grid grid-pad">
-<div class="col-1-4">
+<!-- <div class="col-1-4">
     <div class="content">
       <img class="post-logo" src="/img/events/eco_post1.jpg" alt="">
       <figcaption class="card-info">
@@ -78,33 +78,33 @@
     </div>
   </div>
 
-
+ -->
 {% for event in events %}
   <div class="col-1-4">
     <div class="content">
-      {% if (event.ev_image is null ) %} 
+      {% if (event.ev_img is null ) %} 
         <img class="post-logo" src="/img/events/eco_post1.jpg" alt="">
       {% else %}
-        <img class="post-logo" src="images/event/{{event.ev_image}}" alt="" /> 
+        <img class="post-logo" src="/img/events/{{event.ev_img}}" alt="" /> 
       {% endif %}
       <figcaption class="card-info">
         <p class="residents">#{{event.tag_name}}</p>
         <h3>{{event.ev_title}}</h3>
-        <p class="timeinfo">
-        {% if (event.ev_begin_time is not null ) %}
-          время:{{event.ev_begin_time}}
+        <p class="timeinfo"><br />
+        {% if ((event.ev_begin_time is not null ) and (event.ev_begin_time != '00:00:00')) %}
+          время: {{event.ev_begin_time}}
         {% endif %}
-        {% if (event.ev_end_time is not null ) %}
+        {% if ((event.ev_end_time is not null )  and (event.ev_end_time != '00:00:00') and event.ev_end_time != event.ev_begin_time ) %}
           - {{event.ev_end_time}}
         {% endif %}
         {% if (event.ev_begin_date is not null ) %}
-          дата:{{event.ev_begin_date}}
+          дата: {{event.ev_begin_date}}
         {% endif %}
-        {% if (event.ev_end_date is not null ) %}
+        {% if ((event.ev_end_date is not null) and (event.ev_end_date != event.ev_begin_date)) %}
           - {{event.ev_end_date}}
         {% endif %}
         {% if (event.ev_address is not null ) %}
-        {{event.ev_address}}
+         <br /> {{event.ev_address}}
         {% endif %}
         </p>
       </figcaption>
@@ -113,5 +113,4 @@
   </div>
 {% endfor %}
 </div>
-<script src="/js/eventsScripts/ajaxLoader.js"></script>
-<!--Встраеваемый контент конец-->
+<!-- <script src="/js/eventsScripts/ajaxLoader.js"></script> -->

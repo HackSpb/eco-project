@@ -43,7 +43,7 @@ class Paste_tag_Node extends Twig_Node
 {
     public function __construct($name, $line, $tag = null)
     {
-        parent::__construct(array('value' => $value), array('name' => $name), $line, $tag);
+        parent::__construct(array('value' => @$value), array('name' => $name), $line, $tag);
     }
 
     public function compile(Twig_Compiler $compiler)
