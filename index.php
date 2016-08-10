@@ -23,7 +23,9 @@ else{
 
 try {
     $db = new PDO($dsn, $user_db, $password_db);
-    if($GLOBALS['DEBUG_MODE']) $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    if($GLOBALS['DEBUG_MODE']){ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    }
+    //else $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $db->query('SET NAMES \'utf8\'');
 

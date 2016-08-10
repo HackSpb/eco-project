@@ -29,7 +29,7 @@
   <select class="form-auth-input--half"  required  name="tag">
 {% for tag in tags %}<option value="{{ tag.tag_id }}">{{ tag.tag_name }}</option> {% endfor %}
 </select> 
-  <input class="form-auth-input--half" type="text" required  name="tag" value="{% paste POST.tag %}"><div class="form-auth-input--half">Тег</div>
+  <div class="form-auth-input--half">Тег</div>
   
   <input type="text" name="url" value="{% paste POST.url %}" placeholder="Ссылка на мероприятие">
   

@@ -58,8 +58,6 @@ function regSave () {
             ";
             $db->query($sql);
 
-            session_destroy();
-            session_start();
             $_SESSION = array();
             $_SESSION['user'] = $user;
             $app['twig']->addGlobal('user', $_SESSION['user']);
@@ -129,7 +127,6 @@ function authorizationCheck(){
 
         // если пройдена авторизация
         if( count($form_err) == 0) {
-            session_start();
             $_SESSION['user'] = $user;
             $app['twig']->addGlobal('user', $_SESSION['user']);
             // Если нет ошибок, то возвращаемся на главную страницу

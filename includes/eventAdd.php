@@ -24,7 +24,7 @@ function eventCreate(){
 	    	$description = $_POST['description'];
 
 	    	// экранирование необязательных входных данных
-			$begin_date = ( isset($_POST['begin_date']) && !empty($_POST['begin_date']) ) ? '\''.$_POST['begin_date'].'\'' : 'NULL';
+			$begin_date = ( isset($_POST['begin_date']) && !empty($_POST['begin_date']) ) ? '\''.$_POST['begin_date'].'\'' : 'number_format(number)LL';
 			$end_date = ( isset($_POST['end_date']) && !empty($_POST['end_date']) ) ? '\''.$_POST['end_date'].'\'' : 'NULL';
 			$begin_time = ( isset($_POST['begin_time']) && !empty($_POST['begin_time']) ) ? '\''.$_POST['begin_time'].'\'' : 'NULL';
 			$end_time = ( isset($_POST['end_time']) && !empty($_POST['end_time']) ) ? '\''.$_POST['end_time'].'\'' : 'NULL';
@@ -93,15 +93,20 @@ function eventCreate(){
 	                    `ev_end_date`      	= ".$end_date.",
 	                    `ev_end_time`      	= ".$end_time.",
 	                    `ev_address`       	= ".$address.",
-	                   
+	                    `ev_slug` 			= '".smart_cut(translit($title),20)."',
 	                    `ev_img`         	='".$img."',
 	                    `u_id`				= '".$user_id."'
 	               ";
-	            $db->query($sql);
+	            if($db->query($sql)){
+	            	$app['twig']->addGlobal('form_success', 'Форма сохранена успешно');
+	            }
+	           	else {
+	            	 $form_err[] = "Ошибка сохранения данных";
+	            } 
 
 	            // возвращаемся на главную  страницу
 	            //header("Location: /"); exit();
-	            $app['twig']->addGlobal('form_success', 'Форма сохранена успешно');
+	            
 
         	}
 
