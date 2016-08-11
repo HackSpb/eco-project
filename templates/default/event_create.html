@@ -1,38 +1,33 @@
 {% include 'header.html' %}
 <!-- Встраеваемый контент-->
-
+<div class="grid header-padding event-create">
 {% if form_success is defined  %}
 <script type="text/javascript" src="js/authorization.js"></script>
-<div class="grid header-padding">
 
 
 Событие добавлено! Мир Вам!
 {% else %}
 <form class="container form-auth" action="/event_create" method="post" name="main" enctype="multipart/form-data">
- <div class="form-auth-content shadow-box">
-    <h1 class="form-auth--header">Добавление новостей</h1>
+ <div class="clearfix form-auth-content shadow-box">
+    <h1 class="form-auth--header">Добавление события</h1>
        {% if form_err is defined  %}
   <div class="error"> <b>При добавлении новости произошли следующие ошибки:</b>
     {% for error in form_err %}
     {{ error }} {% endfor %} </div> {% endif %}
-   
+  <div class="half-2">
   <input type='text' required name='title' value="{% paste POST.title %}" placeholder="Название">
-  
-  <input class="form-auth-input--half" type="date" name="begin_date" class="inp" value="{% if POST.begin_date is defined %}{{ POST.begin_date|date("m.d.Y") }}{% else %}{{ "now"|date_modify("+1 day")|date("Y-m-d") }}{% endif %}"><div class="form-auth-input--half">Дата начала</div>
-  
-  <input class="form-auth-input--half" type="time" name="begin_time" value="{% if POST.begin_time is defined  %}{{POST.begin_time}}{% else %}12:00{% endif %}"><div class="form-auth-input--half">Время начала</div>
-  
-  <input class="form-auth-input--half" type="date" name="end_date" value="{% if POST.end_date is defined %}{{ POST.end_date |date("m.d.Y") }}{% else %}{{ "now"|date_modify("+1 day")|date("Y-m-d") }}{% endif %}"><div class="form-auth-input--half">Дата окончания</div>
-  
-  <input class="form-auth-input--half" type="time" name="end_time" value="{% if POST.end_time is defined  %}{{POST.end_time}}{% else %}18:00{% endif %}"><div class="form-auth-input--half">Время окончания</div>
-  
-  <select class="form-auth-input--half"  required  name="tag">
+  <div class="form-auth-input--half lable">Начало</div><input class="form-auth-input--half" type="date" name="begin_date" class="inp" value="{% if POST.begin_date is defined %}{{ POST.begin_date|date("m.d.Y") }}{% else %}{{ "now"|date_modify("+1 day")|date("Y-m-d") }}{% endif %}"><input class="form-auth-input--half" type="time" name="begin_time" value="{% if POST.begin_time is defined  %}{{POST.begin_time}}{% else %}12:00{% endif %}">
+
+  <div class="form-auth-input--half lable">Конец</div>
+  <input class="form-auth-input--half" type="date" name="end_date" value="{% if POST.end_date is defined %}{{ POST.end_date |date("m.d.Y") }}{% else %}{{ "now"|date_modify("+1 day")|date("Y-m-d") }}{% endif %}"><input class="form-auth-input--half" type="time" name="end_time" value="{% if POST.end_time is defined  %}{{POST.end_time}}{% else %}18:00{% endif %}">
+  <select class="form-auth-input form-auth-input--half"  required  name="tag" style="width:100%!important;">
 {% for tag in tags %}<option value="{{ tag.tag_id }}">{{ tag.tag_name }}</option> {% endfor %}
 </select> 
-  <div class="form-auth-input--half">Тег</div>
   
   <input type="text" name="url" value="{% paste POST.url %}" placeholder="Ссылка на мероприятие">
-  
+  <textarea name='description' required  value="{% paste POST.description %}" placeholder="Описание"></textarea>
+  </div>
+  <div class="half-2">
   <div id="map" class="map-small"></div>
   
   <input type='text' id='location' name='location' value="{% paste POST.location %}" placeholder="Адрес">
@@ -40,15 +35,15 @@
   <input type='hidden' id='coord_x' name='coord_x' value="{% paste POST.coord_x %}">
   
   <input type='hidden' id='coord_y' name='coord_y' value="{% paste POST.coord_y %}">
-
-  <textarea name='description' required  value="{% paste POST.description %}" placeholder="Описание"></textarea>
   
   <input type="file" name="image" accept="image">
   </div>
+  <div class="half-1">
+  <input class="btn btn-input centr" type="submit" name="submit" value="Добавить событие на сайт">
+  </div>
+  </div>
   <div class="form-auth-content">
-  <input class="btn btn-input" type="submit" name="submit" value="сохранить">
   
-  <input type="submit" class="btn btn-input" onclick="history.go(-1);" value="Отмена" style="float: none;">
   </div>
   
   </form>
