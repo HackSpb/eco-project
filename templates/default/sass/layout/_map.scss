@@ -10,7 +10,6 @@
   }
 }
 
-
 //убераем лишнее
 .ymaps-2-1-42-traffic{
   display: none!important;
@@ -56,6 +55,26 @@
   color: rgb(0, 0, 0)!important;
   line-height: 1.2!important;
   text-align: left!important;
+  div > b{
+   display: none;
+  }
+  ymaps ymaps div{padding-left: 20px!important;}
+  div:before{
+    font-family:"iconfont";
+    left: -15px;
+    position: relative;
+  }
+  ymaps ymaps div{
+    &:nth-child(3):before{
+    content: "\47";
+  }
+    &:nth-child(4):before{
+    content: "\49";
+  }
+    &:nth-child(5):before{
+    content: "\52";
+  }
+  }
 }
 .ymaps-2-1-42-balloon__layout{
   background: none!important;

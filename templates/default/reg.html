@@ -16,12 +16,13 @@
             <input class="form-auth-input" type='text' name='email' value="{{ POST }}" placeholder="Email">
             <input class="form-auth-input" type="password" name="password" value="" placeholder="Пароль">
             <input class="form-auth-input" type="password" name="password_repeat" value="" placeholder="Повторите пароль">
+            <input class="form-auth-input btn btn-normal content" type="submit" name="submit" value="Вперед">
+            <input id="check" name="check" type="checkbox" checked><label for="check" class="for-check">Я принимаю правила</label>
+      <p class="for-note"></p>
         </div>
-        <div class="form-auth-content">
-            <input class="form-auth-input btn btn-normal content" type="submit" name="submit" value="Сохранить">
-            <input type="submit" class="btn btn-input" onclick="history.go(-1);" value="Отмена" style="float: none;">
-        </div>
-  
+        <div class="form-auth-content t-centr">
+          <p>Уже есть аккаунт? <a href="/auth"> Входи</a></p>
+          </div>
   </form>
   </div>
 <!-- Footer -->

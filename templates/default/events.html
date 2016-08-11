@@ -91,20 +91,22 @@
         <p class="residents">#{{event.tag_name}}</p>
         <h3>{{event.ev_title}}</h3>
         <p class="timeinfo"><br />
-        {% if ((event.ev_begin_time is not null ) and (event.ev_begin_time != '00:00:00')) %}
-          время: {{event.ev_begin_time}}
-        {% endif %}
-        {% if ((event.ev_end_time is not null )  and (event.ev_end_time != '00:00:00') and event.ev_end_time != event.ev_begin_time ) %}
-          - {{event.ev_end_time}}
-        {% endif %}
+        <span class="icon-cal"></span>
         {% if (event.ev_begin_date is not null ) %}
-          дата: {{event.ev_begin_date}}
+         {{event.ev_begin_date}}
         {% endif %}
         {% if ((event.ev_end_date is not null) and (event.ev_end_date != event.ev_begin_date)) %}
           - {{event.ev_end_date}}
         {% endif %}
+        {% if ((event.ev_begin_time is not null ) and (event.ev_begin_time != '00:00:00')) %}
+         <br/>{{event.ev_begin_time}}
+        {% endif %}
+        {% if ((event.ev_end_time is not null )  and (event.ev_end_time != '00:00:00') and event.ev_end_time != event.ev_begin_time ) %}
+          - {{event.ev_end_time}}
+        {% endif %}
+        
         {% if (event.ev_address is not null ) %}
-         <br /> {{event.ev_address}}
+         <br/><span class="icon-map_black"></span> {{event.ev_address}}
         {% endif %}
         </p>
       </figcaption>

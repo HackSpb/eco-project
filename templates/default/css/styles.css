@@ -1167,6 +1167,20 @@ p.copyright {
   color: black !important;
   line-height: 1.2 !important;
   text-align: left !important; }
+  .ymaps-2-1-42-balloon__content div > b {
+    display: none; }
+  .ymaps-2-1-42-balloon__content ymaps ymaps div {
+    padding-left: 20px !important; }
+  .ymaps-2-1-42-balloon__content div:before {
+    font-family: "iconfont";
+    left: -15px;
+    position: relative; }
+  .ymaps-2-1-42-balloon__content ymaps ymaps div:nth-child(3):before {
+    content: "\47"; }
+  .ymaps-2-1-42-balloon__content ymaps ymaps div:nth-child(4):before {
+    content: "\49"; }
+  .ymaps-2-1-42-balloon__content ymaps ymaps div:nth-child(5):before {
+    content: "\52"; }
 
 .ymaps-2-1-42-balloon__layout {
   background: none !important; }
@@ -1213,9 +1227,8 @@ p.copyright {
   padding-top: 82px; }
 
 .error {
-  color: blue;
-  background-color: rgba(70, 0, 0, 0.4);
-  box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4); }
+  color: darkred;
+  margin: 10px 0; }
 
 .form-auth {
   font-weight: 300;
@@ -1267,12 +1280,12 @@ p.copyright {
     color: black;
     box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4); }
     .form-auth input[type='text'] {
-      background: white url("/templates/default/images/sprites/password.png") 8px 18px no-repeat;
+      background: white url("/templates/default/images/sprites/form/password.png") 8px 18px no-repeat;
       padding-left: 25px;
       padding-right: 25px;
       box-shadow: none; }
     .form-auth input[type="password"] {
-      background: white url("/templates/default/images/sprites/password.png") 8px 18px no-repeat;
+      background: white url("/templates/default/images/sprites/form/password.png") 8px 18px no-repeat;
       padding-left: 25px;
       padding-right: 25px;
       box-shadow: none; }
@@ -1289,5 +1302,11 @@ p.copyright {
     .form-auth input.beack {
       display: inline-block;
       width: 40%; }
+
+input:required:valid {
+  border-color: green; }
+
+input:invalid {
+  border-color: red; }
 
 /*# sourceMappingURL=styles.css.map */
