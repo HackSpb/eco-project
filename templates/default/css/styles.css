@@ -1177,11 +1177,10 @@ p.copyright {
   flex-wrap: wrap; }
   .news .col-1-4 {
     flex-basis: auto;
-    max-width: 235px;
-    height: 423px; }
+    padding-bottom: 20px;
+    max-width: 235px; }
     .news .col-1-4 .content {
-      overflow: hidden;
-      max-height: calc(235px * 1.8 - 19px); }
+      overflow: hidden; }
 
 .post-logo {
   width: 100%;
