@@ -85,6 +85,7 @@ body {
   min-height: 100%;//Растяжка на весь экран
   background-color: #cccccc;
   background: url('#{$rootPATH}/images/background.png') no-repeat fixed right top;
+  background-size: cover;
   box-sizing: border-box;
   width: 100%;
   padding: 60px 0%;

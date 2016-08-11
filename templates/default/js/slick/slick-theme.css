@@ -1,28 +1,20 @@
-@charset "UTF-8";
 /* Slider */
 .slick-loading .slick-list {
   background: #fff url("./ajax-loader.gif") center center no-repeat; }
 
 /* Icons */
-@font-face {
-  font-family: "slick";
-  src: url("./fonts/slick.eot");
-  src: url("./fonts/slick.eot?#iefix") format("embedded-opentype"), url("./fonts/slick.woff") format("woff"), url("./fonts/slick.ttf") format("truetype"), url("./fonts/slick.svg#slick") format("svg");
-  font-weight: normal;
-  font-style: normal; }
 /* Arrows */
 .slick-prev,
 .slick-next {
-  position: absolute;
+  position: fixed;
   display: block;
   height: 20px;
   width: 20px;
   line-height: 0px;
-  font-size: 0px;
   cursor: pointer;
   background: transparent;
   color: transparent;
-  top: 50%;
+  top: 50vh;
   -webkit-transform: translate(0, -50%);
   -ms-transform: translate(0, -50%);
   transform: translate(0, -50%);
@@ -38,39 +30,44 @@
     .slick-prev:hover:before, .slick-prev:focus:before,
     .slick-next:hover:before,
     .slick-next:focus:before {
-      opacity: 1; }
+      opacity: 0.6; }
   .slick-prev.slick-disabled:before,
   .slick-next.slick-disabled:before {
-    opacity: 0.25; }
+    opacity: 0.01; }
   .slick-prev:before,
   .slick-next:before {
-    font-family: "slick";
+    font-family: "iconfont";
     font-size: 20px;
     line-height: 1;
     color: white;
-    opacity: 0.75;
+    opacity: 0.45;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale; }
 
 .slick-prev {
-  left: -25px; }
+  left: 50px;
+  z-index: 50000; }
   [dir="rtl"] .slick-prev {
     left: auto;
-    right: -25px; }
+    right: 0px; }
   .slick-prev:before {
-    content: "←"; }
+    color: black;
+    content: "H";
+    font-size: 60px; }
     [dir="rtl"] .slick-prev:before {
-      content: "→"; }
+      content: "O"; }
 
 .slick-next {
-  right: -25px; }
+  right: 150px; }
   [dir="rtl"] .slick-next {
-    left: -25px;
+    left: 0px;
     right: auto; }
   .slick-next:before {
-    content: "→"; }
+    color: black;
+    font-size: 60px;
+    content: "O"; }
     [dir="rtl"] .slick-next:before {
-      content: "←"; }
+      content: "H"; }
 
 /* Dots */
 .slick-dotted.slick-slider {

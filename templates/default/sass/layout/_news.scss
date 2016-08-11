@@ -1,3 +1,19 @@
+$news-content-height:1.8;
+.news{
+  justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+  .col-1-4{
+    flex-basis: auto;
+    max-width: 235px;
+      height: 235px * $news-content-height;
+      .content{
+        overflow: hidden;
+        max-height: calc(235px * 1.8 - 19px);
+      }
+    
+  }
+}
 .post-logo{
   width: 100%;
   height: auto;

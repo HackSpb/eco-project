@@ -5,18 +5,19 @@
 // "\2192" outputs ascii character "→"
 // "\2022" outputs ascii character "•"
 $slick-font-path: "./fonts/" !default;
-$slick-font-family: "slick" !default;
+$slick-font-family: "iconfont" !default;
 $slick-loader-path: "./" !default;
 $slick-arrow-color: white !default;
 $slick-dot-color: rgba(255, 255, 255, 0.502) !default;
 $slick-dot-color-active: rgb(255, 183, 77) !default;
-$slick-prev-character: "\2190" !default;
-$slick-next-character: "\2192" !default;
+$slick-prev-character: "\48" !default;
+$slick-next-character: "\4f" !default;
+$slick-prev-next-size: 60px !default;
 $slick-dot-character: "\2022" !default;
 $slick-dot-size: 6px !default;
-$slick-opacity-default: 0.75 !default;
-$slick-opacity-on-hover: 1 !default;
-$slick-opacity-not-active: 0.25 !default;
+$slick-opacity-default: 0.45 !default;
+$slick-opacity-on-hover: 0.60 !default;
+$slick-opacity-not-active: 0.01 !default;
 @function slick-image-url($url) {
   @if function-exists(image-url) {
     @return image-url($url);
@@ -62,16 +63,15 @@ $slick-opacity-not-active: 0.25 !default;
 
 .slick-prev,
 .slick-next {
-  position: absolute;
+  position: fixed;
   display: block;
   height: 20px;
   width: 20px;
   line-height: 0px;
-  font-size: 0px;
   cursor: pointer;
   background: transparent;
   color: transparent;
-  top: 50%;
+  top: 50vh;
   -webkit-transform: translate(0, -50%);
   -ms-transform: translate(0, -50%);
   transform: translate(0, -50%);
@@ -102,13 +102,16 @@ $slick-opacity-not-active: 0.25 !default;
 }
 
 .slick-prev {
-  left: -25px;
+  left:50px;
+  z-index: 50000;
   [dir="rtl"] & {
     left: auto;
-    right: -25px;
+    right: 0px;
   }
   &:before {
+    color: black;
     content: $slick-prev-character;
+    font-size: $slick-prev-next-size;
     [dir="rtl"] & {
       content: $slick-next-character;
     }
@@ -116,12 +119,14 @@ $slick-opacity-not-active: 0.25 !default;
 }
 
 .slick-next {
-  right: -25px;
+  right: $slick-prev-next-size + 90px;
   [dir="rtl"] & {
-    left: -25px;
+    left: 0px;
     right: auto;
   }
   &:before {
+    color: black;
+    font-size: $slick-prev-next-size;
     content: $slick-next-character;
     [dir="rtl"] & {
       content: $slick-prev-character;

@@ -603,7 +603,7 @@ textarea {
 a {
   color: #ffb74d; }
 
-@media (max-width: 1024px) and (min-width: 767px) {
+@media (max-width: 1024px) and (min-width: 768px) {
   .col-1-4 {
     width: 50%; } }
 /* 
@@ -698,6 +698,7 @@ body {
   min-height: 100%;
   background-color: #cccccc;
   background: url("/templates/default/images/background.png") no-repeat fixed right top;
+  background-size: cover;
   box-sizing: border-box;
   width: 100%;
   padding: 60px 0%; }
@@ -1169,6 +1170,18 @@ p.copyright {
 
 .ymaps-2-1-42-balloon__layout {
   background: none !important; }
+
+.news {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap; }
+  .news .col-1-4 {
+    flex-basis: auto;
+    max-width: 235px;
+    height: 423px; }
+    .news .col-1-4 .content {
+      overflow: hidden;
+      max-height: calc(235px * 1.8 - 19px); }
 
 .post-logo {
   width: 100%;
