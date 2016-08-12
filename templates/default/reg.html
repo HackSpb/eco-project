@@ -1,8 +1,10 @@
 <!-- Header -->
 {% include 'header.html' %}
 <!-- / Main content -->
+<script type="text/javascript" src="js/authorization.js"></script>
+<script>$(document).ready(function() {formValidation('email','password','password_repeat');});</script>
 <div class="grid header-padding">
-<form class="container form-auth" action="/reg" method="post" enctype="multipart/form-data">
+<form id="form-valid" class="container form-auth" action="/reg" method="post" enctype="multipart/form-data">
     <div class="form-auth-content shadow-box">
     <h1 class="form-auth--header"> Регистрация</h1>
             {% if form_err|length > 0 %}
@@ -13,9 +15,18 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <input class="form-auth-input" type='text' name='email' value="{{ POST }}" placeholder="Email">
-            <input class="form-auth-input" type="password" name="password" value="" placeholder="Пароль">
-            <input class="form-auth-input" type="password" name="password_repeat" value="" placeholder="Повторите пароль">
+            <input id="email" class="form-auth-input" type='email' name='email' value="{{ POST }}" placeholder="Email" required>
+            <label for="password">
+            <input id="password" class="form-auth-input" type="password" name="password" value="" placeholder="Пароль" required>
+            <ul class="input-requirements">
+							<li>Длинна более 8 символов</li>
+							<li>Содержит минимум 1 цифру</li>
+							<li>Содержит минимум 1 заглавную букву</li>
+							<li>Содержит минимум 1 строчную букву</li>
+							<li>Содержит спец символ(например @ !)</li>
+        		</ul>
+      			</label>
+            <input id="password_repeat" class="form-auth-input" type="password" name="password_repeat" value="" placeholder="Повторите пароль" required>
             <input class="form-auth-input btn btn-normal content" type="submit" name="submit" value="Вперед">
             <input id="check" name="check" type="checkbox" checked><label for="check" class="for-check">Я принимаю правила</label>
       <p class="for-note"></p>

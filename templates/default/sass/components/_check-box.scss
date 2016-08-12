@@ -1,4 +1,4 @@
-label {
+label.for-radio, label.for-check {
 //	display: inline-block;
 	cursor: pointer;
 	position: relative;
@@ -10,7 +10,7 @@ input[type=radio],
 input[type=checkbox] {
 	display: none;
 }
-label:before {
+label.for-radio:before, label.for-check:before {
 	content: "";
 //	display: inline-block;
 
@@ -25,7 +25,7 @@ label:before {
 	box-shadow: inset 0px 2px 3px 0px rgba(0, 0, 0, .3), 0px 1px 0px 0px rgba(255, 255, 255, .8);
 }
 
-.radio label:before {
+.radio label.for-radio:before {
 	border-radius: 8px;
 }
 label.for-check {
@@ -35,7 +35,7 @@ label.for-check:before {
     border-radius: 3px;
 }
 
-input[type=radio]:checked + label:before {
+input[type=radio]:checked + label.for-radio:before {
     content: "\2022";
     font-size: 25px;
 	  color: green;
@@ -43,7 +43,7 @@ input[type=radio]:checked + label:before {
     line-height: 18px;
 }
 
-input[type=checkbox]:checked + label:before {
+input[type=checkbox]:checked + label.for-check:before {
 	content: "\2713";
 	text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 	font-size: 25px;

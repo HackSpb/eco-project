@@ -75,16 +75,32 @@
     color: black;
     box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4);
     &[type='text']{
-      background: rgb(255,255,255) url("#{$rootPATH}/images/sprites/form/password.png") 8px 18px no-repeat;
+      background: rgb(255,255,255) 8px 18px no-repeat;
       padding-left: 25px;
       padding-right: 25px;
       box-shadow: none;
+    }
+		&[type='email']{
+      padding-left: 25px;
+      padding-right: 25px;
+      box-shadow: none;
+			&:valid {	background:url('#{$rootPATH}/images/sprites/form/email.png') 8px 18px no-repeat, url('#{$rootPATH}/images/sprites/form/validYes.png') 98% 10px no-repeat;
+			background-color: white;
+			}
+			&:invalid {
+			background: url('#{$rootPATH}/images/sprites/form/email.png') 8px 18px no-repeat, url('#{$rootPATH}/images/sprites/form/validNo.png') 98% 10px no-repeat;background-color: white;
+			}
     }
     &[type="password"]{
       background: rgb(255,255,255) url("#{$rootPATH}/images/sprites/form/password.png") 8px 18px no-repeat;
       padding-left: 25px;
       padding-right: 25px;
       box-shadow: none;
+			&:valid {	background:url('#{$rootPATH}/images/sprites/form/password.png') 8px 18px no-repeat, url('#{$rootPATH}/images/sprites/form/validYes.png') 98% 10px no-repeat;background-color: white;
+			}
+			&:invalid {
+			background: url('#{$rootPATH}/images/sprites/form/password.png') 8px 18px no-repeat, url('#{$rootPATH}/images/sprites/form/validNo.png') 98% 10px no-repeat;background-color: white;
+			}
     }
     &[type="checkbox"]{
       float: left;
@@ -133,4 +149,51 @@ input:invalid {
     width: 100%;
     float: right;
   }
+}
+
+/* Hide and show related .input-requirements when interacting with input */
+
+input:not([type="submit"]) + .input-requirements {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: max-height 1s ease-out,margin 1s ease-out;
+  transition: max-height 1s ease-out,margin 1s ease-out;
+	transition-delay: 0s, 1s;
+	margin: 0 auto 0px auto;
+}
+
+input:not([type="submit"]):hover + .input-requirements,
+input:not([type="submit"]):focus + .input-requirements,
+input:not([type="submit"]):active + .input-requirements {
+  max-height: 1000px; /* any large number (bigger then the .input-requirements list) */
+  -webkit-transition: max-height 1s ease-in;
+  transition: max-height 1s ease-in;
+	margin: 0 auto 25px auto;
+}
+.input-requirements {
+  font-size: 14px;
+	font-weight:300;
+//  font-style: italic;
+  text-align: left;
+  list-style:disc;
+  list-style-position: inside;
+  max-width: 400px;
+  color: #ffb74d;
+	margin: 0 auto 25px auto;
+}
+
+
+.input-requirements li.invalid {
+	color: #ffb74d;// #e74c3c;
+}
+.input-requirements li.valid {
+	color: #2ecc61;//#057200;//#2ecc71;
+}
+
+.input-requirements li.valid:after {
+	display: inline-block;
+	padding-left: 10px;
+	content: "\2713";
+	font-size: 20px;
+	line-height: 1px;
 }
