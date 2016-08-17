@@ -80,9 +80,9 @@ $app->get('//', function() use ($app) {
 // создание события
 $app->match('/event_create', function() use ($app) {
     
-    // if(!checkRights('user',$_SESSION['user'])) exit("permission failed");
+    if(!checkRights('user',$_SESSION['user'])) exit("permission failed");
     
-    include_once '/includes/eventAdd.php';
+    include_once 'includes/eventAdd.php';
     
     eventCreate();
   
