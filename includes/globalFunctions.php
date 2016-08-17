@@ -100,3 +100,4 @@ function smart_cut($s , $length){
 	 }
 	 return $s;
 }
+

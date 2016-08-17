@@ -9,6 +9,10 @@ function eventCreate(){
 			$form_err[] = "Необходимо заполнить название.";
 		}
 
+		if (empty($_POST['begin_date']) ) {
+			$form_err[] = "Необходимо заполнить дату начала.";
+		}
+
 		if (isset($_POST['tag']) && empty($_POST['tag']) ) {
 			$form_err[] = "Необходимо заполнить тэг.";
 		}
@@ -93,7 +97,7 @@ function eventCreate(){
 	                    `ev_end_date`      	= ".$end_date.",
 	                    `ev_end_time`      	= ".$end_time.",
 	                    `ev_address`       	= ".$address.",
-	                    `ev_slug` 			= '".smart_cut(translit($title),20)."',
+	                    `ev_slug` 			= '".smart_cut(translit($title),40)."',
 	                    `ev_img`         	='".$img."',
 	                    `u_id`				= '".$user_id."'
 	               ";
