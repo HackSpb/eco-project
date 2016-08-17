@@ -10,13 +10,13 @@ function eventCreate(){
 			$form_err[] = "Необходимо заполнить название.";
 		}
 
-		if (empty($_POST['begin_date']) ) {
-			$form_err[] = "Необходимо заполнить дату начала.";
-		}
+		// if (empty($_POST['begin_date']) ) {
+		// 	$form_err[] = "Необходимо заполнить дату начала.";
+		// }
 
-		if (isset($_POST['tag']) && empty($_POST['tag']) ) {
-			$form_err[] = "Необходимо заполнить тэг.";
-		}
+		// if (isset($_POST['tag']) && empty($_POST['tag']) ) {
+		// 	$form_err[] = "Необходимо заполнить тэг.";
+		// }
 
 		if (isset($_POST['description']) && empty($_POST['description']) ) {
 			$form_err[] = "Необходимо заполнить описание.";
