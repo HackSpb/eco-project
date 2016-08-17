@@ -14,7 +14,7 @@ function loadLastEvents(){
         left join tags  USING (tag_id)
     	ORDER BY t1.`ev_create_date` DESC
     	Limit 0,15";
-        
+
     foreach ($db->query($sql) as $row) {
         $events[] = $row;
     }

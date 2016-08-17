@@ -65,10 +65,8 @@ $form_err = array();
 // Инициируем сессию
 session_start();
 if( isset($_SESSION['user']) ){
-     $app['twig']->addGlobal('user', $_SESSION['user']);
+    $app['twig']->addGlobal('user', $_SESSION['user']);
 }
-
-
 
 // вывод главное страницы - все анонсы
 $app->get('//', function() use ($app) {
@@ -82,9 +80,9 @@ $app->get('//', function() use ($app) {
 // создание события
 $app->match('/event_create', function() use ($app) {
     
-    if(!checkRights('user',$_SESSION['user'])) exit("permission failed");
+    // if(!checkRights('user',$_SESSION['user'])) exit("permission failed");
     
-    include_once 'includes/eventAdd.php';
+    include_once '/includes/eventAdd.php';
     
     eventCreate();
   

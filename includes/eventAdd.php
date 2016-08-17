@@ -5,6 +5,7 @@ function eventCreate(){
 	global  $app, $db, $form_err;
 	// если нажали на кнопку
 	if (isset($_POST['submit'])) {
+
 		if (isset($_POST['title']) && empty($_POST['title'])) {
 			$form_err[] = "Необходимо заполнить название.";
 		}
@@ -19,12 +20,13 @@ function eventCreate(){
 
 		// Если нет ошибок
         if(count($form_err) == 0) {
-	    	$title = $_POST['title'];
+
+	    	$title = str_replace ("'", "\"", $_POST['title']);
        		$tag = (int)$_POST['tag'];
-	    	$description = $_POST['description'];
+	    	$description = str_replace ("'", "\"", $_POST['description']);
 
 	    	// экранирование необязательных входных данных
-			$begin_date = ( isset($_POST['begin_date']) && !empty($_POST['begin_date']) ) ? '\''.$_POST['begin_date'].'\'' : 'number_format(number)LL';
+			$begin_date = ( isset($_POST['begin_date']) && !empty($_POST['begin_date']) ) ? '\''.$_POST['begin_date'].'\'' : 'NULL';
 			$end_date = ( isset($_POST['end_date']) && !empty($_POST['end_date']) ) ? '\''.$_POST['end_date'].'\'' : 'NULL';
 			$begin_time = ( isset($_POST['begin_time']) && !empty($_POST['begin_time']) ) ? '\''.$_POST['begin_time'].'\'' : 'NULL';
 			$end_time = ( isset($_POST['end_time']) && !empty($_POST['end_time']) ) ? '\''.$_POST['end_time'].'\'' : 'NULL';
@@ -33,17 +35,17 @@ function eventCreate(){
 
 			// сохранение координаты (х, у) на карте
 	        if (isset($_POST['coord_x']) && !empty($_POST['coord_x']) && isset($_POST['coord_y']) && !empty($_POST['coord_y'])) {
-	            $tempPath = "map_files/templates/balloon_temp.html";
-	            $JSONPath = "map_files/data_for_map.json";
+	            $tempPath = "/map_files/templates/balloon_temp.html";
+	            $JSONPath = "/map_files/data_for_map.json";
 	            $coord_x = $_POST['coord_x'];
 	            $coord_y = $_POST['coord_y'];
 	            $coords = [$coord_x, $coord_y];
 
-	           /* $eventToDB = new \MapLib\EventGeoObjToDB($title, $begin_date, $address, $description, $coords,
-	                $JSONPath, $tempPath);
-	            $eventToDB->addEventToMap();
-	            $geoobjectID = $eventToDB->getId();*/
-	        } 
+	           	// $eventToDB = new MapLib\EventGeoObjToDB($title, $begin_date, $address, $description, $coords,
+	            //     $JSONPath, $tempPath);
+	            // $eventToDB->addEventToMap();
+	            // $geoobjectID = $eventToDB->getId();
+	        }
 	        // если была загружена картинка
 	        if ($_FILES['image']['error'] == 0) {
 
@@ -70,6 +72,8 @@ function eventCreate(){
 				    // Если файл загружен успешно, перемещаем его
 				    // из временной директории в конечную
 				    copy($_FILES["image"]["tmp_name"], $GLOBALS['root_dir']."/img/events/".$img);
+
+				    $img = '\''.$img.'\'';
 				    
 				} else {
 				    $form_err[] = "Ошибка загрузки файла";
@@ -93,10 +97,11 @@ function eventCreate(){
 	                    `ev_end_date`      	= ".$end_date.",
 	                    `ev_end_time`      	= ".$end_time.",
 	                    `ev_address`       	= ".$address.",
-	                    `ev_slug` 			= '".smart_cut(translit($title),20)."',
-	                    `ev_img`         	='".$img."',
+	                    `ev_slug` 			= '".smart_cut(translit($title),40)."',
+	                    `ev_img`         	= ".$img.",
 	                    `u_id`				= '".$user_id."'
 	               ";
+
 	            if($db->query($sql)){
 	            	$app['twig']->addGlobal('form_success', 'Форма сохранена успешно');
 	            }
@@ -118,10 +123,11 @@ function eventCreate(){
     $result = $db->query($sql);
    
     foreach ($db->query($sql) as $row ){ 
-    	$tags[] = $row;
+    		$tags[] = $row;
     	}
-		$app['twig']->addGlobal('tags', $tags);
-    	$app['twig']->addGlobal('POST', $_POST);
-    	$app['twig']->addGlobal('form_err', $form_err);
+
+	$app['twig']->addGlobal('tags', $tags);
+	$app['twig']->addGlobal('POST', $_POST);
+	$app['twig']->addGlobal('form_err', $form_err);
 	
 }

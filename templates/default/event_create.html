@@ -10,7 +10,7 @@
 <form class="container form-auth" action="/event_create" method="post" name="main" enctype="multipart/form-data">
  <div class="clearfix form-auth-content shadow-box">
     <h1 class="form-auth--header">Добавление события</h1>
-       {% if form_err is defined  %}
+       {% if (form_err is defined) and (form_err|length > 0) %}
   <div class="error"> <b>При добавлении новости произошли следующие ошибки:</b>
     {% for error in form_err %}
     {{ error }} {% endfor %} </div> {% endif %}
