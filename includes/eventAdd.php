@@ -10,6 +10,10 @@ function eventCreate(){
 			$form_err[] = "Необходимо заполнить название.";
 		}
 
+		if (empty($_POST['begin_date']) ) {
+			$form_err[] = "Необходимо заполнить дату начала.";
+		}
+
 		if (isset($_POST['tag']) && empty($_POST['tag']) ) {
 			$form_err[] = "Необходимо заполнить тэг.";
 		}

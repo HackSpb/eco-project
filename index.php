@@ -25,12 +25,12 @@ try {
     $db = new PDO($dsn, $user_db, $password_db);
     if($GLOBALS['DEBUG_MODE']){ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     }
-    //else $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //  else $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $db->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $db->query('SET NAMES \'utf8\'');
 
 } catch (\PDOException $e) {
-    if($DEBUG_MODE)print_r('connect to BD failed');
+    if($DEBUG_MODE)print_r('connect to DB failed');
 }
 
 $app = new Silex\Application();
@@ -116,9 +116,33 @@ $app->get('/map', function() use ($app) {
     //return $app['twig']->render('map.html');
 })->bind('map');
 
-$app->get('/admin/addPoint', function() use ($app) {
+//админка с правами
+$app->match('/admin/{module}', function($module) use ($app) {
+   if(!checkRights(5,$_SESSION['user'])) return $app['twig']->render('error404.html');
+    
+
+
+    switch ($module){
+        case 'addpoint':
+            if(!checkRights('admin',$_SESSION['user'])) exit("permission failed");
+            return $app['twig']->render('admin/addPointToMap.php');
+        break;
+        case 'edittags':
+            if(!checkRights('admin',$_SESSION['user'])) exit("permission failed");
+            include 'includes/admin/editTags.php';
+            echo CoreClasses\tags::getCoefficientByPatch(3000);
+    break;   
+    default:
+
+        return $app['twig']->render('error404.html');
+    break; 
+    }
+    return true;
+})->bind('admin');    
+
+/*$app->get('/admin/addPoint', function() use ($app) {
     return $app['twig']->render('admin/addPointToMap.php');
-})->bind('addPoint123');
+})->bind('addPoint123');*/
 
 // Страница авторизации
 $app->match('/auth', function() use ($app) {
