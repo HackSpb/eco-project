@@ -1,8 +1,7 @@
-
+<!--display:none;-->
 <div class="grid header-padding" >
-<div class="container centr" id="calendar" style="display:none;
-    max-width: 1024px;
-    width: 50%;
+<div class="container centr" id="calendar" style="
+    
 "></div>
   <script>
     function createCalendar(id, year, month) {
@@ -10,8 +9,10 @@
 
       var mon = month - 1; // месяцы в JS идут от 0 до 11, а не от 1 до 12
       var d = new Date(year, mon);
-
-      var table = '<table><tr><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr><tr>';
+//132x90
+      var table = '<div class="calendar-nav"><div class="calendar-nav_btn--settings">==</div><div class="calendar-nav_btn--date"><Месяц Год></div> <div class="calendar-nav_btn--table"></div><div class="calendar-nav_btn--list"></div></div>'
+								+ '<table class="calendar">'
+								+ '<tr class="calendar-dayofweek"><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr><tr>';
 
       // заполнить первый ряд от понедельника
       // и до дня, с которого начинается месяц
@@ -22,7 +23,10 @@
 
       // ячейки календаря с датами
       while (d.getMonth() == mon) {
-        table += '<td>' + d.getDate() + '</td>';
+        table += '<td class="calendar-day">' 
+							+ '<li>' + d.getDate() + '</li>'
+							+ '<li class="calendar-day_event">' + 'Событие №' + d.getDate() + '</li>'
+							+ '</td>';
 
         if (getDay(d) % 7 == 6) { // вс, последний день - перевод строки
           table += '</tr><tr>';
@@ -50,9 +54,6 @@
       if (day == 0) day = 7;
       return day - 1;
     }
-
-
-
     createCalendar("calendar", 2016, 8)
   </script>
 </div>

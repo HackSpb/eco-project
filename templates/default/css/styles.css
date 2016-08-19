@@ -1249,6 +1249,66 @@ p.copyright {
     padding: 0;
     margin: 0; }
 
+#calendar {
+  display: none;
+  max-width: 1024px; }
+
+.calendar {
+  max-width: 924px;
+  border-collapse: collapse; }
+  .calendar li {
+    list-style: none;
+    margin: 2px;
+    font-weight: 300;
+    font-size: 14px; }
+  .calendar th, .calendar td {
+    width: 132px;
+    background-color: rgba(255, 255, 255, 0.349);
+    vertical-align: top; }
+  .calendar th {
+    font-weight: 300;
+    text-transform: uppercase;
+    vertical-align: middle; }
+    .calendar th:first-child {
+      text-align: left; }
+    .calendar th:last-child {
+      text-align: right; }
+  .calendar-day {
+    height: 90px; }
+    .calendar-dayofweek {
+      height: 32px; }
+    .calendar-day_event {
+      background-color: aqua; }
+  .calendar-nav {
+    font-weight: 500;
+    text-transform: uppercase;
+    height: 47px;
+    max-width: 924px;
+    z-index: 100;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.271);
+    box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4); }
+    .calendar-nav div {
+      padding: 10px;
+      height: 100%;
+      display: inline-block;
+      float: left; }
+      .calendar-nav div:hover {
+        background-color: #ffb74d; }
+    .calendar-nav_btn--table {
+      background: url("/templates/default/images/sprites/calendar/calend-test.png") no-repeat;
+      width: 66px;
+      background-origin: content-box; }
+    .calendar-nav_btn--list {
+      background: url("/templates/default/images/sprites/calendar/calend-test.png") no-repeat;
+      width: 66px;
+      background-origin: content-box; }
+    .calendar-nav_btn--date {
+      width: 660px;
+      text-align: center; }
+    .calendar-nav_btn--settings {
+      width: 132px; }
+
 .for-note {
   padding-bottom: 0 !important;
   margin-bottom: 0 !important; }

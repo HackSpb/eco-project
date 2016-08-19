@@ -1,0 +1,76 @@
+$table-elem-width: 132px;
+#calendar{
+	display: none;
+	max-width: 1024px;
+}
+.calendar{
+	max-width: $table-elem-width * 7;
+	border-collapse: collapse;
+	li{
+		list-style: none;
+		margin: 2px;
+		font-weight: 300;
+  	font-size: 14px;
+	}
+	th, td{
+		width: $table-elem-width; 
+		background-color: rgba(255, 255, 255, 0.349);
+		vertical-align: top;
+	}
+	th{
+		font-weight: 300;
+		text-transform: uppercase;
+		vertical-align: middle;
+		&:first-child{text-align: left;}
+		&:last-child{text-align: right;}
+	}
+	&-day{
+		height: 90px;
+		&ofweek{
+			height: 32px;
+		}
+		&_event{
+//			width: 100%;
+			background-color: aqua;
+		}
+	}
+	&-nav{
+		font-weight: 500;
+		text-transform: uppercase;
+		height: 47px;
+		max-width: $table-elem-width * 7;
+		z-index: 100;
+    position: relative;
+		background-color: rgba(255, 255, 255,0.271);
+  	box-shadow: 0px 12px 20px 0px rgba(0, 0, 0, 0.4);
+		div{
+			padding: 10px;
+			height: 100%;
+			display:inline-block;
+			&:hover{
+				background-color: #ffb74d;
+			}
+			float: left;
+		}
+		&_btn{
+			&--table{
+				background: url('#{$rootPATH}/images/sprites/calendar/calend-test.png') no-repeat;
+				
+				width: $table-elem-width / 2;
+				background-origin: content-box;
+			}
+			&--list{
+				background: url('#{$rootPATH}/images/sprites/calendar/calend-test.png') no-repeat;
+		    width: $table-elem-width / 2;
+				background-origin: content-box;
+			}
+			&--date{
+				width: $table-elem-width * 5;
+				text-align: center;
+			}
+			&--settings{
+				width: $table-elem-width;
+			}
+		}
+	}
+}
