@@ -104,10 +104,10 @@ CustomValidation.prototype = {
 var usernameValidityChecks = [
 	{
 		isInvalid: function(input) {
-			return input.value.length < 3;
+			return input.value.length < 3| input.value.length > 50;
 		},
 		//This input needs to be at least 3 characters
-		invalidityMessage: 'От 3 символов',
+		invalidityMessage: 'От 3 символов до 50',
 		element: document.querySelector('label[for="username"] .input-requirements li:nth-child(1)')
 	},
 	{
@@ -124,28 +124,28 @@ var usernameValidityChecks = [
 var passwordValidityChecks = [
 	{
 		isInvalid: function(input) {
-			return input.value.length < 8 | input.value.length > 100;
+			return input.value.length < 6 | input.value.length > 100;
 		},
 		//This input needs to be between 8 and 100 characters
-		invalidityMessage: 'От 8 до 100 символов',
+		invalidityMessage: 'От 6 до 100 символов',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(1)')
 	},
-	{
+	/*{
 		isInvalid: function(input) {
 			return !input.value.match(/[0-9]/g);
 		},
 		//At least 1 number is required
 		invalidityMessage: 'Минимум 1 цифра',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(2)')
-	},
+	},*/
 	{
 		isInvalid: function(input) {
-			return !input.value.match(/[a-z]/g);
+			return !input.value.match(/[A-Za-z]/g);
 		},
 		//At least 1 lowercase letter is required
-		invalidityMessage: 'Минимум 1 строчная буква',
-		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(3)')
-	},
+		invalidityMessage: 'Минимум 1  буква',
+		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(2)')
+	}/*,
 	{
 		isInvalid: function(input) {
 			return !input.value.match(/[A-Z]/g);
@@ -153,15 +153,15 @@ var passwordValidityChecks = [
 		//At least 1 uppercase letter is required
 		invalidityMessage: 'Минимум 1 заглавная буква',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(4)')
-	},
-	{
+	},*/
+	/*{
 		isInvalid: function(input) {
 			return !input.value.match(/[\!\@\#\$\%\^\&\*]/g);
 		},
 		//You need one of the required special characters
 		invalidityMessage: 'Минимум 1 спец символ @',
 		element: document.querySelector('label[for="password"] .input-requirements li:nth-child(5)')
-	}
+	}*/
 ];
 
 var passwordRepeatValidityChecks = [
