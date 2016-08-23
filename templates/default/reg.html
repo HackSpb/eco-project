@@ -15,10 +15,10 @@
                     {% endfor %}
                 </div>
             {% endif %}
-            <input id="email" class="form-auth-input" type='email' name='email' value="{{ POST }}" placeholder="Email" required>
+            <input id="email" class="form-auth-input" type='email' name='email' value="{{ POST }}" placeholder="Email" required minlength="6">
             <label for="password">
-            <input id="password" class="form-auth-input" type="password" name="password" value="" placeholder="Пароль" required>
-            <ul class="input-requirements">
+            <input id="password" class="form-auth-input" type="password" name="password" value="" placeholder="Пароль" required minlength="6">
+            <ul class="input-requirements" >
 							<li>Длинна более 6 символов</li>
 							<li>Содержит минимум 1 букву</li>
         		</ul>

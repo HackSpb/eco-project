@@ -11,9 +11,9 @@
             {% if err  is defined %}
             <div class="error"> <b>При авторизации произошли следующие ошибки:</b>
             {% for error in err %} {{ error }}, {% endfor %} </div> {% endif %}
-            <input id="email" class="form-auth-input" type='email' name='email' value="{{ POST }}" placeholder="Email" required minlength="3">
+            <input id="email" class="form-auth-input" type='email' name='email' value="{{ POST }}" placeholder="Email" required minlength="6">
             <label for="password">
-            <input id="password" class="form-auth-input" type="password" name="password" value="" placeholder="Пароль" required maxlength="100" minlength="8">
+            <input id="password" class="form-auth-input" type="password" name="password" value="" placeholder="Пароль" required maxlength="100" minlength="6">
             <ul class="input-requirements">
 							<li>Длинна более 6 символов</li>
 							<li>Содержит минимум 1 букву</li>
