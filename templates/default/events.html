@@ -77,7 +77,9 @@
         {% endif %}
         
         {% if (event.ev_address is not null ) %}
-         <br/><span class="icon-map_black"></span> {{event.ev_address}}
+          {% for address in event.ev_address %}
+          <br/><span class="icon-map_black"></span> {{address}}
+          {% endfor %}
         {% endif %}
         </p>
       </figcaption>

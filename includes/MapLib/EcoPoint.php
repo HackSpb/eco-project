@@ -26,6 +26,10 @@ abstract class EcoPoint
     abstract function updatePoint($objectID);
 
     abstract function deletePoint($objectID);
+    
+    abstract function createJSONArray();
+    
+    abstract function saveToDB(PDO $db, $objID);
 
 
     /**

@@ -21,18 +21,25 @@ class EventEcoPoint extends EcoPoint
     protected $eventAddress;
     protected $eventDescription;
     public $isActive;
+    protected $address;
 
-    function __construct(array $coordinates, array $eventDatetime, array $info)
+    function __construct(array $coordinates, array $info, array $dateTime = NULL, $geoObjectID = NULL)
     {
-        // TODO: Написать конструктор для событий
         $this->coordinates = $coordinates;
         $this->pointName = $info['pointName'];
         $this->eventDescription = $info['description'];
-        $this->eventCreateDate = $eventDatetime['createDate'];
-        $this->eventBeginDate = $eventDatetime['beginDate'];
-        $this->eventBeginTime = $eventDatetime['beginTime'];
-        $this->eventEndDate = $eventDatetime['endDate'];
-        $this->eventEndTime = $eventDatetime['endTime'];
+        $this->mapIcon = new EventMapIcon();
+        $this->address = $info['address'];
+
+        if (!is_null($dateTime)) {
+            $this->eventBeginDate = $dateTime['beginDate'];
+            $this->eventBeginTime = $dateTime['beginTime'];
+            $this->eventEndDate = $dateTime['endDate'];
+            $this->eventEndTime = $dateTime['endTime'];
+        }
+
+        if (!is_null($geoObjectID))
+            $this->objectID = $geoObjectID;
     }
 
     function createPoint()
@@ -50,18 +57,64 @@ class EventEcoPoint extends EcoPoint
         // TODO: Implement deletePoint() method.
     }
 
-    static function saveToDB(PDO $db)
+    /**
+     * Сохраняет информацию о новой точке в базу данных
+     * 
+     * @param PDO $db подключение к базе данных
+     * @param $objID
+     */
+    function saveToDB(PDO $db, $objID)
     {
-        // TODO: Implement saveToDB() method.
+        $sql = 'INSERT INTO `geo_points` (obj_id, geo_x, geo_y, geo_address) VALUES (:id, :geo_x, :geo_y, :address)';
+        $stmt = $db->prepare($sql);
+        $this->objectID = $objID;
+        
+        $pointData = array(
+            'id' => $objID,
+            'geo_x' => $this->getXCoordinate(),
+            'geo_y' => $this->getYCoordinate(),
+            'address' => $this->address
+        );
+        
+        $stmt->execute($pointData);
+
     }
 
-    function isActive() {
-        $dateFormat = '';
-        $beginDateTime = \DateTime::createFromFormat($dateFormat, $this->eventBeginDate.$this->eventBeginTime);
-        $endDateTime = \DateTime::createFromFormat($dateFormat, $this->eventEndDate.$this->eventEndTime);
 
-        $diff = $beginDateTime->diff($endDateTime);
+    /**
+     * Возвращает массив, который будет преобразован в JSON файл,
+     * используемый для создания точек на карте
+     *
+     * @return array
+     */
+    function createJSONArray() {
+        // TODO: Сделать, чтобы строка контента метки формировалась из шаблона
+        $balloonContentBodyString = "Начало: $this->eventBeginDate $this->eventBeginTime <br> 
+                                     Конец: $this->eventEndDate $this->eventEndTime <br>
+                                     Адрес: $this->address <br>
+                                     Описание: $this->eventDescription";
 
-        return $diff;
+        $JSONArray = array(
+            'type' => 'feature',
+            'id' => $this->objectID,
+            'geometry' => array(
+                'type' => 'Point',
+                'coordinates' => array(
+                    $this->getXCoordinate(),
+                    $this->getYCoordinate()
+                )
+            ),
+            'options' => array(
+                'preset' => $this->mapIcon->getIconName()
+            ),
+            'properties' => array(
+                'balloonContentHeader' => $this->pointName,
+                'balloonContentBody' => $balloonContentBodyString
+            ),
+            'hintContent' => $this->pointName,
+            'hintHideTimeout' => 0
+        );
+
+        return $JSONArray;
     }
 }

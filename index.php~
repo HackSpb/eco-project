@@ -1,6 +1,9 @@
-<?php
+l<?php
 
 require_once __DIR__.'/vendor/autoload.php';
+/*include_once 'includes/map_lib/DataBaseConnection.php';
+include_once 'includes/map_lib/EventGeoObjToDB.php';
+include_once 'includes/map_lib/BalloonTempComposer.php';*/
 
 include 'config.php';
 
@@ -69,12 +72,7 @@ if( isset($_SESSION['user']) ){
 $app->get('//', function() use ($app) {
 
     include_once 'includes/eventsList.php';
-    include_once 'includes/mapList.php';
-    
     loadLastEvents();
-    loadMapPoints();
-    
-    
 
 	return $app['twig']->render('index.html');
 })->bind('index');

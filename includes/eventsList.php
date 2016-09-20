@@ -16,6 +16,7 @@ function loadLastEvents(){
     	Limit 0,15";
 
     foreach ($db->query($sql) as $row) {
+        $row['ev_address'] = preg_split('/[|]/', $row['ev_address']);
         $events[] = $row;
     }
     $app['twig']->addGlobal('events', $events);

@@ -1,6 +1,7 @@
 <?php
 
 function eventCreate(){
+	header('Content-Type: text/html; charset=utf-8');
 
 	global  $app, $db, $form_err;
 	// если нажали на кнопку
@@ -34,22 +35,22 @@ function eventCreate(){
 			$end_date = ( isset($_POST['end_date']) && !empty($_POST['end_date']) ) ? '\''.$_POST['end_date'].'\'' : 'NULL';
 			$begin_time = ( isset($_POST['begin_time']) && !empty($_POST['begin_time']) ) ? '\''.$_POST['begin_time'].'\'' : 'NULL';
 			$end_time = ( isset($_POST['end_time']) && !empty($_POST['end_time']) ) ? '\''.$_POST['end_time'].'\'' : 'NULL';
-			$address = ( isset($_POST['location']) && !empty($_POST['location']) ) ? '\''.$_POST['location'].'\'' : 'NULL';
+//			$address = ( isset($_POST['location']) && !empty($_POST['location']) ) ? '\''.$_POST['location'].'\'' : 'NULL';
 			$user_id = $_SESSION['user']['u_id'];
+			$address = "";
 
-			// сохранение координаты (х, у) на карте
-	        if (isset($_POST['coord_x']) && !empty($_POST['coord_x']) && isset($_POST['coord_y']) && !empty($_POST['coord_y'])) {
-	            $tempPath = "/map_files/templates/balloon_temp.html";
-	            $JSONPath = "/map_files/data_for_map.json";
-	            $coord_x = $_POST['coord_x'];
-	            $coord_y = $_POST['coord_y'];
-	            $coords = [$coord_x, $coord_y];
+			// Создание нужного формата для строки адреса для сохранения в базу данных
+			if (isset($_POST['location']) && !empty($_POST['location'])) {
+				for ($i = 0; $i < count($_POST['location']); $i++) {
+					if ($i == 0)
+						$address .= $_POST['location'][$i];
+					else
+						$address .= '|'.$_POST['location'][$i];
 
-	           	// $eventToDB = new MapLib\EventGeoObjToDB($title, $begin_date, $address, $description, $coords,
-	            //     $JSONPath, $tempPath);
-	            // $eventToDB->addEventToMap();
-	            // $geoobjectID = $eventToDB->getId();
-	        }
+				}
+			}
+
+
 	        // если была загружена картинка
 	        if ($_FILES['image']['error'] == 0) {
 
@@ -88,7 +89,7 @@ function eventCreate(){
 
 	        // Если нет ошибок, то сохраняем новость в БД
         	if(count($form_err) == 0) {
-
+				$db->beginTransaction();
 	            $sql ="
 	                INSERT INTO 
 	                    `events`
@@ -100,7 +101,7 @@ function eventCreate(){
 	                    `ev_begin_time`    	= ".$begin_time.",
 	                    `ev_end_date`      	= ".$end_date.",
 	                    `ev_end_time`      	= ".$end_time.",
-	                    `ev_address`       	= ".$address.",
+	                    `ev_address`       	= '".$address."',
 	                    `ev_slug` 			= '".smart_cut(translit($title),40)."',
 	                    `ev_img`         	= ".$img.",
 	                    `u_id`				= '".$user_id."'
@@ -111,11 +112,37 @@ function eventCreate(){
 	            }
 	           	else {
 	            	 $form_err[] = "Ошибка сохранения данных";
-	            } 
+	            }
 
+				$sql = "SELECT ev_id FROM `events` WHERE ev_title = :title AND ev_description = :descr";
+				$sth = $db->prepare($sql);
+				$sth->execute(array('title' => $title, 'descr' => $description));
+                $id = $sth->fetchColumn();
+
+				$sql = "INSERT INTO `objects` SET ev_id = :id";
+				$sth = $db->prepare($sql);
+                $sth->execute(array('id' => $id));
+
+				$sql = "SELECT obj_id FROM `objects` WHERE ev_id = :ev_id";
+				$sth = $db->prepare($sql);
+				$sth->execute(array('ev_id' => $id));
+				$db->commit();
+
+				$objID = $sth->fetchColumn();
+
+
+				// Добавляем точки с карты в базу данных
+				$addresses = preg_split('/[|]/', $address);
+				for ($i = 0; $i < count($_POST['coord_x']) && $i < count($_POST['coord_y']); $i++) {
+					$coordinates = array($_POST['coord_x'][$i], $_POST['coord_y'][$i]);
+					$info = array('pointName' => $title, 'description' => $description, 'address' => $addresses[$i]);
+					$eventPoint = new \MapLib\EventEcoPoint($coordinates, $info);
+					$eventPoint->saveToDB($db, $objID);
+				}
+
+				
 	            // возвращаемся на главную  страницу
 	            //header("Location: /"); exit();
-	            
 
         	}
 
