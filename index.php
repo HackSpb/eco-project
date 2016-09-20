@@ -97,7 +97,6 @@ $app->get('/calendar', function() use ($app) {
     loadLastEvents();
 
     return $app['twig']->render('index.html');
-	//return $app['twig']->render('google-calendar.html');
 })->bind('calendar');
 
 // Страница регистрации нового пользователя

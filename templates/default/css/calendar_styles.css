@@ -1,0 +1,43 @@
+#calendar-block {
+	display: block;
+	left: 50%;
+	width: 470px;
+	text-align: center;
+	top: 100px;
+	height: 500px;
+	background-color: rgba(255, 255, 255, 0.349);
+	margin-left: 120px;
+}
+
+#calendar-head {
+	font-size: 24px;
+	background-color: rgba(255, 255, 255, 0.5);
+	width: 100%;
+	margin: 0;
+	box-shadow: 0px 0px 5px #777, 0px 3px 5px #000;
+
+}
+
+#list-calendarType {
+	-moz-transform: rotate(90deg); /* Для Firefox */
+    -ms-transform: rotate(90deg); /* Для IE */
+    -webkit-transform: rotate(90deg); /* Для Safari, Chrome, iOS */
+    -o-transform: rotate(90deg); /* Для Opera */
+    transform: rotate(90deg);
+}
+
+#calendar-head-menu {
+	background-color: rgba(255, 255, 255, 0.7);
+	padding-right: 40px;
+}
+
+#calendar-content {
+	overflow-y: scroll;
+}
+
+#calendar-loading {
+	background-image: url(../images/loading.gif);
+	width: 32px;
+	height: 32px;
+	display: none;
+}
