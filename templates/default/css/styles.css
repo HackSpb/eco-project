@@ -1165,7 +1165,8 @@ p.copyright {
   height: 300px;
   margin: 0 auto; }
 .map-container {
-  padding: 85px 40px 0 20px; }
+  padding: 85px 40px 0 20px;
+  min-height: 150px; }
 
 .ymaps-2-1-42-traffic {
   display: none !important; }

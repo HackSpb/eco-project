@@ -1,5 +1,5 @@
   <!-- Встраеваемый контент-->
-  <div class="map-container grid grid-pad">
+  <div class="map-container">
     <div id="map">
       
      <!--  <ul class="dropdown">
@@ -55,11 +55,11 @@ $(document).ready(function () {
 
 });
 
-function reload_width(){
-  $("#map").width('100%');
-  if($( window ).height()<700)$("#map").height($( window ).height()-200);
-  else $("#map").height($( window ).height()-200);
-
+  function reload_width(){
+    $(".map-container").width($( window ).width()-40);
+  $("#map").height($( window ).height()-230);
+  $(".news").css('min-height', $( window ).height()-200);
+$(".page-content").height('100%');
 }
 
 </script>
