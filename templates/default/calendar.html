@@ -2,7 +2,7 @@
   <div class="container centr" id="calendar" style=""></div>
 
   <!-- Calendar block -->
-  <div class="grid container" style="width:50vw;height:50vw;">
+  <div class="grid container" style="width:50vw;height:auto;">
     <div id="calendar-block">
       <div id="calendar-head" class="row">
         <div id="calendar-head-menu" class="col-xs-1">
@@ -10,9 +10,9 @@
         </div>
         <div id="calendar-head-month" class="col-xs-8">
           <div id="month">
-            <span class="glyphicon glyphicon-chevron-left"></span>
+            <span id="left" class="glyphicon glyphicon-chevron-left" onclick="decreaseSelectedMonth();"></span>
             <b id="MonthYear-string">Месяц</b>
-            <span class="glyphicon glyphicon-chevron-right"></span>
+            <span id="right" class="glyphicon glyphicon-chevron-right" onclick="increaseSelectedMonth();"></span>
           </div>
         </div>
         <div id="calendar-head-calType1" class="col-xs-1">
@@ -24,8 +24,39 @@
       </div>
 
       <div id="calendar-content">
-        <div id="calendar-loading">
-          
+        <div id="calendar-loading"></div>
+        <div id="calendar-content-container">
+          <article>
+            <div class="row">
+              <div class="calendar-date col-xs-2">
+                <p class="calendar-date-dayNum">31</p>
+                <p class="calendar-date-day">Сб</p>
+              </div>
+              <div class="calendar-text col-xs-9">
+                <p><b>Lorem ipsum dolor sit amet,</b></p>
+                <p>Lorem ipsum dolor sit amet,</p>
+                <p>10:50</p>
+              </div>
+            </div>
+          </article>
+          {% for event in calendar %}
+          <article>
+            <div class="row">
+              <div class="calendar-date col-xs-2">
+                <p class="calendar-date-dayNum">{{event.beginDateDay}}</p>
+                <p class="calendar-date-day">{{event.DayOfWeek}}</p>
+              </div>
+              <div class="calendar-text col-xs-9">
+                <p><b>{{event.name}}</b></p>
+                <p>{{event.address}}</p>
+                <p>{{event.beginTime}}</p>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+        <div id="load-more">
+          Показать еще
         </div>
       </div>
     </div>

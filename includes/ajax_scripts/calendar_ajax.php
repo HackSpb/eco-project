@@ -1,42 +1,47 @@
 <?php
 define('PATH', $_SERVER['DOCUMENT_ROOT']);
 
+header('Content-Type: text/html; charset=utf-8');
+
 
 spl_autoload_register(function ($class) {
-	
-	require_once PATH.'/includes/EventLib/'.$class.'.php';
+    require_once PATH . '/includes/EventLib/' . $class . '.php';
 });
 
 
-require_once PATH.'/local.config.php';
+$filename = PATH . '/local.config.php';
+if (file_exists($filename))
+    require_once $filename;
+else
+    require_once PATH . '/config.php';
+
+
 try {
-	$db = new PDO($dsn, $user_db, $password_db);
-}
-catch(PDOExeption $e) {
-	print_r('Ошибка подключения к базе данных');
+    $db = new PDO($dsn, $user_db, $password_db);
+} catch (PDOException $e) {
+    print_r('Ошибка подключения к базе данных');
 }
 
-if (isset($_GET['month']) && isset($_GET['year'])) {
-	$month = $_GET['month'];
-	$year = $_GET['year'];
-}
-else {
-	// $month = 4;
-	// $year = 2016;
-}
+$db->query('SET NAMES \'utf8\'');
+
+if (!empty($_GET['limit']))
+    $limit = intval($_GET['limit']);
+else
+    throw new Exception('Ошибка');
 
 $calendar = new EventContainer();
-$eventTable = new EventsTableGateWay($db);
+$eventsTable = new EventsTableGateWay($db);
 
-$eventTableData = $eventTable->getDataForCalendar($month, $year);
-foreach ($eventTableData as $item) {
-	$event = new Event();
-	$event->setDataFromArray($item);
-	$calendar->add($event);
+$data = $eventsTable->getCalendarListData($limit);
+foreach ($data as $row) {
+    $event = new Event();
+    $event->setDataFromArray($row);
+    $calendar->add($event);
 }
 
-header('Content-Type: application/json');
 
 $json = $calendar->crateJSON();
+
+header('Content-Type: application/json; charset=utf-8');
 
 echo $json;

@@ -4,7 +4,8 @@
 	width: 470px;
 	text-align: center;
 	top: 100px;
-	height: 500px;
+	height: auto;
+	/*overflow: auto;*/
 	background-color: rgba(255, 255, 255, 0.349);
 	margin-left: 120px;
 }
@@ -32,7 +33,10 @@
 }
 
 #calendar-content {
-	overflow-y: scroll;
+	display: block;
+	height: auto;
+	/*overflow: auto;*/
+
 }
 
 #calendar-loading {
@@ -40,4 +44,55 @@
 	width: 32px;
 	height: 32px;
 	display: none;
+}
+
+#left {
+	display: block;
+}
+
+#left :hover {
+	display: block;
+	cursor: pointer;
+}
+
+#right {
+	display: block;
+	cursor: pointer;
+}
+
+#right :hover {
+	display: block;
+	cursor: pointer;
+}
+
+article {
+	margin: 20px;
+	display: block;
+	width: auto;
+	height: auto;
+
+}
+
+.calendar-date {
+
+}
+
+.calendar-text {
+	background-color: #ccff90;
+	display: block;
+	text-align: left;
+	-ms-text-justify: auto;
+	text-justify: auto;
+}
+
+article p {
+	margin: 0;
+}
+
+.calendar-date-dayNum {
+	font-size: 26px;
+}
+
+.calendar-date-day {
+	font-size: 10px;
 }

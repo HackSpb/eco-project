@@ -70,10 +70,11 @@ $app->get('//', function() use ($app) {
 
     include_once 'includes/eventsList.php';
     include_once 'includes/mapList.php';
+    include_once 'includes/calendarFeatures.php';
     
     loadLastEvents();
     loadMapPoints();
-    
+    initCalendar();
     
 
 	return $app['twig']->render('index.html');
