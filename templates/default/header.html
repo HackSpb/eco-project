@@ -44,7 +44,7 @@
                 <li>Привет, {{ user.u_email }}!</li>
                 {% else %}
                 <li onclick="location.href='/reg'">Стать жителем MyEcoCity</li>
-                <li onclick="location.href='/auth'">Уже прописаны у нас?</li>
+                <li onclick="location.href='/auth'">Войти в город</li>
                 {% endif %}
               </ul>
               {% if user.u_id is defined %}
@@ -59,12 +59,13 @@
       <nav class="nav clearfix">
         <ul class="centr">
           <!-- Грязный хак против отступов -->
-          <li><a href="/">Карта</a></li><li> 
-          <a href="/">Новости</a></li><li>
-          <a href="/">Календарь</a></li>
+          <li><a href='/'>Главная</a></li>
+          <li><a href='/reg'>Стать жителем MyEcoCity</a></li>
+          <li><a href='/auth'>Войти в город</a></li>
+          
           <!-- Грязный хак против отступов -->
         </ul>
-        <div class="MyEcoSity"><a href="/#" id="pull">MyEcoCity</a></div>
+        <div class="MyEcoSity"><a href="/#" id="pull"><span class="icon-menu"></span> MyEcoCity</a></div>
       </nav>
       <!--menu end!-->
       <!--content start-->

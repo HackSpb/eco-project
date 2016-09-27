@@ -411,7 +411,7 @@ textarea {
   clear: both; }
 
 .grid-pad {
-  padding-top: 20px;
+  padding-top: 85px;
   padding-left: 20px;
   /* grid-space to left */
   padding-right: 0;
@@ -709,7 +709,7 @@ body {
   position: relative;
   min-height: 100%;
   background-color: #cccccc;
-  background: url("/templates/default/images/background.png") no-repeat fixed right top;
+  background: url("/templates/default/images/background.jpg") no-repeat fixed right top;
   background-size: cover;
   box-sizing: border-box;
   width: 100%;
@@ -1021,7 +1021,12 @@ input[type=checkbox]:checked + label.for-check:before {
     .header .right li:nth-child(1) {
       color: #057200;
       font-weight: bold;
-      border-bottom: 1px solid #057200; }
+      border-bottom: 1px solid #057200;
+      cursor: pointer;   }
+          .header .right li:nth-child(2) {
+      color: #057200;
+      font-weight: bold;
+      cursor: pointer;  }
   .header .add {
     border-radius: 50px;
     width: 244px;
@@ -1106,7 +1111,7 @@ input[type=checkbox]:checked + label.for-check:before {
       display: none; }
     .nav a#pull:after {
       content: "";
-      background: url(../images/Background/nav-icon.png) no-repeat;
+      
       width: 37px;
       height: 37px;
       display: inline-block;
@@ -1160,7 +1165,7 @@ p.copyright {
   height: 300px;
   margin: 0 auto; }
 .map-container {
-  padding: 60px 20px; }
+  padding: 85px 40px 0 20px; }
 
 .ymaps-2-1-42-traffic {
   display: none !important; }
