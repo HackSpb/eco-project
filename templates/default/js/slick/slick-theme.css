@@ -45,29 +45,29 @@
     -moz-osx-font-smoothing: grayscale; }
 
 .slick-prev {
-  left: 50px;
+  left: 5px;
   z-index: 50000; }
   [dir="rtl"] .slick-prev {
     left: auto;
     right: 0px; }
   .slick-prev:before {
     color: black;
-    content: "H";
-    font-size: 60px; }
+    content: "E";
+    font-size: 50px; }
     [dir="rtl"] .slick-prev:before {
-      content: "O"; }
+      content: "A"; }
 
 .slick-next {
-  right: 150px; }
+  right: 45px; }
   [dir="rtl"] .slick-next {
     left: 0px;
     right: auto; }
   .slick-next:before {
     color: black;
-    font-size: 60px;
-    content: "O"; }
+    font-size: 50px;
+    content: "I"; }
     [dir="rtl"] .slick-next:before {
-      content: "H"; }
+      content: "A"; }
 
 /* Dots */
 .slick-dotted.slick-slider {
