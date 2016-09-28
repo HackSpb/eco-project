@@ -1,13 +1,14 @@
 #calendar-block {
 	display: block;
 	left: 50%;
-	width: 470px;
+	width: 100%;
+	max-width: 600px;
 	text-align: center;
 	top: 100px;
 	height: auto;
 	/*overflow: auto;*/
 	background-color: rgba(255, 255, 255, 0.349);
-	margin-left: 120px;
+	margin: 0 auto;
 }
 
 #calendar-head {
