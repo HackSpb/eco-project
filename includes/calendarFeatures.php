@@ -19,7 +19,6 @@ function initCalendar() {
         $event = new Event();
         $event->setDataFromArray($value);
         $calendar->add($event);
-
     }
 
 

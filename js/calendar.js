@@ -42,29 +42,32 @@ function getEventData(limit) {
         data: ({"limit": limit}),
         dataType: 'json',
         success: function (json) {
-            $.each(json, function (index, value) {
-                $('#calendar-content-container').append('' +
-                    '<article>' +
+            if (json.length > 0) {
+
+                $.each(json, function (index, value) {
+                    $('#calendar-content-container').append('' +
+                        '<article>' +
                         '<div class="row">' +
-                            '<div class="calendar-date col-xs-2">' +
-                                '<p class="calendar-date-dayNum">' + value['beginDateDay'] + '</p>' +
-                                '<p class="calendar-date-day">' + value['DayOfWeek'] + '</p>' +
-                            '</div>' +
-                            '<div class="calendar-text col-xs-9">' +
-                                '<p><b>' + value['name'] + '</b></p>' +
-                                '<p>' + value['address'] + '</p>' +
-                                '<p>' + value['beginTime'] +'</p>' +
-                            '</div>' +
+                        '<div class="calendar-date col-xs-2">' +
+                        '<p class="calendar-date-dayNum">' + value['beginDateDay'] + '</p>' +
+                        '<p class="calendar-date-day">' + value['DayOfWeek'] + '</p>' +
                         '</div>' +
-                    '</article>');
-                
+                        '<div class="calendar-text col-xs-9">' +
+                        '<p><b>' + value['name'] + '</b></p>' +
+                        '<p>' + value['address'] + '</p>' +
+                        '<p>' + value['beginTime'] + '</p>' +
+                        '</div>' +
+                        '</div>' +
+                        '</article>');
 
+                    $('#calendar-content-container').height('auto');
 
-                $('#calendar-content-container').height('auto');
-                
-            });
+                });
 
-            counter += 5;
+                counter += 5;
+            }
+            else
+                $('#load-more').hide();
         },
         error: function (XMLHttpRequest, textStatus, errorThrown) {
             console.log(textStatus);

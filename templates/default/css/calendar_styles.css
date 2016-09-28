@@ -72,6 +72,10 @@
 	cursor: pointer;
 }
 
+#calendar-content-container {
+	height: auto;
+}
+
 article {
 	margin: 20px;
 	display: block;

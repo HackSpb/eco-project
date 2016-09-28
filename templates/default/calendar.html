@@ -10,9 +10,9 @@
         </div>
         <div id="calendar-head-month" class="col-xs-8">
           <div id="month">
-            <span id="left" class="glyphicon glyphicon-chevron-left" onclick="decreaseSelectedMonth();"></span>
-            <b id="MonthYear-string">...</b>
-            <span id="right" class="glyphicon glyphicon-chevron-right" onclick="increaseSelectedMonth();"></span>
+            <!--<span id="left" class="glyphicon glyphicon-chevron-left" onclick="decreaseSelectedMonth();"></span>-->
+            <b id="MonthYear-string">&nbsp;</b>
+            <!--<span id="right" class="glyphicon glyphicon-chevron-right" onclick="increaseSelectedMonth();"></span>-->
           </div>
         </div>
         <div id="calendar-head-calType1" class="col-xs-1">
@@ -26,6 +26,24 @@
       <div id="calendar-content">
         <div id="calendar-loading"></div>
         <div id="calendar-content-container">
+
+          {% if calendar %}
+            {% for event in calendar %}
+            <article>
+              <div class="row">
+                <div class="calendar-date col-xs-2">
+                  <p class="calendar-date-dayNum">{{event.beginDateDay}}</p>
+                  <p class="calendar-date-day">{{event.DayOfWeek}}</p>
+                </div>
+                <div class="calendar-text col-xs-9">
+                  <p><b>{{event.name}}</b></p>
+                  <p>{{event.address}}</p>
+                  <p>{{event.beginTime}}</p>
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+          {% else %}
           <article>
             <div class="row">
               <div class="calendar-date col-xs-2">
@@ -37,25 +55,12 @@
               </div>
             </div>
           </article>
-          {% for event in calendar %}
-          <article>
-            <div class="row">
-              <div class="calendar-date col-xs-2">
-                <p class="calendar-date-dayNum">{{event.beginDateDay}}</p>
-                <p class="calendar-date-day">{{event.DayOfWeek}}</p>
-              </div>
-              <div class="calendar-text col-xs-9">
-                <p><b>{{event.name}}</b></p>
-                <p>{{event.address}}</p>
-                <p>{{event.beginTime}}</p>
-              </div>
-            </div>
-          </article>
-          {% endfor %}
+          {% endif %}
         </div>
         <div id="load-more">
           Показать еще
         </div>
+        <p> &nbsp;</p>
       </div>
     </div>
   </div>
