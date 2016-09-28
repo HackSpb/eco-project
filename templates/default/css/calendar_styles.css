@@ -19,6 +19,12 @@
 	box-shadow: 0px 0px 5px #777, 0px 3px 5px #000;
 
 }
+#month{
+
+	flex-wrap: nowrap;
+    display: flex;
+        justify-content: center;
+}
 
 #list-calendarType {
 	-moz-transform: rotate(90deg); /* Для Firefox */
