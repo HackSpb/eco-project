@@ -4,7 +4,7 @@
  * User: root
  * Date: 23.09.16
  * Time: 1:11
- */
+ */ 
 
 spl_autoload_register(function ($class) {
     require $_SERVER['DOCUMENT_ROOT'].'/includes/EventLib/'.$class.'.php';

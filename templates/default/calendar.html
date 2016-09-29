@@ -9,7 +9,7 @@
           <span class="glyphicon glyphicon-align-justify"></span>
         </div>
         <div id="calendar-head-month" class="col-xs-8">
-          <div id="month">
+          <div >
             <!--<span id="left" class="glyphicon glyphicon-chevron-left" onclick="decreaseSelectedMonth();"></span>-->
             <b id="MonthYear-string">&nbsp;</b>
             <!--<span id="right" class="glyphicon glyphicon-chevron-right" onclick="increaseSelectedMonth();"></span>-->
@@ -26,9 +26,13 @@
       <div id="calendar-content">
         <div id="calendar-loading"></div>
         <div id="calendar-content-container">
-
+		{% set oldmonth = '' %}
           {% if calendar %}
             {% for event in calendar %}
+            {% if oldmonth!=event.month %}
+            	<div id="month">{{event.month}}</div>
+            	{% set oldmonth = event.month %}
+            {% endif %}
             <article>
               <div class="row">
                 <div class="calendar-date col-xs-2">
