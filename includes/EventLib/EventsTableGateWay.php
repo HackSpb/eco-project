@@ -69,11 +69,11 @@ class EventsTableGateWay
     public function getCalendarListData($limit)
     {
         $limitUpper = intval($limit);
-        $limitLower = $limitUpper - 4;
+        $limitLower = $limitUpper - 5;
         $sql = "SELECT ev_id, ev_title, ev_begin_time, ev_begin_date, ev_slug, ev_address, ev_url
                 FROM " . self::$tableName . "
                 WHERE ev_begin_date >= CURDATE() ORDER BY ev_begin_date LIMIT $limitLower, $limitUpper ";
-
+echo $sql;
         $stmt = $this->pdo->query($sql);
         $dataForCal = array();
         foreach ($stmt as $row) {
