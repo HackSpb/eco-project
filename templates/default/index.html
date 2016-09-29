@@ -30,5 +30,21 @@
   <div>{% include 'events.html' %}</div>
   <div>{% include 'calendar.html' %}</div>
 </div>
+<script>
+$(document).ready(function () {
+  reload_width();  
+     $(window).resize(function () { reload_width();    }); 
 
+});
+
+function reload_width(){
+  $(".map-container").width($( window ).width()-40);
+  $("#map").height($( window ).height()-230);
+  $(".news").css('min-height', $( window ).height()-200);
+ // $(".page-content").height('100%');
+  $("#calendar").css('min-height',$(".news").height());
+  $(".map-container").css('min-height',$(".news").height());
+}
+
+</script>
 {% include 'footer.html' %}

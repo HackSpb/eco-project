@@ -1156,6 +1156,7 @@ p.copyright {
   padding-bottom: 0;
   padding-top: 0; }
 
+
 @media (max-width: 375px) {
   .footer-contact {
     padding: 0;
@@ -1256,7 +1257,6 @@ p.copyright {
     margin: 0; }
 
 #calendar {
-  display: none;
   max-width: 1024px; }
 
 .calendar {
