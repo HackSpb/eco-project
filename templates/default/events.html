@@ -67,12 +67,12 @@
          {{event.ev_begin_date}}
         {% endif %}
         {% if ((event.ev_end_date is not null) and (event.ev_end_date != event.ev_begin_date)) %}
-          - {{event.ev_end_date}}
+          <br />&nbsp;&nbsp;&nbsp; по {{event.ev_end_date}}
         {% endif %}
-        {% if ((event.ev_begin_time is not null ) and (event.ev_begin_time != '00:00:00')) %}
-         <br/>{{event.ev_begin_time}}
+        {% if ((event.ev_begin_time is not null ) and (event.ev_begin_time != '00:00')) %}
+         <br/>&nbsp;&nbsp; &nbsp;{{event.ev_begin_time}}
         {% endif %}
-        {% if ((event.ev_end_time is not null )  and (event.ev_end_time != '00:00:00') and event.ev_end_time != event.ev_begin_time ) %}
+        {% if ((event.ev_end_time is not null )  and (event.ev_end_time != '00:00') and event.ev_end_time != event.ev_begin_time ) %}
           - {{event.ev_end_time}}
         {% endif %}
         
