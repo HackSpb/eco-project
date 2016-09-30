@@ -1029,12 +1029,19 @@ input[type=checkbox]:checked + label.for-check:before {
       cursor: pointer;  }
   .header .add {
     border-radius: 50px;
-    width: 244px;
-    height: 100%; }
+    width: 180px;
+    height: 50px;
+    padding-left: 40px;
+    padding-top: 10px;
+    line-height: 18px;
+    font: 18px bolder;
+
+
+     }
     .header .add:hover {
       background-color: #ffa726; }
-      .header .add:hover add-logo:after {
-        content: "╨Ф╨╛╨▒╨░╨▓╨╕╤В╤М"; }
+      .add:hover:before {
+        content: "Публикация"; } 
   .header .add-logo {
     width: 40px;
     height: 40px;

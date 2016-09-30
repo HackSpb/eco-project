@@ -63,9 +63,9 @@
         <ul class="centr">
           <!-- Грязный хак против отступов -->
           <li><a href='/'>Главная</a></li>
-          <li><a href='/reg'>Стать жителем MyEcoCity</a></li>
+          {% if user.u_id is not defined %}<li><a href='/reg'>Стать жителем MyEcoCity</a></li>
           <li><a href='/auth'>Войти в город</a></li>
-          
+          {% endif %}
           <!-- Грязный хак против отступов -->
         </ul>
         <div class="MyEcoSity"><a href="/#" id="pull"><span class="icon-menu"></span> MyEcoCity</a></div>
