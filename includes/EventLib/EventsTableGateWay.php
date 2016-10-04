@@ -69,7 +69,7 @@ class EventsTableGateWay
     public function getCalendarListData($limit)
     {
         $limitUpper = intval($limit);
-        $limitLower = $limitUpper - 4;
+        $limitLower = $limitUpper - 5;
         $sql = "SELECT ev_id, ev_title, ev_begin_time, ev_begin_date, ev_slug, ev_address, ev_url
                 FROM " . self::$tableName . "
                 WHERE ev_begin_date >= CURDATE() ORDER BY ev_begin_date LIMIT $limitLower, $limitUpper ";
@@ -87,6 +87,7 @@ class EventsTableGateWay
                 'DayOfWeek' => $this->getDayOfWeek($row['ev_begin_date']),
                 'beginDateMonth' => $dateTimeArray['beginDateMonth'],
                 'beginTime' => $dateTimeArray['beginTimeHM'],
+                'beginDateYear' => $dateTimeArray['beginDateYear'],
                 'slug' => $row['ev_slug'],
                 'address' => $address,
                 'url' => $row['ev_url'],
@@ -100,11 +101,13 @@ class EventsTableGateWay
         $beginDateDay = substr($date, 8, 9);
         $beginDateMonth = substr($date, 5, 6);
         $beginTimeHM = substr($time, 0, 5);
+        $beginDateYear = substr($date, 0, 4);
 
         $formattedDateTimeArray = array(
             'beginDateDay' => $beginDateDay,
             'beginDateMonth' => $beginDateMonth,
             'beginTimeHM' => $beginTimeHM,
+            'beginDateYear' => $beginDateYear,
         );
 
         return $formattedDateTimeArray;
@@ -129,4 +132,6 @@ class EventsTableGateWay
 
         return $this->daysOfWeek[$objDayOfWeek];
     }
+
+
 }

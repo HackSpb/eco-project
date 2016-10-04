@@ -1,0 +1,184 @@
+<!-- Header -->
+{% include 'header.html' %}
+<!-- / Main content -->
+<div class="grid header-padding event-create">
+    <form class="container form-auth" action="/profile/{{ user.id }}" method="POST" name="main" enctype="multipart/form-data">
+        <div class="clearfix form-auth-content shadow-box">
+            {% if form_err|length > 0 %}
+                <div class="form-row error">
+                    <b>При регистрации произошли следующие ошибки:</b><br>
+                    {% for error in form_err %}
+                        {{ error }}<br>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            <div class="half-2">
+                <div>
+                    <p>Почтовый адрес</p>
+
+                    {% if  user.email is not empty %}
+                            {{ user.email }}
+                    {% else %}
+                        Не заполнено
+                    {% endif %}
+
+                    {% if isAllowEditing %}
+                        <span id="user-email" class="edit">[Редактивровать]</span>
+                    {% endif %}
+
+                    <input style="display: none;" id type="email" placeholder="{{ user.email }}" name="user-email">
+
+                </div>
+                {% if isAllowEditing %}
+                <div>
+                    <p>Изменить пароль</p>
+                    <input type="password" placeholder="Введите новый пароль" name="user-password">
+                    <input type="password" placeholder="Повторите новый пароль" name="user-password-check">
+                </div>
+                {% endif %}
+                <div>
+                    <p>Личная информация</p>
+
+                    {% if user.name is not empty %}
+                        Имя: {{ user.name }}
+                    {% else %}
+                        Имя не заполнено
+                    {% endif %}
+
+                    {% if isAllowEditing %}
+                        <span id="user_name" class="edit">[Редактировать]</span>
+                    {% endif %}
+                    <input style="display: none" type="text" name="user_name" placeholder="">
+                    <br><br>
+
+                    {% if user.name is not empty %}
+                        Фамилия: {{ user.surname }}
+                    {% else %}
+                        Фамилия не заполнена
+                    {% endif %}
+
+                    {% if isAllowEditing %}
+                        <span id="user_surname" class="edit">[Редактировать]</span>
+                    {% endif %}
+
+                    <input style="display: none;" type="text" name="user_surname" placeholder="">
+                    <br><br>
+
+                    <input type="hidden" id='user_gender' name="user_gender" value="">
+
+
+                    {% if user.gender is  empty  and isAllowEditing %}
+                        <div class="gender" id="gender0" onclick="clickOnGenderDiv(0);">Женщина</div>
+                        <div class="gender" id="gender1" onclick="clickOnGenderDiv(1);">Мужчина</div>
+                        <div class="gender" id="gender2" onclick="clickOnGenderDiv(2);">Бинарный</div>
+                        <script>
+                            $(document).ready(function () {
+                                clickOnGenderDiv({{ user.gender }})
+                            });
+                        </script>
+
+                    {% elseif gender is not empty %}
+                        {{ gender }}
+                    {% endif %}
+                </div>
+                <div>
+                    <p>Дата рождения</p>
+                    {% if user.birthday is not empty %}
+                        {{ user.birthday }}
+                    {% else %}
+                        Дата рождения не заполнена
+                    {% endif %}
+
+                    {% if isAllowEditing %}
+                        <span id="user_birthday" class="edit">[Редактировать]</span>
+                    {% endif %}
+                    <input style="display:none;" type="date" name="user_birthday" placeholder="{{ now }}">
+                    <br><br>
+                </div>
+                {#<div>#}
+                    {#<p>Статус</p>#}
+                    {#<input type="text" name="user_status" placeholder="">#}
+                {#</div>#}
+                {#<div>#}
+                    {#<p>Читаемые теги</p>#}
+                    {#<input type="text" name="tags" placeholder="">#}
+                {#</div>#}
+                {#<div>#}
+                    {#<p>Ссылка на организацию</p>#}
+                    {#<input type="text" name="organization-ref" placeholder="">#}
+                {#</div>#}
+                {#<div>#}
+                    {#<p>Миссия организации</p>#}
+                    {#<input type="text" name="organization-mission" placeholder="">#}
+                {#</div>#}
+            </div>
+            <div class="half-2">
+                <p>Аватар пользователя</p>
+                <div id="user-photo">
+                    <div id="user-avatar" style="width: 200px; height: 200px;"></div>
+
+                    {% if isAllowEditing %}
+                    <p>Загрузить фото</p>
+                    <input type="file" name="user-photo" accept="image/*">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% if isAllowEditing %}
+            <input style="display: none" id="submit" type="submit" value="Отправить">
+        {% endif %}
+    </form>
+    <div class="form-auth-content"></div>
+</div>
+
+<style>
+    #user-avatar {
+    {% if user.image is empty %}
+        background: url('/templates/default/images/avatars/standart.jpeg') no-repeat ;
+        background-size: cover;">
+    {% else %}
+        background: url('/templates/default/images/avatars/standart.jpeg') no-repeat;
+        background-size: cover;
+    {% endif %}
+    }
+
+    .gender {
+        position: relative;
+        width: 30.7%;
+        float: left;
+        background-color: #cccccc;
+        height: 50px;
+        margin-right: 10px;
+        margin-bottom: 20px;
+    }
+
+    .edit {
+        color: #05008c;
+        cursor: pointer;
+    }
+</style>
+<script>
+    function clickOnGenderDiv(divNum) {
+        $('.gender').css({
+            "background-color": "#cccccc"
+        });
+
+        var divName = '#gender' + divNum;
+        $(divName).click(function () {
+            $(divName).css({
+                "background-color": "#414141"
+            });
+
+            $('#user_gender').value = divNum;
+        })
+    }
+
+    $(document).ready(function () {
+        $('span.edit').click(function () {
+            $('input[name=' + this.id + ']').show();
+            $('input#submit').show();
+        })
+    });
+</script>
+<!-- Footer -->
+{% include 'footer.html' %}

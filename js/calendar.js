@@ -28,7 +28,6 @@ var months = {
 
 $('#load-more').click(function () {
     getEventData(counter);
-    console.log(counter);
 });
 
 /**

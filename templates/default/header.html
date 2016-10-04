@@ -44,7 +44,7 @@
               <ul class="right">
                {% if user.u_id is defined %}
                 <li onclick="location.href=''"></li>
-                <li>Привет, {{ user.u_email }}!</li>
+                <li onclick="location.href='/profile/' + '{{ user.u_id }}'">Привет, {{ user.u_email }}!</li>
                 {% else %}
                 <li onclick="location.href='/reg'">Стать жителем MyEcoCity</li>
                 <li onclick="location.href='/auth'">Войти в город</li>

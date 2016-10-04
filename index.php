@@ -109,6 +109,7 @@ $app->match('/reg', function() use ($app) {
 	return $app['twig']->render('reg.html');
 })->bind('reg');
 
+
 $app->get('/map', function() use ($app) {
     
     include_once 'includes/eventList.php';
@@ -156,12 +157,14 @@ $app->match('/auth', function() use ($app) {
 })->bind('auth');
 
 // анкета пользователя
-$app->match('/user_profil_edit', function() use ($app) {
+$app->match('/profile/{id}', function($id) use ($app) {
+    header('Content-Type: text/html; charset=utf-8');
 
     include_once 'includes/userForms.php';
-    profilEdit();
+    getProfile($id);
+    profileEdit();
     
-    return $app['twig']->render('user_profil_edit.html');
+    return $app['twig']->render('user_profil_edit.twig');
 })->bind('profil_edit');
 
 $app->error( function (Exception $e, $code) use ($app) {

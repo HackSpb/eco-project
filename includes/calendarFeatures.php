@@ -7,7 +7,7 @@
  */
 
 spl_autoload_register(function ($class) {
-    require $_SERVER['DOCUMENT_ROOT'].'/includes/EventLib/'.$class.'.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/includes/EventLib/'.$class.'.php';
 });
 
 function initCalendar() {
@@ -23,6 +23,7 @@ function initCalendar() {
 
 
     $calendarData = $calendar->createArrayData();
+
 
     $app['twig']->addGlobal('calendar', $calendarData);
 }
