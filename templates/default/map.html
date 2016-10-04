@@ -1,6 +1,6 @@
   <!-- Встраеваемый контент-->
   <div class="map-container">
-    <div id="map">
+    <div id="map" style="min-height: 300px">
       
      <!--  <ul class="dropdown">
  <li class="dropbtn">==</li> -->
@@ -48,19 +48,5 @@
 </script>
 <script src="//api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
 <script src="/js/mapScripts/geoScript.js"></script>
-<script>
-$(document).ready(function () {
-  reload_width();  
-     $(window).resize(function () { reload_width();    }); 
 
-});
-
-  function reload_width(){
-    $(".map-container").width($( window ).width()-40);
-  $("#map").height($( window ).height()-230);
-  $(".news").css('min-height', $( window ).height()-200);
-$(".page-content").height('100%');
-}
-
-</script>
 <!-- Встраеваемый контент!-->

@@ -16,7 +16,20 @@ class EventsTableGateWay
         'Saturday' => 'Сб',
         'Sunday' => 'Вс'
     );
-
+    public $months = [
+        "ЯНВАРЬ",
+        "ФЕВРАЛЬ",
+        "МАРТ",
+        "АПРЕЛЬ",
+        "МАЙ",
+        "ИЮНЬ",
+        "ИЮЛЬ",
+        "АВГУСТ",
+        "СЕНТЯБРЬ",
+        "ОКТЯБРЬ",
+        "НОЯБРЬ",
+        "ДЕКАБРЬ"
+    ];
 
     /**
      * Constructor of class EventsTableGateWay.
@@ -70,7 +83,8 @@ class EventsTableGateWay
     {
         $limitUpper = intval($limit);
         $limitLower = $limitUpper - 5;
-        $sql = "SELECT ev_id, ev_title, ev_begin_time, ev_begin_date, ev_slug, ev_address, ev_url
+
+        $sql = "SELECT ev_id, ev_title, ev_begin_time, ev_begin_date, ev_slug, ev_address, ev_url, UNIX_TIMESTAMP(ev_begin_date) as ev_begin_date_timestamp
                 FROM " . self::$tableName . "
                 WHERE ev_begin_date >= CURDATE() ORDER BY ev_begin_date LIMIT $limitLower, $limitUpper ";
 
@@ -86,6 +100,8 @@ class EventsTableGateWay
                 'beginDateDay' => $dateTimeArray['beginDateDay'],
                 'DayOfWeek' => $this->getDayOfWeek($row['ev_begin_date']),
                 'beginDateMonth' => $dateTimeArray['beginDateMonth'],
+                //название месяца
+                'month' => $this->months[date("n",$row['ev_begin_date_timestamp'])-1],
                 'beginTime' => $dateTimeArray['beginTimeHM'],
                 'beginDateYear' => $dateTimeArray['beginDateYear'],
                 'slug' => $row['ev_slug'],

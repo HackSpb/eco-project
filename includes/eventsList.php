@@ -6,7 +6,10 @@ function loadLastEvents(){
 
     $sql ="
     	SELECT 
-    		*
+    		*,
+            DATE_FORMAT(ev_begin_time,'%H:%i') as ev_begin_time,
+            DATE_FORMAT(ev_end_time,'%H:%i') as ev_end_time
+
     	FROM 
     		`events` AS t1
         left join objects as obj USING (ev_id)

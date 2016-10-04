@@ -9,11 +9,9 @@ spl_autoload_register(function ($class) {
 });
 
 
-$filename = PATH . '/local.config.php';
-if (file_exists($filename))
-    require_once $filename;
-else
-    require_once PATH . '/config.php';
+include PATH . '/config.php';
+
+if(file_exists(PATH . '/local.config.php'))include PATH . '/local.config.php';
 
 
 try {

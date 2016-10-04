@@ -10,6 +10,7 @@ class Event
     protected $address;
     protected $beginDateDay;
     protected $beginDateMonth;
+    protected $month;
     protected $beginDateYear;
     protected $dayOfWeek;
     protected $beginTimeHM;
@@ -35,6 +36,7 @@ class Event
         $this->dayOfWeek = $eventData['DayOfWeek'];
         $this->beginDateMonth = $eventData['beginDateMonth'];
         $this->beginDateYear = $eventData['beginDateYear'];
+        $this->month = $eventData['month'];
         $this->beginTimeHM = $eventData['beginTime'];
         $this->url = $eventData['url'];
         $this->slug = $eventData['slug'];
@@ -54,6 +56,7 @@ class Event
             'beginDateDay' => $this->beginDateDay,
             'beginDateMonth' => $this->beginDateMonth,
             'beginDateYear' => $this->beginDateYear,
+            'month' => $this->month,
             'DayOfWeek' => $this->dayOfWeek,
             'beginTime' => $this->beginTimeHM,
             'url' => $this->url,
