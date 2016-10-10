@@ -23,7 +23,6 @@ function initCalendar() {
     foreach ($data = $eventsTable->getCalendarListData(5) as $value) {
         $event = new Event();
         $event->setDataFromArray($value);
-        print_r($event);
         $calendar->add($event);
     }
 
