@@ -22,15 +22,16 @@ class User
     protected $image;
 
     /**
+     * Function return gender information.
      * @return string - gender
      */
     public function getGender()
     {
         switch ($this->gender) {
             case 'f':
-                return 'Пол: мужской.';
-            case 'm':
                 return 'Пол: женский.';
+            case 'm':
+                return 'Пол: мужской.';
             case 'b':
                 return 'Пол: бинарный';
             default:

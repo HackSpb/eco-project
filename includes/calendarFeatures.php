@@ -4,10 +4,15 @@
  * User: root
  * Date: 23.09.16
  * Time: 1:11
- */ 
+ */
 
-spl_autoload_register(function ($class) {
-    require_once $_SERVER['DOCUMENT_ROOT'].'/includes/EventLib/'.$class.'.php';
+use EventLib\Event;
+use EventLib\EventContainer;
+use EventLib\EventsTableGateWay;
+
+spl_autoload_register(function($class) {
+    $class = str_replace('\\', '/', $class);
+    require_once __DIR__.DIRECTORY_SEPARATOR.$class.'.php';
 });
 
 function initCalendar() {
@@ -18,12 +23,11 @@ function initCalendar() {
     foreach ($data = $eventsTable->getCalendarListData(5) as $value) {
         $event = new Event();
         $event->setDataFromArray($value);
+        print_r($event);
         $calendar->add($event);
     }
 
-
     $calendarData = $calendar->createArrayData();
-
 
     $app['twig']->addGlobal('calendar', $calendarData);
 }

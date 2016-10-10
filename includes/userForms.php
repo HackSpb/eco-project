@@ -1,24 +1,16 @@
 <?php
 
 
-function autoload($className)
-{
-    $className = ltrim($className, '\\');
-    $fileName  = '';
-    $namespace = '';
-    if ($lastNsPos = strrpos($className, '\\')) {
-        $namespace = substr($className, 0, $lastNsPos);
-        $className = substr($className, $lastNsPos + 1);
-        $fileName  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-    }
-    $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $className) . '.php';
-
-    require $fileName;
-}
-spl_autoload_register('autoload');
-
+use EventLib\EventsTableGateWay;
+use Formaters\Image;
 use UserLib\UserTableGateway;
-use UserLib\User;
+
+spl_autoload_register(function($class) {
+    $class = str_replace('\\', '/', $class);
+    require_once __DIR__.DIRECTORY_SEPARATOR.$class.'.php';
+});
+
+
 
 // регистрация пользователя
 function regSave () {
@@ -175,34 +167,44 @@ function profileEdit(){
     $app['twig']->addGlobal('now', $now->format('Y-m-d'));
 
 	$usersTable = new UserTableGateway($db);
-    $id = $_SESSION['user']['u_id'];
+
+    $id = 0;
+
+    if (session_status() == PHP_SESSION_ACTIVE && !empty($_SESSION['user']['u_id'])) {
+        $id = $_SESSION['user']['u_id'];
+    }
+    
+//    $user = $usersTable->getUser($id);
+//    $app['twig']->addGlobal('user', $user->getUser());
 
     if (!empty($_POST)) {
-        if (isset($_POST['user_name'])) {
+        if (!empty($_POST['user_name'])) {
             $name = $_POST['user_name'];
             if (preg_match('/[\W ]{1,50}/', $name))
                 $usersTable->setName($name, $id);
-        }
-        else
-            $form_err[] = "Неправильно введено имя. Имя может содержать буквы, пробелы, и не должно быть больше 50 символов";
+            else
+                $form_err[] = "Неправильно введено имя. Имя может содержать буквы, пробелы, и не должно быть больше 50 символов";
 
-        if (isset($_POST['user_surname'])) {
+        }
+
+        if (!empty($_POST['user_surname'])) {
             $surname = $_POST['user_surname'];
             if (preg_match('/[\W ]{1,60}/', $surname))
                 $usersTable->setSurname($surname, $id);
-        }
-        else
-            $form_err[] = "Неправильна введена фамилия. Фамилия может содержать буквы, пробелы, и не должны быть больше 50 символов";
+            else
+                $form_err[] = "Неправильна введена фамилия. Фамилия может содержать буквы, пробелы, и не должны быть больше 50 символов";
 
-        if (isset($_POST['user_gender'])) {
+        }
+
+        if (!empty($_POST['user_gender'])) {
             $gender = intval($_POST['user_gender']);
-            if ($gender < 3 && $gender >= 0) 
+            if ($gender < 3 && $gender >= 0)
                 $usersTable->setGender($gender, $id);
             else
                 $form_err[] = "Проблемы в выборе пола";
         }
 
-        if (isset($_POST['user-password']) && isset($_POST['user-password-check'])) {
+        if (!empty($_POST['user-password']) && isset($_POST['user-password-check'])) {
             $password = $_POST['user-password'];
             $passwordCheck = $_POST['user-password-check'];
 
@@ -212,7 +214,7 @@ function profileEdit(){
                 $form_err[] = "Пароль должен содержать 1 букву или 1 цифру.";
         }
 
-        if (isset($_POST['user-email'])) {
+        if (!empty($_POST['user-email'])) {
             $email = $_POST['user-email'];
 
             if (preg_match('/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/', $email))
@@ -221,7 +223,7 @@ function profileEdit(){
                 $form_err[] = "Адрес почтового ящика введен некоректно";
         }
 
-        if (isset($_POST['user_birthday'])) {
+        if (!empty($_POST['user_birthday'])) {
             $birthday = new DateTime($_POST['user_birthday']);
             $now = new DateTime();
 
@@ -231,7 +233,11 @@ function profileEdit(){
                 $form_err[] = "Ошибка. Дата рождения не может быть позже текущего времени";
         }
 
-        print_r($_FILES);
+        
+        if (is_uploaded_file($_FILES['userfile']['tmp_name'])) {
+            $image = new Image($usersTable);
+            $image->save($id);
+        }
     }
 
     $app['twig']->addGlobal('form_err', $form_err);
@@ -249,16 +255,30 @@ function getProfile($profileID)
     if (!$isExist) {
         $app->abort(404, 'Нет такого пользователя');
     }
+
+    if (!empty($_SESSION['user']['u_id'])) {
+        $mainUserID = $_SESSION['user']['u_id'];
+        $mainUser = $userTable->getUser($mainUserID);
+        
+        $app['twig']->addGlobal('mainUser', $mainUser->getUser());
+    }
+
     $user = $userTable->getUser($profileID);
+    $userData = $user->getUser();
     
-    $app['twig']->addGlobal('user', $user->getUser());
+
+
+    $app['twig']->addGlobal('user', $userData);
     $app['twig']->addGlobal('isAllowEditing', isAllowEditing($profileID));
+
 
     $date = new DateTime();
     $app['twig']->addGlobal('now', $date->format('Y-m-d'));
     $app['twig']->addGlobal('form_err', $form_err);
     
+
     $app['twig']->addGlobal('gender', $user->getGender());
+    print_r($user->getGender());
 }
 
 function isAllowEditing($profileID) {
@@ -266,4 +286,19 @@ function isAllowEditing($profileID) {
         return true;
     else 
         return false;
+}
+
+function getUserPosts() {
+    global $db, $app;
+    $eventTable = new EventsTableGateWay($db);
+    $id = $_SESSION['user']['u_id'];
+
+    $events = $eventTable->getUserEvents($id);
+    $eventsDataArray = array();
+    
+    foreach ($events as $event) {
+        $eventsDataArray[] = $event->getArrayData();
+    }
+    
+    $app['twig']->addGlobal('events', $eventsDataArray);
 }

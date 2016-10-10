@@ -1,0 +1,42 @@
+{% include 'header.twig' %}
+
+
+<div class="grid grid-pad news">
+    <div class="col-1-1">
+        <div class="content-container">
+            <h2>{{ post.name }}</h2>
+            {% if (post.img is null ) %}
+                <img class="post-logo" src="/img/events/eco_post1.jpg" alt="">
+            {% else %}
+                <img class="post-logo" src="/img/events/{{ event.ev_img }}" alt=""/>
+            {% endif %}
+            <div class="description">
+                <br><br> {{ post.description }} <br><br>
+            </div>
+            <div class="datetime">
+                Начало: {{ post.beginDateTime | lower }} <br>
+                Конец: {{ post.endDateTime | lower }}
+            </div>
+            {% for address in post.addresses %}
+                <br/><span class="icon-map_black"></span> {{ address }}
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+<style>
+    .content-container {
+        padding: 30px;
+        background-color: rgba(255, 255, 255, 0.349);;
+        margin-bottom: 50px;
+
+    }
+
+    .post-logo {
+        width: 500px;
+        margin: auto;
+    }
+</style>
+
+{% include 'footer.twig' %}

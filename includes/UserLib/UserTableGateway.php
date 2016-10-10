@@ -29,8 +29,9 @@ class UserTableGateway
      * Getting all data from table user
      * @return array
      */
-    public function getData() {
-        $sql = 'SELECT * FROM '.self::$tableName;
+    public function getData()
+    {
+        $sql = 'SELECT * FROM ' . self::$tableName;
         $stmt = $this->pdo->query($sql);
 
         $dataArr = $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -43,10 +44,11 @@ class UserTableGateway
      * @param $id - Integer, id of searching user.
      * @return array|boolean - array of user data or false, if there is no such user.
      */
-    public function getDataArray($id) {
+    public function getDataArray($id)
+    {
 
 
-        $sql = 'SELECT * FROM '.self::$tableName." WHERE u_id = :id";
+        $sql = 'SELECT * FROM ' . self::$tableName . " WHERE u_id = :id";
 
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(array('id' => $id));
@@ -65,6 +67,7 @@ class UserTableGateway
             'image' => $data[0]['u_avatar']
         );
 
+
         return $userData;
     }
 
@@ -73,7 +76,8 @@ class UserTableGateway
      * @param $id - Integer - id of user
      * @return User|false - object of user with chosen id or false, if there is no data.
      */
-    public function getUser($id) {
+    public function getUser($id)
+    {
 
         $data = $this->getDataArray($id);
         if ($data) {
@@ -82,29 +86,31 @@ class UserTableGateway
             $user->setUser($data);
 
             return $user;
-        }
-        else
+        } else
             return false;
     }
 
-    public function setName($name, $id) {
+    public function setName($name, $id)
+    {
         $tableName = self::$tableName;
         $sql = "UPDATE $tableName SET u_name = :name WHERE users.u_id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(array(
-            'name' => $name,
-            'id' => $id)
+                'name' => $name,
+                'id' => $id)
         );
     }
 
-    public function setSurname($surname, $id) {
+    public function setSurname($surname, $id)
+    {
         $tableName = self::$tableName;
         $sql = "UPDATE $tableName SET u_fname = :surname WHERE u_id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(array('surname' => $surname, 'id' => $id));
     }
 
-    public function setGender($gender, $id) {
+    public function setGender($gender, $id)
+    {
         $tableName = self::$tableName;
 
         $genderString = $this->checkGender($gender);
@@ -112,9 +118,11 @@ class UserTableGateway
         $sql = "UPDATE $tableName SET u_gender = :gender WHERE u_id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(array('gender' => $genderString, 'id' => $id));
+        print_r($stmt);
     }
 
-    public function setPassword($password, $id) {
+    public function setPassword($password, $id)
+    {
         $tableName = self::$tableName;
         $hashedPass = hash('md5', $password);
 
@@ -123,28 +131,33 @@ class UserTableGateway
         $stmt->execute(array('pass' => $hashedPass, 'id' => $id));
     }
 
-    public function setEmail($email, $id) {
+    public function setEmail($email, $id)
+    {
         $tableName = self::$tableName;
         $sql = "UPDATE $tableName SET u_email = :email WHERE u_id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(array('email' => $email, 'id' => $id));
     }
 
-    public function setTelNum($telNum, $id) {
+    public function setTelNum($telNum, $id)
+    {
         $tableName = self::$tableName;
         $sql = "UPDATE $tableName SET u_telephone = :telNum WHERE u_id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(array('telNum' => $telNum, 'id' => $id));
     }
 
-    public function setBirthday($birthday, $id) {
+    public function setBirthday($birthday, $id)
+    {
         $tableName = self::$tableName;
         $sql = "UPDATE $tableName SET u_birthday = :birthday WHERE u_id = :id";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute(array('birthday' => $birthday, 'id' => $id));
     }
 
-    public function setAvatar($img, $id) {
+    public function setAvatar($img, $id)
+    {
+        $img = substr($img, 62);
         $tableName = self::$tableName;
         $sql = "UPDATE $tableName SET u_avatar = :img WHERE u_id = :id";
         $stmt = $this->pdo->prepare($sql);
@@ -155,7 +168,8 @@ class UserTableGateway
      * @param $gender - num of gender
      * @return string - gender in format for saving to database
      */
-    private function checkGender($gender) {
+    private function checkGender($gender)
+    {
         $genderString = "";
 
         switch ($gender) {
@@ -176,7 +190,8 @@ class UserTableGateway
      * @param $id - Integer, searching id
      * @return bool - result of searching in database
      */
-    public function isIDExist($id) {
+    public function isIDExist($id)
+    {
         $tableName = self::$tableName;
         $sql = "SELECT u_id FROM $tableName WHERE u_id = :id";
         $stmt = $this->pdo->prepare($sql);
@@ -185,4 +200,25 @@ class UserTableGateway
 
         return !empty($data);
     }
+
+    /**
+     * Check in database, is searching file already exist.
+     * @param $fileName - name of searching file
+     * @return bool - result of searching. Return false if not find.
+     */
+    public function isPicNameExist($fileName)
+    {
+        $tableName = self::$tableName;
+        $sql = "SELECT u_avatar FROM $tableName WHERE u_avatar = :file";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(array('file' => $fileName));
+        
+        $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if(!empty($stmt)) 
+            return false;
+        else 
+            return true;
+    }
+
+    
 }

@@ -1,5 +1,7 @@
 <?php
 
+namespace EventLib;
+
 /**
  * This class describes container of event objects
  */
@@ -12,7 +14,7 @@ class EventContainer
      * Function add new event object to container
      * @param $event - Event type.
      */
-    public function add(Event $event)
+    public function add(Post $event)
     {
         $this->container[] = $event;
     }

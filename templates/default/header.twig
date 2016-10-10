@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой Эко Город</title>
+    <base href="/templates/default/">
+    <link rel="stylesheet" type="text/css" href="/templates/default/css/calendar_styles.css">
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/templates/default/css/styles.css">
+    <link rel="stylesheet" href="/templates/default/fonts/iconfont/style.css">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script>
+    $(function () {
+        var pull = $('#pull');
+        menu = $('nav ul');
+        menuHeight = menu.height();
+        $(pull).on('click', function (e) {
+            e.preventDefault();
+            menu.slideToggle();
+        });
+        $(window).resize(function () {
+            var w = $(window).width();
+            if (w > 320 && menu.is(':hidden')) {
+                menu.removeAttr('style');
+            }
+        });
+    });
+</script>
+<body class="">
+<div class="wrapper">
+    <div class="inner-wrapper">
+        <!--header start!-->
+        <header class="header" name="home">
+            <div class="grid grid-pad">
+                <div class="col-1-1">
+                    <div class="content">
+                        <figure class="header-logo left MyEcoSity"><a href="/">MyEcoCity</a>
+                            <p>мой городской помощник</p>
+                        </figure>
+                        <ul class="right">
+                            {% if user.u_id is defined %}
+                                <li onclick="location.href=''"></li>
+                                <li onclick="location.href='/profile/' + '{{ user.u_id }}'">Привет, {{ user.u_email }}
+                                    !
+                                </li>
+                            {% elseif mainUser.id is defined %}
+                                {% if mainUser.name is defined %}
+                                    <li onclick="location.href=''"></li>
+                                    <li onclick="location.href='/profile/' + '{{ mainUser.id }}'">
+                                        Привет, {{ mainUser.name }} {{ mainUser.surname }}!
+                                    </li>
+                                {% else %}
+                                    <li onclick="location.href=''"></li>
+                                    <li onclick="location.href='/profile/' + '{{ mainUser.id }}'">
+                                        Привет, {{ mainUser.email }}!
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <li onclick="location.href='/reg'">Стать жителем MyEcoCity</li>
+                                <li onclick="location.href='/auth'">Войти в город</li>
+                            {% endif %}
+                        </ul>
+                        {% if user.u_id is defined %}
+                            <div class="right add" onclick="location.href='/event_create'"><img class="add-logo right"
+                                                                                                src="images/sprites/btn-add.png"
+                                                                                                alt=""></div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!--header end!-->
+        <!--menu start-->
+        <nav class="nav clearfix">
+            <ul class="centr">
+                <!-- Грязный хак против отступов -->
+                <li><a href='/'>Главная</a></li>
+                {% if user.u_id is not defined %}
+                    <li><a href='/reg'>Стать жителем MyEcoCity</a></li>
+                    <li><a href='/auth'>Войти в город</a></li>
+                {% else %}
+                    <li><a href='/event_create'>Добавить новость</a></li>
+                {% endif %}
+                <!-- Грязный хак против отступов -->
+            </ul>
+            <div class="MyEcoSity"><a href="/#" id="pull"><span class="icon-menu"></span> MyEcoCity</a></div>
+        </nav>
+        <!--menu end!-->
+        <!--content start-->
+        <main class="page-content">
+ 

@@ -1,5 +1,5 @@
 <!-- Header -->
-{% include 'header.html' %}
+{% include 'header.twig' %}
 <!-- / Main content -->
 <div class="grid header-padding event-create">
     <form class="container form-auth" action="/profile/{{ user.id }}" method="POST" name="main" enctype="multipart/form-data">
@@ -12,12 +12,13 @@
                     {% endfor %}
                 </div>
             {% endif %}
+            <h2>Профиль пользователя</h2>
             <div class="half-2">
                 <div>
                     <p>Почтовый адрес</p>
 
                     {% if  user.email is not empty %}
-                            {{ user.email }}
+                        {{ user.email }}
                     {% else %}
                         Не заполнено
                     {% endif %}
@@ -30,11 +31,11 @@
 
                 </div>
                 {% if isAllowEditing %}
-                <div>
-                    <p>Изменить пароль</p>
-                    <input type="password" placeholder="Введите новый пароль" name="user-password">
-                    <input type="password" placeholder="Повторите новый пароль" name="user-password-check">
-                </div>
+                    <div>
+                        <p>Изменить пароль</p>
+                        <input class="user-pass" type="password" placeholder="Введите новый пароль" name="user-password">
+                        <input class="user-pass" type="password" placeholder="Повторите новый пароль" name="user-password-check">
+                    </div>
                 {% endif %}
                 <div>
                     <p>Личная информация</p>
@@ -96,20 +97,20 @@
                     <br><br>
                 </div>
                 {#<div>#}
-                    {#<p>Статус</p>#}
-                    {#<input type="text" name="user_status" placeholder="">#}
+                {#<p>Статус</p>#}
+                {#<input type="text" name="user_status" placeholder="">#}
                 {#</div>#}
                 {#<div>#}
-                    {#<p>Читаемые теги</p>#}
-                    {#<input type="text" name="tags" placeholder="">#}
+                {#<p>Читаемые теги</p>#}
+                {#<input type="text" name="tags" placeholder="">#}
                 {#</div>#}
                 {#<div>#}
-                    {#<p>Ссылка на организацию</p>#}
-                    {#<input type="text" name="organization-ref" placeholder="">#}
+                {#<p>Ссылка на организацию</p>#}
+                {#<input type="text" name="organization-ref" placeholder="">#}
                 {#</div>#}
                 {#<div>#}
-                    {#<p>Миссия организации</p>#}
-                    {#<input type="text" name="organization-mission" placeholder="">#}
+                {#<p>Миссия организации</p>#}
+                {#<input type="text" name="organization-mission" placeholder="">#}
                 {#</div>#}
             </div>
             <div class="half-2">
@@ -118,8 +119,16 @@
                     <div id="user-avatar" style="width: 200px; height: 200px;"></div>
 
                     {% if isAllowEditing %}
-                    <p>Загрузить фото</p>
-                    <input type="file" name="user-photo" accept="image/*">
+                        <div class="fileload">
+                            <p>Загрузка файла:</p>
+                            <div class="file-load-block">
+                                <input name="userfile" type="file" value="" id="file"/>
+                                <div class="fileLoad">
+                                    <input type="text" value="Выберите файл"/>
+
+                                </div>
+                            </div>
+                        </div>
                     {% endif %}
                 </div>
             </div>
@@ -127,17 +136,37 @@
         {% if isAllowEditing %}
             <input style="display: none" id="submit" type="submit" value="Отправить">
         {% endif %}
+        {% if isAllowEditing %}
+            <div class="created">
+                <h2>Созданные вами события</h2>
+                <div class="created-container">
+                    {% for event in events %}
+                        <p><a class="event-post" href="/page/{{ event.slug }}">{{ event.name }}</a>({{ event.createDate }})</p>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
     </form>
+
     <div class="form-auth-content"></div>
 </div>
 
 <style>
+    html, body {
+        overflow-x: hidden;
+    }
+
+
+    .created {
+        margin-top: 30px;
+        margin-right: 20px;
+        margin-left: 50px;
+    }
+
     #user-avatar {
-    {% if user.image is empty %}
-        background: url('/templates/default/images/avatars/standart.jpeg') no-repeat ;
-        background-size: cover;">
-    {% else %}
-        background: url('/templates/default/images/avatars/standart.jpeg') no-repeat;
+    {% if user.image is empty %} background: url('/templates/default/images/avatars/standart.jpeg') no-repeat;
+        background-size: cover;
+    ">{% else %} background: url('{{ user.image }} ') no-repeat;
         background-size: cover;
     {% endif %}
     }
@@ -156,6 +185,66 @@
         color: #05008c;
         cursor: pointer;
     }
+
+    /*	=	File Load */
+    /* Стили для контейнера */
+    .file-load-block {
+        width: 310px;
+        height: 35px;
+        position: relative;
+    }
+
+    /* работаем с инпутом который конкретно file */
+    .file-load-block input[type=file] {
+        opacity: 0;
+        filter: alpha(opacity=0);
+
+        /* Позиционируем абсолютно отсносительно контейнера по правому краю */
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        height: 35px;
+        font-size: 60px;
+
+        /* Ставим наш инпут поверх всего содержимого */
+        z-index: 2;
+        cursor: pointer;
+        width: 310px;
+    }
+
+    /* Стилизируем инпут и кнопку которые под загрузчиком */
+    .file-load-block input[type=text] {
+        z-index: 1;
+        width: 200px;
+        padding-right: 10px;
+        white-space: nowrap;
+        height: 35px;
+        /*text-overflow: ellipsis;*/
+        /*-o-text-overflow: ellipsis;*/
+    }
+
+    .file-load-block button {
+        width: 120px;
+        height: 28px;
+        border: 1px solid #ccc;
+        background: #fff;
+        color: #666;
+        border-radius: 5px;
+        box-shadow: inset 0 2px 2px #ccc;
+    }
+
+    .file-load-block .button-hover {
+        box-shadow: 0 0 2px #ccc;
+    }
+
+    .event-post {
+        color: black;
+    }
+
+    .user-pass {
+        width: 80% !important;
+    }
 </style>
 <script>
     function clickOnGenderDiv(divNum) {
@@ -168,8 +257,9 @@
             $(divName).css({
                 "background-color": "#414141"
             });
+            $('input#submit').show();
 
-            $('#user_gender').value = divNum;
+            $('input#user_gender')[0].value = divNum;
         })
     }
 
@@ -177,8 +267,32 @@
         $('span.edit').click(function () {
             $('input[name=' + this.id + ']').show();
             $('input#submit').show();
+        });
+
+        $('input[type=password]').click(function () {
+            $('input#submit').show();
+        });
+
+        $('input[type=file]').click(function () {
+            $('input#submit').show();
         })
+    });
+
+    // = Load
+    // отслеживаем изменение инпута file
+    $('#file').change(function () {
+        // Если файл прикрепили то заносим значение value в переменную
+        var fileResult = $(this).val();
+        // И дальше передаем значение в инпут который под загрузчиком
+        $(this).parent().find('.fileLoad').find('input').val(fileResult);
+    });
+
+    /* Добавляем новый класс кнопке если инпут файл получил фокус */
+    $('#file').hover(function () {
+        $(this).parent().find('button').addClass('button-hover');
+    }, function () {
+        $(this).parent().find('button').removeClass('button-hover');
     });
 </script>
 <!-- Footer -->
-{% include 'footer.html' %}
+{% include 'footer.twig' %}

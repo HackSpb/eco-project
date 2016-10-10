@@ -1,5 +1,11 @@
 <?php
 
+namespace EventLib;
+
+use DateTime;
+use Exception;
+use PDO;
+
 /**
  * Class describe model of events table in database
  */
@@ -9,7 +15,7 @@ class EventsTableGateWay
     static private $tableName = 'events';
     private $daysOfWeek = array(
         'Monday' => 'Пн',
-        'Tuesday' =>'Вт',
+        'Tuesday' => 'Вт',
         'Wednesday' => 'Ср',
         'Thursday' => 'Чт',
         'Friday' => 'Пт',
@@ -20,7 +26,7 @@ class EventsTableGateWay
         "ЯНВАРЬ",
         "ФЕВРАЛЬ",
         "МАРТ",
-        "АПРЕЛЬ",
+        "АПРЕЛ",
         "МАЙ",
         "ИЮНЬ",
         "ИЮЛЬ",
@@ -50,7 +56,7 @@ class EventsTableGateWay
     public function getDataForCalendar($month, $year)
     {
         $month++;
-        $sql = "SELECT ev_id, ev_title, ev_begin_time, ev_begin_date, ev_end_time, ev_end_date, ev_slug, ev_address, ev_url 
+        $sql = "SELECT ev_id, ev_title, ev_create_date, ev_begin_time, ev_begin_date, ev_end_time, ev_end_date, ev_slug, ev_address, ev_url 
                 FROM " . self::$tableName . "
 				WHERE ev_begin_date LIKE '" . $year . "-%" . $month . "_%'";
 
@@ -60,6 +66,7 @@ class EventsTableGateWay
             $dataForCal[] = array(
                 'id' => $value['ev_id'],
                 'name' => $value['ev_title'],
+                'createDate' => $value['ev_create_date'],
                 'beginDate' => $value['ev_begin_date'],
                 'beginTime' => $value['ev_begin_time'],
                 'endDate' => $value['ev_end_date'],
@@ -84,7 +91,7 @@ class EventsTableGateWay
         $limitUpper = intval($limit);
         $limitLower = $limitUpper - 5;
 
-        $sql = "SELECT ev_id, ev_title, ev_begin_time, ev_begin_date, ev_slug, ev_address, ev_url, UNIX_TIMESTAMP(ev_begin_date) as ev_begin_date_timestamp
+        $sql = "SELECT ev_id, ev_title, ev_create_date, ev_begin_time, ev_begin_date, ev_slug, ev_address, ev_url, UNIX_TIMESTAMP(ev_begin_date) as ev_begin_date_timestamp
                 FROM " . self::$tableName . "
                 WHERE ev_begin_date >= CURDATE() ORDER BY ev_begin_date LIMIT $limitLower, $limitUpper ";
 
@@ -92,16 +99,16 @@ class EventsTableGateWay
         $dataForCal = array();
         foreach ($stmt as $row) {
             $dateTimeArray = $this->getFormattedDateTime($row['ev_begin_date'], $row['ev_begin_time']);
-            $address = $this->getFormattedAddress($row['ev_address']);
+            $address = $this->getFormattedAddresses($row['ev_address'])[0];
 
             $dataForCal[] = array(
                 'id' => $row['ev_id'],
                 'name' => $row['ev_title'],
+                'createDate' => $row['ev_create_date'],
                 'beginDateDay' => $dateTimeArray['beginDateDay'],
                 'DayOfWeek' => $this->getDayOfWeek($row['ev_begin_date']),
                 'beginDateMonth' => $dateTimeArray['beginDateMonth'],
-                //название месяца
-                'month' => $this->months[date("n",$row['ev_begin_date_timestamp'])-1],
+                'month' => $this->months[date("n", $row['ev_begin_date_timestamp']) - 1],
                 'beginTime' => $dateTimeArray['beginTimeHM'],
                 'beginDateYear' => $dateTimeArray['beginDateYear'],
                 'slug' => $row['ev_slug'],
@@ -113,7 +120,8 @@ class EventsTableGateWay
         return $dataForCal;
     }
 
-    private function getFormattedDateTime($date, $time) {
+    private function getFormattedDateTime($date, $time)
+    {
         $beginDateDay = substr($date, 8, 9);
         $beginDateMonth = substr($date, 5, 6);
         $beginTimeHM = substr($time, 0, 5);
@@ -129,18 +137,18 @@ class EventsTableGateWay
         return $formattedDateTimeArray;
     }
 
-    private function getFormattedAddress($address) {
+    private function getFormattedAddresses($address)
+    {
         $addresses = preg_split('/[|]/', $address);
 
-        return $addresses[0];
+        return $addresses;
     }
 
     private function getDayOfWeek($date)
     {
         try {
             $objDate = new DateTime($date);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             return 'Ошибка';
         }
 
@@ -149,5 +157,79 @@ class EventsTableGateWay
         return $this->daysOfWeek[$objDayOfWeek];
     }
 
+    /**
+     * Function gets data of events which was created by user with $authorID.
+     * @param $authorID .
+     * @return array of Even type.
+     */
+    public function getUserEvents($authorID)
+    {
+        $events = array();
+        $tableName = self::$tableName;
+        $sql = "SELECT ev_id, ev_title, ev_slug, ev_create_date FROM $tableName WHERE u_id = :id;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(array('id' => $authorID));
+
+        $eventData = array();
+        foreach ($stmt as $row) {
+            $eventData[] = array(
+                'id' => $row['ev_id'],
+                'name' => $row['ev_title'],
+                'slug' => $row['ev_slug'],
+                'createDate' => $row['ev_create_date'],
+            );
+        }
+
+        foreach ($eventData as $item) {
+            $event = new Event();
+
+            $event->setId($item['id']);
+            $event->setName($item['name']);
+            $event->setSlug($item['slug']);
+            $event->setCreateDate($item['createDate']);
+
+            $events[] = $event;
+        }
+
+        return $events;
+    }
+
+    /**
+     * @param $slug
+     * @return array
+     */
+    public function getEventBySlug($slug)
+    {
+        $tableName = self::$tableName;
+        $sql = "SELECT ev_begin_date, ev_begin_time, ev_end_date, ev_end_time, ev_address, ev_title, ev_description, ev_img
+                FROM $tableName WHERE ev_slug = :slug";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(array('slug' => $slug));
+
+        $item = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $data = $item[0];
+
+        $beginDateTime = $this->getFormattedDateTime($data['ev_begin_date'], $data['ev_begin_time']);
+        $endDateTime = $this->getFormattedDateTime($data['ev_end_date'], $data['ev_end_time']);
+        $address = $this->getFormattedAddresses($data['ev_address']);
+
+
+        $eventData[] = array(
+            'name' => $data['ev_title'],
+            'addresses' => $address,
+            'beginDateTime' => $beginDateTime,
+            'beginMonth' => $this->months[intval($beginDateTime['beginDateMonth']) - 1],
+            'endDateTime' => $endDateTime,
+            'endMonth' => $this->months[intval($endDateTime['beginDateMonth']) -1],
+            'description' => $data['ev_description'],
+        );
+
+        isset($data['ev_img']) ? $eventData['img'] = $data['ev_img'] : null;
+        
+        $event = new Event();
+        $event->setPostInfo($eventData[0]);
+
+        return $event;
+    }
 
 }

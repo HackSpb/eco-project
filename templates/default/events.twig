@@ -53,14 +53,16 @@
 {% for event in events %}
   <div class="col-1-4">
     <div class="content">
-      {% if (event.ev_img is null ) %} 
-        <img class="post-logo" src="/img/events/eco_post1.jpg" alt="">
-      {% else %}
-        <img class="post-logo" src="/img/events/{{event.ev_img}}" alt="" /> 
-      {% endif %}
+      <a href="/page/{{ event.ev_slug }}">
+        {% if (event.ev_img is null ) %}
+          <img class="post-logo" src="/img/events/eco_post1.jpg" alt="">
+        {% else %}
+          <img class="post-logo" src="/img/events/{{ event.ev_img }}" alt=""/>
+        {% endif %}
+      </a>
       <figcaption class="card-info">
         <p class="residents">#{{event.tag_name}}</p>
-        <h3>{{event.ev_title}}</h3>
+        <h3><a href="/page/{{ event.ev_slug }}"> {{event.ev_title}}</a></h3>
         <p class="timeinfo"><br />
         <span class="icon-cal"></span>
         {% if (event.ev_begin_date is not null ) %}

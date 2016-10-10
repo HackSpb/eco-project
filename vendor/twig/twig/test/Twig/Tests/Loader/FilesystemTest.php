@@ -81,9 +81,9 @@ class Twig_Tests_Loader_FilesystemTest extends PHPUnit_Framework_TestCase
             realpath($basePath.'/named_quater/named_absolute.html'),
             realpath($loader->getCacheKey('@named/named_absolute.html'))
         );
-        $this->assertEquals("path (final)\n", $loader->getSource('index.html'));
-        $this->assertEquals("path (final)\n", $loader->getSource('@__main__/index.html'));
-        $this->assertEquals("named path (final)\n", $loader->getSource('@named/index.html'));
+        $this->assertEquals("path (final)\n", $loader->getSource('index.twig'));
+        $this->assertEquals("path (final)\n", $loader->getSource('@__main__/index.twig'));
+        $this->assertEquals("named path (final)\n", $loader->getSource('@named/index.twig'));
     }
 
     public function testEmptyConstructor()
@@ -123,12 +123,12 @@ class Twig_Tests_Loader_FilesystemTest extends PHPUnit_Framework_TestCase
         $loader = new Twig_Loader_Filesystem(array($basePath.'/normal'));
         $loader->addPath($basePath.'/named', 'named');
 
-        // prime the cache for index.html in the named namespace
-        $namedSource = $loader->getSource('@named/index.html');
+        // prime the cache for index.twig in the named namespace
+        $namedSource = $loader->getSource('@named/index.twig');
         $this->assertEquals("named path\n", $namedSource);
 
-        // get index.html from the main namespace
-        $this->assertEquals("path\n", $loader->getSource('index.html'));
+        // get index.twig from the main namespace
+        $this->assertEquals("path\n", $loader->getSource('index.twig'));
     }
 
     public function testLoadTemplateAndRenderBlockWithCache()

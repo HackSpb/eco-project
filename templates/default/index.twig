@@ -1,4 +1,4 @@
-{% include 'header.html' %}
+{% include 'header.twig' %}
 <link rel="stylesheet" type="text/css" href="js/slick/slick.css"/>
  <link rel="stylesheet" type="text/css" href="js/slick/slick-theme.css"/> 
 <!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script> -->
@@ -26,9 +26,9 @@
       }); 
       </script>
 <div class="slide">
-  <div>{% include 'map.html' %}</div>
-  <div>{% include 'events.html' %}</div>
-  <div>{% include 'calendar.html' %}</div>
+  <div>{% include 'map.twig' %}</div>
+  <div>{% include 'events.twig' %}</div>
+  <div>{% include 'calendar.twig' %}</div>
 </div>
 <script>
 $(document).ready(function () {
@@ -47,4 +47,4 @@ function reload_width(){
 }
 
 </script>
-{% include 'footer.html' %}
+{% include 'footer.twig' %}
