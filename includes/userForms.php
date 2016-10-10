@@ -278,7 +278,6 @@ function getProfile($profileID)
     
 
     $app['twig']->addGlobal('gender', $user->getGender());
-    print_r($user->getGender());
 }
 
 function isAllowEditing($profileID) {
